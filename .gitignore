@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyRevit
+*.log
+*.tmp
+.pyrevit/
+
+# Revit
+*.rvt.*.rvt
+*.0001.rvt
+*.0002.rvt
+*.0003.rvt
+*.0004.rvt
+*.bak
+*.rws
+*.slog
+*.dat
+*_backup/
+*.adsklib
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+output/
+temp/
+results/
