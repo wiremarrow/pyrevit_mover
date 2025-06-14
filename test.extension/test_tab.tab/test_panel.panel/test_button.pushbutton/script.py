@@ -21,6 +21,98 @@ doc = revit.doc
 uidoc = revit.uidoc
 
 
+def separate_hosted_elements(document, element_ids):
+    """
+    Separate hosted elements (doors, windows) from non-hosted elements
+    Host elements should be transformed before their hosted elements
+    """
+    hosted_elements = []
+    non_hosted_elements = []
+    
+    for element_id in element_ids:
+        try:
+            element = document.GetElement(element_id)
+            if element and hasattr(element, 'Host') and element.Host is not None:
+                hosted_elements.append(element_id)
+            else:
+                non_hosted_elements.append(element_id)
+        except:
+            non_hosted_elements.append(element_id)  # Default to non-hosted
+    
+    return hosted_elements, non_hosted_elements
+
+
+def get_valid_elements(document, element_ids):
+    """
+    Get list of elements that still exist in the document
+    Some elements may be invalidated during rotation
+    """
+    valid_elements = []
+    
+    for element_id in element_ids:
+        try:
+            element = document.GetElement(element_id)
+            if element is not None:
+                valid_elements.append(element_id)
+        except:
+            continue
+    
+    return valid_elements
+
+
+def store_wall_joins(document, element_ids):
+    """
+    Store wall-to-wall join relationships before transformation
+    """
+    wall_joins = []
+    
+    try:
+        # Get all walls from the element list
+        walls = []
+        for element_id in element_ids:
+            element = document.GetElement(element_id)
+            if element and isinstance(element, DB.Wall):
+                walls.append(element)
+        
+        # Check which walls are joined to each other
+        for i, wall1 in enumerate(walls):
+            for j, wall2 in enumerate(walls[i+1:], i+1):
+                try:
+                    if DB.JoinGeometryUtils.AreElementsJoined(document, wall1, wall2):
+                        wall_joins.append((wall1.Id, wall2.Id))
+                except:
+                    continue
+    except Exception as e:
+        print("Error storing wall joins: {}".format(str(e)))
+    
+    return wall_joins
+
+
+def restore_wall_joins(document, wall_joins):
+    """
+    Restore wall-to-wall join relationships after transformation
+    """
+    if not wall_joins:
+        return
+    
+    print("Restoring {} wall joins...".format(len(wall_joins)))
+    
+    for wall1_id, wall2_id in wall_joins:
+        try:
+            wall1 = document.GetElement(wall1_id)
+            wall2 = document.GetElement(wall2_id)
+            
+            if wall1 and wall2:
+                # Check if they're not already joined
+                if not DB.JoinGeometryUtils.AreElementsJoined(document, wall1, wall2):
+                    DB.JoinGeometryUtils.JoinGeometry(document, wall1, wall2)
+        except Exception as e:
+            print("Failed to restore wall join: {}".format(str(e)))
+            continue
+    
+    print("Wall join restoration completed")
+
+
 def get_model_elements(document):
     """
     Get all transformable model elements with better filtering
@@ -104,14 +196,18 @@ def get_model_elements(document):
 def transform_elements_robust(document, element_ids, transform, rotation_degrees=0, rotation_origin=None):
     """
     Robust element transformation using proper Revit API methods
-    For combined rotation + translation, we must apply them separately
+    Handles hosted elements, wall joins, and element invalidation
     """
     
     if not element_ids:
         return 0
-        
+    
+    original_count = len(element_ids)
     element_ids_list = List[DB.ElementId](element_ids)
     transformed_count = 0
+    
+    # Store wall joins before transformation
+    wall_joins = store_wall_joins(document, element_ids)
     
     try:
         # Step 1: Apply rotation if needed
@@ -126,43 +222,72 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
             # Convert degrees to radians
             rotation_radians = rotation_degrees * 3.14159265359 / 180.0
             
-            # Apply rotation to all elements
-            try:
-                DB.ElementTransformUtils.RotateElements(document, element_ids_list, rotation_axis, rotation_radians)
-                print("Bulk rotation successful!")
-            except Exception as rot_e:
-                print("Bulk rotation failed, trying individual: {}".format(str(rot_e)))
-                # Try individual rotation
-                for element_id in element_ids:
-                    try:
-                        DB.ElementTransformUtils.RotateElement(document, element_id, rotation_axis, rotation_radians)
-                    except:
-                        continue
+            # Separate hosted and non-hosted elements
+            hosted_elements, non_hosted_elements = separate_hosted_elements(document, element_ids)
+            
+            # Rotate non-hosted elements first (hosts before hosted)
+            if non_hosted_elements:
+                non_hosted_list = List[DB.ElementId](non_hosted_elements)
+                try:
+                    DB.ElementTransformUtils.RotateElements(document, non_hosted_list, rotation_axis, rotation_radians)
+                    print("Non-hosted elements rotation successful!")
+                except Exception as rot_e:
+                    print("Non-hosted rotation failed, trying individual: {}".format(str(rot_e)))
+                    for element_id in non_hosted_elements:
+                        try:
+                            DB.ElementTransformUtils.RotateElement(document, element_id, rotation_axis, rotation_radians)
+                        except:
+                            continue
+            
+            # Rotate hosted elements (doors, windows, etc.)
+            if hosted_elements:
+                hosted_list = List[DB.ElementId](hosted_elements)
+                try:
+                    DB.ElementTransformUtils.RotateElements(document, hosted_list, rotation_axis, rotation_radians)
+                    print("Hosted elements rotation successful!")
+                except Exception as rot_e:
+                    print("Hosted rotation failed, trying individual: {}".format(str(rot_e)))
+                    for element_id in hosted_elements:
+                        try:
+                            DB.ElementTransformUtils.RotateElement(document, element_id, rotation_axis, rotation_radians)
+                        except:
+                            continue
         
-        # Step 2: Apply translation if needed
+        # Step 2: Apply translation if needed  
         translation_vector = transform.Origin
         if not (translation_vector.X == 0 and translation_vector.Y == 0 and translation_vector.Z == 0):
             print("Applying translation: ({}, {}, {})...".format(
                 translation_vector.X, translation_vector.Y, translation_vector.Z))
             
+            # Get fresh element list after rotation (some may be invalidated)
+            valid_elements = get_valid_elements(document, element_ids)
+            valid_element_list = List[DB.ElementId](valid_elements)
+            
             try:
-                DB.ElementTransformUtils.MoveElements(document, element_ids_list, translation_vector)
+                DB.ElementTransformUtils.MoveElements(document, valid_element_list, translation_vector)
                 print("Bulk translation successful!")
-                transformed_count = len(element_ids)
+                transformed_count = len(valid_elements)
             except Exception as trans_e:
                 print("Bulk translation failed, trying individual: {}".format(str(trans_e)))
                 # Try individual translation
-                for element_id in element_ids:
+                for element_id in valid_elements:
                     try:
-                        DB.ElementTransformUtils.MoveElement(document, element_id, translation_vector)
-                        transformed_count += 1
+                        # Check if element still exists
+                        element = document.GetElement(element_id)
+                        if element is not None:
+                            DB.ElementTransformUtils.MoveElement(document, element_id, translation_vector)
+                            transformed_count += 1
                     except:
                         continue
         else:
-            # If no translation, count successful rotations
-            transformed_count = len(element_ids)
-            
-        print("Successfully transformed {}/{} elements".format(transformed_count, len(element_ids)))
+            # Count valid elements after rotation
+            valid_elements = get_valid_elements(document, element_ids)
+            transformed_count = len(valid_elements)
+        
+        # Step 3: Restore wall joins
+        restore_wall_joins(document, wall_joins)
+        
+        print("Successfully transformed {}/{} elements".format(transformed_count, original_count))
         return transformed_count
         
     except Exception as e:
