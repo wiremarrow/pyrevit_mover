@@ -374,35 +374,923 @@ Success rate: 100.0% of elements transformed
 
 
 
-=== V3 ELEVATION MARKER TEST - NO TRANSFORMATION ===
+=== V3 ELEVATION MARKER UPDATE - FIXED ROTATION ===
 
 
 
-TESTING: Skipping all elevation marker transformations to see if they follow building automatically
+Found 44 total elevation elements
 
 
 
-Found 44 total elevation elements - SKIPPING ALL TRANSFORMATIONS
+Filtered: 0 default markers skipped, 44 user markers to process
 
 
 
-Hypothesis: Elevation markers should align automatically with transformed building
+FIXED: Using original rotation angle directly: 90.0 degrees
 
 
 
-=== ELEVATION MARKER TEST COMPLETE ===
+Processing elevation element: 511938 (Type: FamilyInstance)
 
 
 
-NO transformations applied - testing if markers follow building automatically
+FamilyInstance Location type: LocationPoint
 
 
 
-Expected result: Markers should be properly aligned if hypothesis is correct
+FamilyInstance moved to (70.35, 76.34, 0.00)
 
 
 
-==========================================
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511939 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-16.45, 125.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511940 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-65.55, 38.64, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511941 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (21.25, -10.46, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511826 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511827 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (1.80, 125.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511828 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-65.55, 56.89, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511829 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (3.00, -10.46, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511830 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512464 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (133.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512468 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (136.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511974 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (76.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511979 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (76.35, 64.17, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 29152 (Type: ElevationMarker)
+
+
+
+ElevationMarker has 1 elevation views
+
+
+
+ElevationMarker translated by (59.89, 55.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
+
+
+
+Processing elevation element: 511984 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (76.35, 70.25, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 29157 (Type: ElevationMarker)
+
+
+
+ElevationMarker has 1 elevation views
+
+
+
+ElevationMarker translated by (59.89, 55.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
+
+
+
+Processing elevation element: 511989 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (76.35, 76.34, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 29162 (Type: ElevationMarker)
+
+
+
+ElevationMarker has 1 elevation views
+
+
+
+ElevationMarker translated by (59.89, 55.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
+
+
+
+Processing elevation element: 512121 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (94.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512122 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (94.35, 64.17, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512123 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (94.35, 70.25, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511998 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (1.80, 131.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 29167 (Type: ElevationMarker)
+
+
+
+ElevationMarker has 1 elevation views
+
+
+
+ElevationMarker translated by (59.89, 55.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
+
+
+
+Processing elevation element: 511999 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-4.28, 131.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512000 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-10.37, 131.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512001 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-16.45, 131.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512124 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (94.35, 76.34, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511753 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (64.36, 58.07, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512023 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (88.35, 58.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512024 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (88.35, 64.17, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512025 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (88.35, 70.25, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 512026 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (88.35, 76.34, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511915 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 64.17, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511916 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-4.28, 125.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511917 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-65.55, 50.80, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511918 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (9.08, -10.46, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511919 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 64.17, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 1242351 (Type: ElevationMarker)
+
+
+
+ElevationMarker has 1 elevation views
+
+
+
+ElevationMarker translated by (59.89, 55.09, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
+
+
+
+Processing elevation element: 511931 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 70.25, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511932 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-10.37, 125.43, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511933 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (-65.55, 44.72, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511934 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (15.17, -10.46, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511935 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 70.25, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+Processing elevation element: 511937 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+FamilyInstance moved to (70.35, 76.34, 0.00)
+
+
+
+FIXED: Rotating by original angle: 90.0°
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
+
+
+
+=== ELEVATION UPDATE SUMMARY ===
+
+
+
+Updated 44 out of 44 user-created elevation elements
+
+
+
+Skipped 0 default elevation markers
+
+
+
+Success rate: 100.0%
+
+
+
+FIXED: Using original rotation angle 90.0° instead of calculated matrix values
+
+
+
+================================
 
 
 
@@ -410,7 +1298,7 @@ Regenerating document after elevation marker updates...
 
 
 
-=== V3 SECTION VIEW TEST - NO MARKER TRANSFORMATION ===
+=== V3 SECTION VIEW UPDATE - FIXED SECTION MARKERS ===
 
 
 
@@ -454,11 +1342,119 @@ Found section marker: 512456 - section tail - filled
 
 
 
-Found 9 section marker family instances - SKIPPING MARKER TRANSFORMATIONS
+Found 9 section marker family instances
 
 
 
-Testing: Section markers might follow building automatically through view relationships
+FIXED: Transforming section markers by 90.0 degrees
+
+
+
+Section marker moved to (1.82, 119.45, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 511753 (with rotation)
+
+
+
+Section marker moved to (118.35, 59.09, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512308 (with rotation)
+
+
+
+Section marker moved to (121.35, 59.09, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512386 (with rotation)
+
+
+
+Section marker moved to (124.35, 59.09, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512393 (with rotation)
+
+
+
+Section marker moved to (127.35, 58.21, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512421 (with rotation)
+
+
+
+Section marker moved to (130.35, 59.09, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512422 (with rotation)
+
+
+
+Section marker moved to (127.35, 63.21, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512448 (with rotation)
+
+
+
+Section marker moved to (130.35, 64.09, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512449 (with rotation)
+
+
+
+Section marker moved to (127.35, 68.21, 0.00)
+
+
+
+FIXED: Rotating section marker by 90.0°
+
+
+
+Updated section marker point: 512456 (with rotation)
 
 
 
@@ -1171,7 +2167,7 @@ Model elements: 8/8 transformed
 
 
 
-ELEVATION MARKERS: 0 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
 
 
 
