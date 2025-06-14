@@ -719,6 +719,22 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
                 if marker.Location and hasattr(marker.Location, 'Point'):
                     print("  FamilyInstance Location type: LocationPoint")
                     
+                    # DIAGNOSTIC: Check flipped status (could explain 45° offset!)
+                    try:
+                        facing_flipped = marker.FacingFlipped if hasattr(marker, 'FacingFlipped') else False
+                        hand_flipped = marker.HandFlipped if hasattr(marker, 'HandFlipped') else False
+                        facing_orientation = marker.FacingOrientation if hasattr(marker, 'FacingOrientation') else "N/A"
+                        hand_orientation = marker.HandOrientation if hasattr(marker, 'HandOrientation') else "N/A"
+                        
+                        print("  DIAGNOSTIC: FacingFlipped={}, HandFlipped={}, FacingOrientation={}, HandOrientation={}".format(
+                            facing_flipped, hand_flipped, facing_orientation, hand_orientation))
+                            
+                        # Check for left-handed coordinate system (could cause 45° issues)
+                        if (facing_flipped and not hand_flipped) or (not facing_flipped and hand_flipped):
+                            print("  WARNING: Left-handed coordinate system detected - may need direction reversal!")
+                    except Exception as diag_e:
+                        print("  Diagnostic info not available: {}".format(str(diag_e)))
+                    
                     # Step 1: Apply translation
                     old_point = marker.Location.Point
                     new_point = transform.OfPoint(old_point)
