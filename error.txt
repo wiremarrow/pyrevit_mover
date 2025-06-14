@@ -1,0 +1,96 @@
+﻿
+
+=== TRANSFORMATION DEBUG ===
+
+
+
+Original point: (0.0, 0.0, 0.0)
+
+
+
+Transformed point: (100.0, 0.0, 0.0)
+
+
+
+Translation: (100.0, 0.0, 0.0)
+
+
+
+Transform is invertible: True
+
+
+
+Transform determinant: 1.0
+
+
+
+Is translation only: True
+
+
+
+===========================
+
+
+
+Analyzing elements for transformation...
+
+
+
+Found 1472 elements to transform
+
+
+
+Using MoveElements for translation...
+
+
+
+Bulk move successful!
+
+
+
+Successfully transformed 1472/1472 elements
+
+
+
+Success rate: 100.0% of elements transformed
+
+
+
+
+=== STARTING VIEW UPDATES ===
+
+
+
+=== V3 ELEVATION MARKER UPDATE ===
+
+
+
+Found 5 ElevationMarker objects
+
+
+
+Found 36 elevation elements by category
+
+
+
+Found 39 potential elevation family instances
+
+
+
+
+ERROR [pyrevit.revit.db.transaction] Error in Transaction Context. Rolling back changes. | <type 'exceptions.AttributeError'>:'ElementId' object has no attribute 'IntegerValue'
+
+Error during transformation: 'ElementId' object has no attribute 'IntegerValue'
+
+
+
+Full traceback:
+
+
+
+Traceback (most recent call last): 
+ File "C:\Users\hgomez.MWAARCH\OneDrive - MWA Architects\Documents\pyrevit\test.extension\test_tab.tab\test_panel.panel\test_button.pushbutton\script.py", line 595, in transform_model_and_views_v3 
+ elevation_count = update_elevation_markers_v3(document, combined_transform) 
+ File "C:\Users\hgomez.MWAARCH\OneDrive - MWA Architects\Documents\pyrevit\test.extension\test_tab.tab\test_panel.panel\test_button.pushbutton\script.py", line 176, in update_elevation_markers_v3 
+ unique_elevations[elem.Id.IntegerValue] = elem 
+AttributeError: 'ElementId' object has no attribute 'IntegerValue' 
