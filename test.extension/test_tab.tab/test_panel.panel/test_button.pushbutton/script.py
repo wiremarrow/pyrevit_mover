@@ -204,6 +204,12 @@ def get_model_elements(document):
             category_elements = collector.ToElements()
             category_count = 0
             
+            # Debug: show what elements are in this category
+            if len(category_elements) > 0:
+                print("  Found {} elements in category {}".format(len(category_elements), category_name))
+                for i, elem in enumerate(category_elements[:3]):  # Show first 3
+                    print("    Element {}: {} (Type: {})".format(elem.Id.Value, elem.Name if hasattr(elem, 'Name') else 'No Name', type(elem).__name__))
+            
             for element in category_elements:
                 try:
                     # Check if element can be transformed
@@ -216,9 +222,11 @@ def get_model_elements(document):
                             can_transform = True
                     
                     # Method 2: Sketch-based elements (roofs, floors) might not have standard Location
-                    elif isinstance(element, (DB.Floor, DB.RoofBase, DB.Ceiling)):
+                    elif (isinstance(element, (DB.Floor, DB.RoofBase, DB.Ceiling)) or 
+                          type(element).__name__ in ['FootPrintRoof', 'ExtrusionRoof', 'Floor', 'Ceiling']):
                         # These are sketch-based and can be transformed via ElementTransformUtils
                         can_transform = True
+                        print("  Found sketch-based element: {} (Type: {})".format(element.Id.Value, type(element).__name__))
                     
                     # Method 3: Family instances should have geometry even without Location
                     elif isinstance(element, DB.FamilyInstance):
@@ -418,27 +426,40 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
                             sketch_list = List[DB.ElementId]([sketch_id])
                             
                             try:
-                                # Try rotation first
+                                # For sketch-based elements, use a more careful approach
+                                # Try to preserve sketch constraints during transformation
+                                
+                                # Method 1: Try individual element transformation
                                 if rotation_degrees != 0:
                                     axis_start = rotation_origin
                                     axis_end = DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10)
                                     rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
                                     rotation_radians = rotation_degrees * 3.14159265359 / 180.0
                                     
-                                    DB.ElementTransformUtils.RotateElements(document, sketch_list, rotation_axis, rotation_radians)
-                                    print("    Sketch element rotated successfully")
+                                    # Use individual transformation for sketch elements to avoid constraint conflicts
+                                    DB.ElementTransformUtils.RotateElement(document, sketch_id, rotation_axis, rotation_radians)
+                                    print("    Sketch element rotated individually")
                                 
                                 # Then translation
-                                if transform.Origin.GetLength() > 0.001:  # Only if there's meaningful translation
-                                    DB.ElementTransformUtils.MoveElements(document, sketch_list, transform.Origin)
-                                    print("    Sketch element translated successfully")
+                                if transform.Origin.GetLength() > 0.001:
+                                    DB.ElementTransformUtils.MoveElement(document, sketch_id, transform.Origin)
+                                    print("    Sketch element translated individually")
                                 
                                 transformed_count += 1
                                 
                             except Exception as sketch_e:
                                 print("    Sketch element transformation failed: {}".format(str(sketch_e)))
-                                # Don't fail the whole operation for sketch constraint issues
-                                continue
+                                
+                                # Method 2: Try without rotation if constraints are too restrictive
+                                try:
+                                    if transform.Origin.GetLength() > 0.001:
+                                        DB.ElementTransformUtils.MoveElement(document, sketch_id, transform.Origin)
+                                        print("    Sketch element translated only (rotation skipped due to constraints)")
+                                        transformed_count += 1
+                                except Exception as translate_e:
+                                    print("    Sketch element translation also failed: {}".format(str(translate_e)))
+                                    # Skip this element but continue with others
+                                    continue
                                 
                     except Exception as e:
                         print("  Error processing sketch element {}: {}".format(sketch_id.Value, str(e)))
@@ -761,19 +782,29 @@ def update_section_views_v3(document, transform):
                     print("  Updating crop box...")
                     crop_box = view.CropBox
                     if crop_box:
-                        # For section views, we need to transform the view origin, not the crop box bounds
+                        # For section views, we need to transform the view origin AND direction
                         # The crop box transform contains the view's coordinate system
                         old_transform = crop_box.Transform
                         
                         # Transform the origin point
                         new_origin = transform.OfPoint(old_transform.Origin)
                         
-                        # Create new transform with moved origin but same orientation
+                        # Create new transform with moved origin AND rotated orientation
                         new_transform = DB.Transform.Identity
                         new_transform.Origin = new_origin
-                        new_transform.BasisX = old_transform.BasisX
-                        new_transform.BasisY = old_transform.BasisY
-                        new_transform.BasisZ = old_transform.BasisZ
+                        
+                        # CRITICAL: Apply rotation to the view direction vectors
+                        if not transform.IsTranslation:
+                            # Transform the view direction vectors with the same rotation
+                            new_transform.BasisX = transform.OfVector(old_transform.BasisX)
+                            new_transform.BasisY = transform.OfVector(old_transform.BasisY) 
+                            new_transform.BasisZ = transform.OfVector(old_transform.BasisZ)
+                            print("    Applied rotation to section view direction vectors")
+                        else:
+                            # Translation only - keep original orientation
+                            new_transform.BasisX = old_transform.BasisX
+                            new_transform.BasisY = old_transform.BasisY
+                            new_transform.BasisZ = old_transform.BasisZ
                         
                         # Create new crop box with same size but new transform
                         new_crop_box = DB.BoundingBoxXYZ()
@@ -848,19 +879,29 @@ def update_plan_views_v3(document, transform):
                 try:
                     crop_box = view.CropBox
                     if crop_box:
-                        # For plan views, we need to transform the view origin, not the crop box bounds
+                        # For plan views, we need to transform the view origin AND direction  
                         # The crop box transform contains the view's coordinate system
                         old_transform = crop_box.Transform
                         
                         # Transform the origin point
                         new_origin = transform.OfPoint(old_transform.Origin)
                         
-                        # Create new transform with moved origin but same orientation
+                        # Create new transform with moved origin AND rotated orientation
                         new_transform = DB.Transform.Identity
                         new_transform.Origin = new_origin
-                        new_transform.BasisX = old_transform.BasisX
-                        new_transform.BasisY = old_transform.BasisY
-                        new_transform.BasisZ = old_transform.BasisZ
+                        
+                        # CRITICAL: Apply rotation to the view direction vectors for plan views too
+                        if not transform.IsTranslation:
+                            # Transform the view direction vectors with the same rotation
+                            new_transform.BasisX = transform.OfVector(old_transform.BasisX)
+                            new_transform.BasisY = transform.OfVector(old_transform.BasisY) 
+                            new_transform.BasisZ = transform.OfVector(old_transform.BasisZ)
+                            print("    Applied rotation to plan view direction vectors")
+                        else:
+                            # Translation only - keep original orientation
+                            new_transform.BasisX = old_transform.BasisX
+                            new_transform.BasisY = old_transform.BasisY
+                            new_transform.BasisZ = old_transform.BasisZ
                         
                         # Create new crop box with same size but new transform
                         new_crop_box = DB.BoundingBoxXYZ()
