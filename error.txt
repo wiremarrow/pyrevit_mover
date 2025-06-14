@@ -44,7 +44,11 @@ Applying rotation of 90.0 degrees...
 
 
 
-Bulk rotation successful!
+Non-hosted elements rotation successful!
+
+
+
+Hosted elements rotation successful!
 
 
 
@@ -52,8 +56,7 @@ Applying translation: (50.0, 50.0, 0.0)...
 
 
 
-Bulk translation failed, trying individual: One or more elements in elementsToMove do not exist in the document. 
-Parameter name: elementsToMove
+Bulk translation successful!
 
 
 
