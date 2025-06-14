@@ -636,13 +636,16 @@ def is_default_elevation_marker(document, marker):
         return False
 
 
-def update_elevation_markers_v3(document, transform, rotation_degrees):
+def update_elevation_markers_v3(document, transform, rotation_degrees, building_center):
     """
-    V3 - FIXED ROTATION DIRECTION
-    Use original rotation angle directly instead of calculating from transform matrix
+    V4 - CRITICAL FIX: Use building center as rotation axis (not individual marker positions)
+    Based on API research: markers must rotate around same axis as building
     """
     
-    print("=== V3 ELEVATION MARKER UPDATE - FIXED ROTATION ===")
+    print("=== V4 ELEVATION MARKER UPDATE - BUILDING CENTER ROTATION ===")
+    print("CRITICAL FIX: Rotating around building center (same axis as building transformation)")
+    print("Building center rotation axis: ({:.2f}, {:.2f}, {:.2f})".format(
+        building_center.X, building_center.Y, building_center.Z))
     
     # Get elevation markers
     elevation_markers = list(DB.FilteredElementCollector(document).OfClass(DB.ElevationMarker).ToElements())
@@ -690,12 +693,22 @@ def update_elevation_markers_v3(document, transform, rotation_degrees):
     
     updated_count = 0
     
-    # CRITICAL FIX: Use the original rotation angle directly 
-    # The building was rotated by rotation_degrees, so markers should rotate by the SAME amount
+    # CRITICAL FIX V4: Use building center as rotation axis for ALL markers
+    # This ensures markers rotate around the same point as the building
     marker_rotation_degrees = rotation_degrees  # Same as building rotation
     marker_rotation_radians = math.radians(marker_rotation_degrees)
     
-    print("FIXED: Using original rotation angle directly: {} degrees".format(marker_rotation_degrees))
+    # Create rotation axis through building center (same as building rotation)
+    building_rotation_axis = DB.Line.CreateBound(
+        building_center, 
+        DB.XYZ(building_center.X, building_center.Y, building_center.Z + 10)
+    )
+    
+    print("V4 CRITICAL FIX: Using building center rotation axis for all markers")
+    print("Rotation axis: ({:.2f}, {:.2f}, {:.2f}) to ({:.2f}, {:.2f}, {:.2f})".format(
+        building_center.X, building_center.Y, building_center.Z,
+        building_center.X, building_center.Y, building_center.Z + 10))
+    print("Rotation angle: {} degrees".format(marker_rotation_degrees))
     
     for marker in user_markers:
         try:
@@ -713,16 +726,11 @@ def update_elevation_markers_v3(document, transform, rotation_degrees):
                     print("  FamilyInstance moved to ({:.2f}, {:.2f}, {:.2f})".format(
                         new_point.X, new_point.Y, new_point.Z))
                     
-                    # Step 2: Apply SAME rotation as building (not calculated from matrix)
-                    print("  FIXED: Rotating by original angle: {}°".format(marker_rotation_degrees))
+                    # Step 2: V4 CRITICAL FIX - Rotate around building center, not marker position
+                    print("  V4 FIX: Rotating around building center axis (not marker position)")
                     
-                    rotation_center = new_point
-                    axis_start = rotation_center
-                    axis_end = DB.XYZ(rotation_center.X, rotation_center.Y, rotation_center.Z + 10)
-                    rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                    
-                    DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, marker_rotation_radians)
-                    print("  SUCCESS: FamilyInstance elevation marker transformed correctly")
+                    DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
+                    print("  SUCCESS: FamilyInstance rotated around building center")
                     updated_count += 1
                     
             elif isinstance(marker, DB.ElevationMarker):
@@ -736,21 +744,11 @@ def update_elevation_markers_v3(document, transform, rotation_degrees):
                 print("  ElevationMarker translated by ({:.2f}, {:.2f}, {:.2f})".format(
                     translation_vector.X, translation_vector.Y, translation_vector.Z))
                 
-                # Step 2: Apply SAME rotation as building
-                print("  FIXED: Rotating by original angle: {}°".format(marker_rotation_degrees))
+                # Step 2: V4 CRITICAL FIX - Rotate around building center
+                print("  V4 FIX: Rotating around building center axis")
                 
-                if marker.Location and hasattr(marker.Location, 'Point'):
-                    rotation_center = marker.Location.Point
-                else:
-                    # Fallback: use transform origin
-                    rotation_center = transform.Origin
-                
-                axis_start = rotation_center
-                axis_end = DB.XYZ(rotation_center.X, rotation_center.Y, rotation_center.Z + 10)
-                rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                
-                DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, marker_rotation_radians)
-                print("  SUCCESS: ElevationMarker transformed with ElementTransformUtils")
+                DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
+                print("  SUCCESS: ElevationMarker rotated around building center")
                 updated_count += 1
                 
         except Exception as e:
@@ -767,10 +765,10 @@ def update_elevation_markers_v3(document, transform, rotation_degrees):
     return updated_count
 
 
-def update_section_views_v3(document, transform, rotation_degrees):
+def update_section_views_v3(document, transform, rotation_degrees, building_center):
     """
-    V3 - FIXED SECTION MARKER TRANSFORMATION
-    Now properly transforms section markers using original rotation angle
+    V4 - FIXED SECTION MARKER TRANSFORMATION  
+    Now uses building center as rotation axis (same as elevation markers)
     """
     
     print("=== V3 SECTION VIEW UPDATE - FIXED SECTION MARKERS ===")
@@ -796,11 +794,20 @@ def update_section_views_v3(document, transform, rotation_degrees):
     
     print("Found {} section marker family instances".format(len(section_markers)))
     
-    # FIXED: Transform section markers using same approach as elevation markers
+    # V4 FIXED: Transform section markers using building center rotation axis
     marker_rotation_degrees = rotation_degrees  # Same as building rotation
     marker_rotation_radians = math.radians(marker_rotation_degrees)
     
-    print("FIXED: Transforming section markers by {} degrees".format(marker_rotation_degrees))
+    # Create rotation axis through building center (same as building and elevation markers)
+    building_rotation_axis = DB.Line.CreateBound(
+        building_center, 
+        DB.XYZ(building_center.X, building_center.Y, building_center.Z + 10)
+    )
+    
+    print("V4 FIXED: Section markers using building center rotation axis")
+    print("Building center axis: ({:.2f}, {:.2f}, {:.2f})".format(
+        building_center.X, building_center.Y, building_center.Z))
+    print("Rotation angle: {} degrees".format(marker_rotation_degrees))
     
     for marker in section_markers:
         try:
@@ -812,16 +819,11 @@ def update_section_views_v3(document, transform, rotation_degrees):
                 print("  Section marker moved to ({:.2f}, {:.2f}, {:.2f})".format(
                     new_point.X, new_point.Y, new_point.Z))
                 
-                # Step 2: Apply SAME rotation as building
-                print("  FIXED: Rotating section marker by {}°".format(marker_rotation_degrees))
+                # Step 2: V4 FIX - Rotate around building center
+                print("  V4 FIX: Rotating section marker around building center")
                 
-                rotation_center = new_point
-                axis_start = rotation_center
-                axis_end = DB.XYZ(rotation_center.X, rotation_center.Y, rotation_center.Z + 10)
-                rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                
-                DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, marker_rotation_radians)
-                print("  Updated section marker point: {} (with rotation)".format(marker.Id.Value))
+                DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
+                print("  Updated section marker: {} (rotated around building center)".format(marker.Id.Value))
         except Exception as e:
             print("  ERROR transforming section marker {}: {}".format(marker.Id.Value, str(e)))
             continue
@@ -1206,15 +1208,15 @@ def transform_model_and_views_v3(document, translation_vector, rotation_angle_de
                 print("No elements found to transform!")
                 return False
             
-            # 2. Update views with V3 improvements - ELEVATION MARKERS FIRST
+            # 2. Update views with V4 improvements - BUILDING CENTER ROTATION
             print("\n=== STARTING VIEW UPDATES ===")
-            elevation_count = update_elevation_markers_v3(document, combined_transform, rotation_angle_degrees)
+            elevation_count = update_elevation_markers_v3(document, combined_transform, rotation_angle_degrees, rotation_origin)
             
             # Regenerate document after elevation marker changes (recommended for view-dependent elements)
             print("Regenerating document after elevation marker updates...")
             document.Regenerate()
             
-            section_count = update_section_views_v3(document, combined_transform, rotation_angle_degrees)
+            section_count = update_section_views_v3(document, combined_transform, rotation_angle_degrees, rotation_origin)
             plan_count = update_plan_views_v3(document, combined_transform)
             
             # 3. Update annotations
@@ -1256,11 +1258,11 @@ def main():
     # Show confirmation dialog
     result = UI.TaskDialog.Show(
         "Enhanced Transform Model and Views - v3",
-        "V3 CRITICAL ROTATION FIXES:\n"
-        "- FIXED: Elevation marker rotation direction (45° offset)\n"
-        "- FIXED: Use original rotation angle directly\n"
-        "- FIXED: Section marker transformations\n"
-        "- FIXED: Proper ElementTransformUtils usage\n\n"
+        "V4 BREAKTHROUGH ROTATION FIXES:\n"
+        "- FIXED: Use building center as rotation axis\n"
+        "- FIXED: Markers rotate around same point as building\n"
+        "- FIXED: Coordinate system alignment issue\n"
+        "- RESEARCH: Based on Revit API documentation\n\n"
         "Transform settings:\n"
         "Translation: ({}, {}, {}) feet\n"
         "Rotation: {} degrees\n\n"
