@@ -8,11 +8,11 @@ Original point: (0.0, 0.0, 0.0)
 
 
 
-Transformed point: (100.0, 0.0, 0.0)
+Transformed point: (50.0, 50.0, 0.0)
 
 
 
-Translation: (100.0, 0.0, 0.0)
+Translation: (50.0, 50.0, 0.0)
 
 
 
