@@ -184,30 +184,44 @@ for elem_id in element_ids:
 print(f"Rotating: {element_summary}")
 ```
 
-## LATEST FIXES - ROTATION ANGLE CORRECTION
+## LATEST FIXES - PROPER API-BASED TRANSFORMATION
 
-### Mathematical Issue Discovered
-**Problem**: Elevation and section markers rotated 45° counter-clockwise from correct position
-**Root Cause**: Using measured angle directly instead of correcting for coordinate system difference
+### Root Cause Analysis (API Research-Based)
+**Problem**: Elevation/section markers 45° off + ElevationMarker objects not updating
+**Root Cause**: Incorrect use of `transform.OfPoint()` instead of proper Revit API methods
 
-### Transform Matrix Analysis
-When building rotates +90° clockwise:
-- `BasisX: (0, 1, 0)` (X-axis now points up)  
-- `BasisY: (-1, 0, 0)` (Y-axis now points left)
-- `atan2(BasisY.X, BasisX.X) = atan2(-1, 0) = -90°`
+### API Research Findings
+1. **ElevationMarker objects**: Must use `ElementTransformUtils.RotateElement()` 
+2. **FamilyInstance markers**: `transform.OfPoint()` compounds with family coordinate system causing 45° offset
+3. **Section markers**: Need separate translation + rotation, not full transform
+4. **View-dependent elements**: Require `document.Regenerate()` after transformation
 
-**The Issue**: Markers need +90° rotation to match building, but we applied -90°
-**The Fix**: `actual_rotation_deg = -measured_rotation_deg` (flip the sign)
+### Correct Code Patterns
 
-### Fixed Code Pattern
+#### For ElevationMarker Objects:
 ```python
-# BEFORE (incorrect):
-actual_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+# Step 1: Translate
+DB.ElementTransformUtils.MoveElement(document, marker.Id, translation_vector)
 
-# AFTER (correct):
-measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X) 
-actual_rotation_deg = -math.degrees(measured_rotation_rad)  # Flip sign
-actual_rotation_rad = math.radians(actual_rotation_deg)
+# Step 2: Rotate around new position
+rotation_axis = DB.Line.CreateBound(new_position, new_position + (0,0,10))
+DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, rotation_radians)
+```
+
+#### For FamilyInstance Markers:
+```python
+# Step 1: Move to new position (translation only)
+location.Point = old_point.Add(transform.Origin)
+
+# Step 2: Rotate around new position for orientation only
+axis = DB.Line.CreateBound(new_position, new_position + (0,0,10))
+DB.ElementTransformUtils.RotateElement(document, marker.Id, axis, rotation_radians)
+```
+
+#### Document Regeneration:
+```python
+# After transforming view-dependent elements
+document.Regenerate()
 ```
 
 ## MEMORY COMPACTING SUMMARY

@@ -686,23 +686,42 @@ def update_elevation_markers_v3(document, transform):
             marker_id = marker.Id.Value
             print("Processing elevation element: {} (Type: {})".format(marker_id, type(marker).__name__))
             
-            # Method A: Try direct location transformation (SAME AS SECTION MARKERS)
-            if hasattr(marker, 'Location') and marker.Location:
+            # Method A: For FamilyInstance markers, use proper rotation approach
+            if isinstance(marker, DB.FamilyInstance) and hasattr(marker, 'Location') and marker.Location:
                 try:
                     location = marker.Location
-                    print("  Location type: {}".format(type(location).__name__))
+                    print("  FamilyInstance Location type: {}".format(type(location).__name__))
                     
                     if isinstance(location, DB.LocationPoint):
                         old_point = location.Point
-                        new_point = transform.OfPoint(old_point)  # Apply FULL transform directly
-                        location.Point = new_point
+                        
+                        # Step 1: Move to new position (translation only)
+                        new_position = old_point.Add(transform.Origin)
+                        location.Point = new_position
+                        print("  FamilyInstance moved to ({:.2f}, {:.2f}, {:.2f})".format(
+                            new_position.X, new_position.Y, new_position.Z))
+                        
+                        # Step 2: Rotate around its new position for orientation
+                        if not transform.IsTranslation:
+                            rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                            rotation_deg = math.degrees(rotation_rad)
+                            
+                            if abs(rotation_deg) > 1.0:  # Only rotate if significant
+                                # Create rotation axis through marker's new position
+                                axis_start = new_position
+                                axis_end = new_position.Add(DB.XYZ(0, 0, 10))
+                                rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
+                                
+                                print("  Rotating FamilyInstance by {:.1f}° around its position".format(rotation_deg))
+                                DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
+                        
                         updated_count += 1
-                        print("  SUCCESS: LocationPoint updated with FULL transform")
+                        print("  SUCCESS: FamilyInstance elevation marker transformed correctly")
                         continue
                         
                     elif isinstance(location, DB.LocationCurve):
                         old_curve = location.Curve
-                        new_curve = old_curve.CreateTransformed(transform)  # Apply FULL transform directly
+                        new_curve = old_curve.CreateTransformed(transform)  # Full transform OK for curves
                         location.Curve = new_curve
                         updated_count += 1
                         print("  SUCCESS: LocationCurve updated with FULL transform")
@@ -712,7 +731,7 @@ def update_elevation_markers_v3(document, transform):
                         print("  Location type {} - trying alternative methods...".format(type(location).__name__))
                         
                 except Exception as loc_e:
-                    print("  Location method failed: {}".format(str(loc_e)))
+                    print("  FamilyInstance location method failed: {}".format(str(loc_e)))
             
             # Method B: Try using ElementTransformUtils (FALLBACK ONLY)
             # NOTE: For elevation markers with generic "Location" type, try full transform
@@ -747,39 +766,59 @@ def update_elevation_markers_v3(document, transform):
                 except:
                     print("  ElementTransformUtils failed with formatting error")
             
-            # Method C: For ElevationMarker objects, try specific methods
+            # Method C: For ElevationMarker objects, use proper ElementTransformUtils
             if isinstance(marker, DB.ElevationMarker):
                 try:
-                    # Try to get the marker's position and update it
-                    if hasattr(marker, 'Position'):
-                        old_pos = marker.Position
-                        new_pos = transform.OfPoint(old_pos)
-                        # Note: Position might be read-only, but try anyway
-                        marker.Position = new_pos
-                        updated_count += 1
-                        print("  SUCCESS: ElevationMarker Position updated")
-                        continue
-                except Exception as pos_e:
-                    print("  Position method failed: {}".format(str(pos_e)))
-                
-                # Try to access elevation views and update their origins
-                try:
-                    elevation_count = marker.CurrentViewCount
-                    print("  Marker has {} elevation views".format(elevation_count))
+                    # Get marker's current position to calculate rotation center
+                    marker_location = None
+                    if hasattr(marker, 'Location') and marker.Location:
+                        if hasattr(marker.Location, 'Point'):
+                            marker_location = marker.Location.Point
                     
-                    for i in range(elevation_count):
-                        try:
-                            elev_view_id = marker.GetElevationViewId(i)
+                    if marker_location is None:
+                        # Try to get position from first elevation view
+                        elevation_count = marker.CurrentViewCount
+                        print("  ElevationMarker has {} elevation views".format(elevation_count))
+                        
+                        if elevation_count > 0:
+                            elev_view_id = marker.GetElevationViewId(0)
                             if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
                                 elev_view = document.GetElement(elev_view_id)
-                                if elev_view:
-                                    print("    Found elevation view: {}".format(elev_view.Name))
-                                    # The view should update automatically when marker moves
-                        except Exception as view_e:
-                            continue
+                                if elev_view and hasattr(elev_view, 'Origin'):
+                                    marker_location = elev_view.Origin
+                    
+                    if marker_location:
+                        # Calculate rotation angle from transform matrix  
+                        rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        rotation_deg = math.degrees(rotation_rad)
+                        
+                        # Apply translation first
+                        translation_vector = transform.Origin
+                        if translation_vector.GetLength() > 0.001:
+                            DB.ElementTransformUtils.MoveElement(document, marker.Id, translation_vector)
+                            print("  ElevationMarker translated by ({:.2f}, {:.2f}, {:.2f})".format(
+                                translation_vector.X, translation_vector.Y, translation_vector.Z))
+                        
+                        # Apply rotation using proper API method
+                        if abs(rotation_deg) > 1.0:  # Only rotate if significant angle
+                            # Create rotation axis through marker location
+                            axis_start = marker_location.Add(translation_vector)  # New position after translation
+                            axis_end = axis_start.Add(DB.XYZ(0, 0, 10))
+                            rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
                             
-                except Exception as views_e:
-                    print("  Elevation view access failed: {}".format(str(views_e)))
+                            print("  Rotating ElevationMarker by {:.1f}° around ({:.2f}, {:.2f}, {:.2f})".format(
+                                rotation_deg, axis_start.X, axis_start.Y, axis_start.Z))
+                            
+                            DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
+                        
+                        updated_count += 1
+                        print("  SUCCESS: ElevationMarker transformed with ElementTransformUtils")
+                        continue
+                    else:
+                        print("  Could not determine ElevationMarker position")
+                        
+                except Exception as elev_e:
+                    print("  ElevationMarker transformation failed: {}".format(str(elev_e)))
             
             # Method D: Try geometry-based approach for family instances
             if isinstance(marker, DB.FamilyInstance):
@@ -850,7 +889,7 @@ def update_section_views_v3(document, transform):
         try:
             marker_updated = False
             
-            # Method 1: Location-based transformation
+            # Method 1: Proper transformation for section markers (same approach as elevation markers)
             if hasattr(marker, 'Location') and marker.Location:
                 if isinstance(marker.Location, DB.LocationCurve):
                     old_curve = marker.Location.Curve
@@ -860,9 +899,28 @@ def update_section_views_v3(document, transform):
                     marker_updated = True
                 elif isinstance(marker.Location, DB.LocationPoint):
                     old_point = marker.Location.Point
-                    new_point = transform.OfPoint(old_point)
-                    marker.Location.Point = new_point
-                    print("Updated section marker point: {}".format(marker.Id.Value))
+                    
+                    # Step 1: Move to new position (translation only)
+                    new_position = old_point.Add(transform.Origin)
+                    marker.Location.Point = new_position
+                    print("  Section marker moved to ({:.2f}, {:.2f}, {:.2f})".format(
+                        new_position.X, new_position.Y, new_position.Z))
+                    
+                    # Step 2: Rotate around its new position for orientation
+                    if not transform.IsTranslation:
+                        rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        rotation_deg = math.degrees(rotation_rad)
+                        
+                        if abs(rotation_deg) > 1.0:  # Only rotate if significant
+                            # Create rotation axis through marker's new position
+                            axis_start = new_position
+                            axis_end = new_position.Add(DB.XYZ(0, 0, 10))
+                            rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
+                            
+                            print("  Rotating section marker by {:.1f}° around its position".format(rotation_deg))
+                            DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
+                    
+                    print("Updated section marker point: {} (with rotation)".format(marker.Id.Value))
                     marker_updated = True
             
             # Method 2: If location method fails, try ElementTransformUtils
@@ -1298,6 +1356,11 @@ def transform_model_and_views_v3(document, translation_vector, rotation_angle_de
             # 2. Update views with V3 improvements - ELEVATION MARKERS FIRST
             print("\n=== STARTING VIEW UPDATES ===")
             elevation_count = update_elevation_markers_v3(document, combined_transform)
+            
+            # Regenerate document after elevation marker changes (recommended for view-dependent elements)
+            print("Regenerating document after elevation marker updates...")
+            document.Regenerate()
+            
             section_count = update_section_views_v3(document, combined_transform)
             plan_count = update_plan_views_v3(document, combined_transform)
             
