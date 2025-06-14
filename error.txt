@@ -40,19 +40,32 @@ Found 1413 elements to transform
 
 
 
-Complex transformation - applying to each element...
+Applying rotation of 90.0 degrees...
 
 
 
-Transformed 524/1413 elements
+Bulk rotation successful!
 
 
 
-Successfully transformed 524/1413 elements
+Applying translation: (50.0, 50.0, 0.0)...
 
 
 
-Success rate: 37.1% of elements transformed
+Bulk translation failed, trying individual: One or more elements in elementsToMove do not exist in the document. 
+Parameter name: elementsToMove
+
+
+
+Successfully transformed 1409/1413 elements
+
+
+
+Successfully transformed 1409/1413 elements
+
+
+
+Success rate: 99.7% of elements transformed
 
 
 
@@ -1298,7 +1311,7 @@ SUCCESS: Bulk transformed 32 annotations
 
 
 
-Model elements: 524/1413 transformed
+Model elements: 1409/1413 transformed
 
 
 
