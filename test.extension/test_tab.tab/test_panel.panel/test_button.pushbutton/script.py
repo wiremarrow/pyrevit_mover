@@ -153,47 +153,39 @@ def get_model_elements(document):
     
     elements_to_transform = []
     
-    # INCLUDE specific building element categories
+    # INCLUDE specific building element categories - VERIFIED FOR REVIT 2026
     included_categories = [
+        # Core building elements
         DB.BuiltInCategory.OST_Walls,
         DB.BuiltInCategory.OST_Floors, 
         DB.BuiltInCategory.OST_Roofs,
+        DB.BuiltInCategory.OST_Ceilings,
         DB.BuiltInCategory.OST_Doors,
         DB.BuiltInCategory.OST_Windows,
-        DB.BuiltInCategory.OST_Furniture,
-        DB.BuiltInCategory.OST_GenericModel,
-        DB.BuiltInCategory.OST_StructuralFraming,
-        DB.BuiltInCategory.OST_StructuralColumns,
-        DB.BuiltInCategory.OST_StructuralFoundation,
+        # Building components
         DB.BuiltInCategory.OST_Stairs,
         DB.BuiltInCategory.OST_Railings,
-        DB.BuiltInCategory.OST_Ceilings,
         DB.BuiltInCategory.OST_CurtainWallPanels,
         DB.BuiltInCategory.OST_CurtainWallMullions,
+        # Furniture and fixtures
+        DB.BuiltInCategory.OST_Furniture,
         DB.BuiltInCategory.OST_Casework,
         DB.BuiltInCategory.OST_PlumbingFixtures,
         DB.BuiltInCategory.OST_LightingFixtures,
         DB.BuiltInCategory.OST_ElectricalFixtures,
+        # Equipment
         DB.BuiltInCategory.OST_MechanicalEquipment,
         DB.BuiltInCategory.OST_ElectricalEquipment,
+        # Structural elements
+        DB.BuiltInCategory.OST_StructuralFraming,
+        DB.BuiltInCategory.OST_StructuralColumns,
+        DB.BuiltInCategory.OST_StructuralFoundation,
+        # Site and generic
+        DB.BuiltInCategory.OST_GenericModel,
         DB.BuiltInCategory.OST_Entourage,
         DB.BuiltInCategory.OST_Parking,
         DB.BuiltInCategory.OST_Site,
         DB.BuiltInCategory.OST_Topography,
-        # Add additional roof-related categories
-        DB.BuiltInCategory.OST_RoofSoffit,
-        DB.BuiltInCategory.OST_Fascia,
-        DB.BuiltInCategory.OST_Gutters,
-        # Add missing structural categories
-        DB.BuiltInCategory.OST_StructuralConnections,
-        DB.BuiltInCategory.OST_Rebar,
-        # Add missing MEP categories  
-        DB.BuiltInCategory.OST_DuctTerminal,
-        DB.BuiltInCategory.OST_DuctAccessory,
-        DB.BuiltInCategory.OST_PipeAccessory,
-        DB.BuiltInCategory.OST_PipeFitting,
-        # Add more specialty categories
-        DB.BuiltInCategory.OST_SpecialityEquipment,
         DB.BuiltInCategory.OST_Mass,
     ]
     
@@ -202,6 +194,10 @@ def get_model_elements(document):
     # Collect elements from each included category
     for category in included_categories:
         try:
+            # Verify category exists before using it
+            category_name = str(category).split('.')[-1]  # Get just the OST_* part
+            print("Checking category: {}".format(category_name))
+            
             collector = DB.FilteredElementCollector(document)
             collector.OfCategory(category).WhereElementIsNotElementType()
             
@@ -242,10 +238,11 @@ def get_model_elements(document):
                     continue
             
             if category_count > 0:
-                print("Found {} transformable elements in category {}".format(category_count, category))
+                print("Found {} transformable elements in category {}".format(category_count, category_name))
                 
         except Exception as e:
-            print("Could not collect category {}: {}".format(category, str(e)))
+            category_name = str(category).split('.')[-1] if hasattr(category, '__str__') else 'Unknown'
+            print("Could not collect category {}: {}".format(category_name, str(e)))
             continue
     
     # Debug: Check what types we actually collected

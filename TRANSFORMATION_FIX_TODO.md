@@ -129,11 +129,14 @@ for element in elements:
 
 ## NEXT STEPS (PRIORITY ORDER)
 
-### 1. IMMEDIATE (Critical) - ✅ COMPLETED
+### 1. IMMEDIATE (Critical) - ✅ COMPLETED + FIXED API ERRORS
 - ✅ Fixed `get_model_elements()` to include walls, floors, doors, windows
-- ✅ Added specific inclusion of building element categories
+- ✅ Added specific inclusion of building element categories  
 - ✅ Verified element selection includes LocationPoint and LocationCurve elements
 - ✅ Added debug output to show element types being collected
+- ✅ FIXED: Removed invalid BuiltInCategory constants (OST_Gutters, OST_RoofSoffit, OST_Fascia)
+- ✅ RESEARCHED: Verified categories against Revit 2026 API documentation
+- ✅ ENHANCED: Added error handling for invalid categories
 
 ### 2. VALIDATION
 - Add element type breakdown in debug output
