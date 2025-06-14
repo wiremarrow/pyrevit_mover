@@ -576,42 +576,63 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
         return 0
 
 
-def is_default_elevation_marker(marker):
+def is_default_elevation_marker(document, marker):
     """
     Identify default elevation markers to skip transformation
-    REVISED: Only skip the 4 main building elevations (North, South, East, West)
+    FIXED: Use correct API methods and better filtering logic
     """
     try:
-        # Only ElevationMarker objects can be default project elevations
-        # FamilyInstance elevation markers are typically user-created
-        if not isinstance(marker, DB.ElevationMarker):
-            return False
+        # Check both ElevationMarker objects and FamilyInstance elevation markers
+        
+        # For ElevationMarker objects - check all hosted views
+        if isinstance(marker, DB.ElevationMarker):
+            elevation_count = marker.CurrentViewCount
+            for i in range(4):  # Check all 4 possible indices (0-3)
+                try:
+                    elev_view_id = marker.GetViewId(i)  # FIXED: Correct API method
+                    if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
+                        elev_view = document.GetElement(elev_view_id)
+                        if elev_view and hasattr(elev_view, 'Name'):
+                            view_name = elev_view.Name.lower()
+                            
+                            # Check for default elevation names
+                            default_names = ['north', 'south', 'east', 'west']
+                            if view_name in default_names:
+                                print("    Identified as default elevation: {}".format(view_name))
+                                return True
+                            
+                            # Check for templates like "Elevation 1 - North"
+                            if 'elevation' in view_name and any(dir in view_name for dir in default_names):
+                                print("    Identified as default elevation: {}".format(view_name))
+                                return True
+                except:
+                    continue
             
-        # Check if marker has default elevation view names
-        elevation_count = marker.CurrentViewCount
-        for i in range(elevation_count):
-            try:
-                elev_view_id = marker.GetElevationViewId(i)
-                if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
-                    elev_view = marker.Document.GetElement(elev_view_id)
-                    if elev_view and hasattr(elev_view, 'Name'):
-                        view_name = elev_view.Name.lower()
-                        # ONLY consider the 4 main compass directions as default
-                        # More specific matching to avoid over-filtering
-                        if view_name in ['north', 'south', 'east', 'west']:
-                            print("    Identified as default elevation: {}".format(view_name))
-                            return True
-                        # Check for exact matches like "Elevation 1 - North"
-                        if view_name.startswith('elevation') and any(dir in view_name for dir in ['north', 'south', 'east', 'west']):
-                            print("    Identified as default elevation: {}".format(view_name))
-                            return True
-            except:
-                continue
+            # Additional check: location near origin suggests default placement
+            if hasattr(marker, 'Location') and marker.Location:
+                if hasattr(marker.Location, 'Point'):
+                    marker_loc = marker.Location.Point
+                    # Default elevations often placed near project origin
+                    if abs(marker_loc.X) < 50 and abs(marker_loc.Y) < 50:
+                        print("    Identified as default elevation: near origin ({:.1f}, {:.1f})".format(
+                            marker_loc.X, marker_loc.Y))
+                        return True
+        
+        # For FamilyInstance markers - these are typically user-created
+        # But check family name for elevation-related defaults
+        elif isinstance(marker, DB.FamilyInstance):
+            if marker.Symbol and marker.Symbol.Family:
+                family_name = marker.Symbol.Family.Name.lower()
+                # Some default elevation families might have specific names
+                if 'default' in family_name or 'system' in family_name:
+                    print("    Identified as default elevation family: {}".format(family_name))
+                    return True
         
         return False
         
     except Exception as e:
         # If we can't determine, assume it's user-created (safer to transform)
+        print("    Error checking elevation marker: {}".format(str(e)))
         return False
 
 
@@ -671,7 +692,7 @@ def update_elevation_markers_v3(document, transform):
     default_count = 0
     
     for marker in final_elevation_list:
-        if is_default_elevation_marker(marker):
+        if is_default_elevation_marker(document, marker):  # FIXED: Pass document parameter
             default_count += 1
             print("Skipping default elevation marker: {} (Type: {})".format(marker.Id.Value, type(marker).__name__))
         else:
@@ -703,17 +724,22 @@ def update_elevation_markers_v3(document, transform):
                         
                         # Step 2: Rotate around its new position for orientation
                         if not transform.IsTranslation:
-                            rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                            rotation_deg = math.degrees(rotation_rad)
+                            measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                            measured_rotation_deg = math.degrees(measured_rotation_rad)
                             
-                            if abs(rotation_deg) > 1.0:  # Only rotate if significant
+                            # CRITICAL FIX: Flip the sign to get correct rotation direction
+                            # Building rotated +90° clockwise, markers need +90° to match (not -90°)
+                            correct_rotation_deg = -measured_rotation_deg
+                            
+                            if abs(correct_rotation_deg) > 1.0:  # Only rotate if significant
                                 # Create rotation axis through marker's new position
                                 axis_start = new_position
                                 axis_end = new_position.Add(DB.XYZ(0, 0, 10))
                                 rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
                                 
-                                print("  Rotating FamilyInstance by {:.1f}° around its position".format(rotation_deg))
-                                DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
+                                print("  Measured: {:.1f}°, Corrected: {:.1f}° - Rotating FamilyInstance".format(
+                                    measured_rotation_deg, correct_rotation_deg))
+                                DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(correct_rotation_deg))
                         
                         updated_count += 1
                         print("  SUCCESS: FamilyInstance elevation marker transformed correctly")
@@ -781,7 +807,7 @@ def update_elevation_markers_v3(document, transform):
                         print("  ElevationMarker has {} elevation views".format(elevation_count))
                         
                         if elevation_count > 0:
-                            elev_view_id = marker.GetElevationViewId(0)
+                            elev_view_id = marker.GetViewId(0)  # FIXED: Correct API method
                             if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
                                 elev_view = document.GetElement(elev_view_id)
                                 if elev_view and hasattr(elev_view, 'Origin'):
@@ -789,8 +815,11 @@ def update_elevation_markers_v3(document, transform):
                     
                     if marker_location:
                         # Calculate rotation angle from transform matrix  
-                        rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        rotation_deg = math.degrees(rotation_rad)
+                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        measured_rotation_deg = math.degrees(measured_rotation_rad)
+                        
+                        # CRITICAL FIX: Same correction as FamilyInstance markers
+                        rotation_deg = -measured_rotation_deg
                         
                         # Apply translation first
                         translation_vector = transform.Origin
@@ -806,8 +835,8 @@ def update_elevation_markers_v3(document, transform):
                             axis_end = axis_start.Add(DB.XYZ(0, 0, 10))
                             rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
                             
-                            print("  Rotating ElevationMarker by {:.1f}° around ({:.2f}, {:.2f}, {:.2f})".format(
-                                rotation_deg, axis_start.X, axis_start.Y, axis_start.Z))
+                            print("  Measured: {:.1f}°, Corrected: {:.1f}° - Rotating ElevationMarker around ({:.2f}, {:.2f}, {:.2f})".format(
+                                measured_rotation_deg, rotation_deg, axis_start.X, axis_start.Y, axis_start.Z))
                             
                             DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
                         
@@ -908,17 +937,21 @@ def update_section_views_v3(document, transform):
                     
                     # Step 2: Rotate around its new position for orientation
                     if not transform.IsTranslation:
-                        rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        rotation_deg = math.degrees(rotation_rad)
+                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        measured_rotation_deg = math.degrees(measured_rotation_rad)
                         
-                        if abs(rotation_deg) > 1.0:  # Only rotate if significant
+                        # CRITICAL FIX: Same correction as elevation markers
+                        correct_rotation_deg = -measured_rotation_deg
+                        
+                        if abs(correct_rotation_deg) > 1.0:  # Only rotate if significant
                             # Create rotation axis through marker's new position
                             axis_start = new_position
                             axis_end = new_position.Add(DB.XYZ(0, 0, 10))
                             rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
                             
-                            print("  Rotating section marker by {:.1f}° around its position".format(rotation_deg))
-                            DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
+                            print("  Measured: {:.1f}°, Corrected: {:.1f}° - Rotating section marker".format(
+                                measured_rotation_deg, correct_rotation_deg))
+                            DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(correct_rotation_deg))
                     
                     print("Updated section marker point: {} (with rotation)".format(marker.Id.Value))
                     marker_updated = True
