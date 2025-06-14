@@ -8,6 +8,22 @@ Checking category: OST_Walls
 
 
 
+Found 5 elements in category OST_Walls
+
+
+
+Element 1240604: Generic - 8" (Type: Wall)
+
+
+
+Element 1240661: Generic - 8" (Type: Wall)
+
+
+
+Element 1240724: Generic - 8" (Type: Wall)
+
+
+
 Found 5 transformable elements in category OST_Walls
 
 
@@ -20,11 +36,35 @@ Checking category: OST_Roofs
 
 
 
+Found 1 elements in category OST_Roofs
+
+
+
+Element 1241410: Generic - 9" (Type: FootPrintRoof)
+
+
+
 Checking category: OST_Ceilings
 
 
 
 Checking category: OST_Doors
+
+
+
+Found 3 elements in category OST_Doors
+
+
+
+Element 1240791: 36" x 84" (Type: FamilyInstance)
+
+
+
+Element 1241022: 36" x 84" (Type: FamilyInstance)
+
+
+
+Element 1241261: 36" x 84" (Type: FamilyInstance)
 
 
 
@@ -943,6 +983,10 @@ Updating crop box...
 
 
 
+Applied rotation to section view direction vectors
+
+
+
 SUCCESS: Crop box updated
 
 
@@ -952,6 +996,10 @@ Processing section view: North - Architectural
 
 
 Updating crop box...
+
+
+
+Applied rotation to section view direction vectors
 
 
 
@@ -967,6 +1015,10 @@ Updating crop box...
 
 
 
+Applied rotation to section view direction vectors
+
+
+
 SUCCESS: Crop box updated
 
 
@@ -976,6 +1028,10 @@ Processing section view: South - Architectural
 
 
 Updating crop box...
+
+
+
+Applied rotation to section view direction vectors
 
 
 
@@ -1095,6 +1151,10 @@ Updating crop box...
 
 
 
+Applied rotation to section view direction vectors
+
+
+
 SUCCESS: Crop box updated
 
 
@@ -1104,6 +1164,10 @@ Processing section view: Section 2
 
 
 Updating crop box...
+
+
+
+Applied rotation to section view direction vectors
 
 
 
@@ -1127,6 +1191,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1139,15 +1207,7 @@ View has active crop box
 
 
 
-SUCCESS: Plan view crop box updated
-
-
-
-Processing plan view: L2 - Architectural
-
-
-
-View has active crop box
+Applied rotation to plan view direction vectors
 
 
 
@@ -1160,6 +1220,26 @@ Processing plan view: L2 - Architectural
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Architectural
+
+
+
+View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1172,6 +1252,10 @@ Processing plan view: Site
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1267,6 +1351,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1276,6 +1364,10 @@ Processing plan view: L2 - Mechanical
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1291,6 +1383,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1300,6 +1396,10 @@ Processing plan view: L2 - Power
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1315,6 +1415,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1324,6 +1428,10 @@ Processing plan view: L2 - Plumbing
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1339,6 +1447,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1348,6 +1460,10 @@ Processing plan view: L2 - Lighting
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1379,6 +1495,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1388,6 +1508,10 @@ Processing plan view: L2 - Mechanical
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1403,6 +1527,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1412,6 +1540,10 @@ Processing plan view: L2 - Lighting
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
@@ -1475,6 +1607,10 @@ View has active crop box
 
 
 
+Applied rotation to plan view direction vectors
+
+
+
 SUCCESS: Plan view crop box updated
 
 
@@ -1484,6 +1620,10 @@ Processing plan view: L2 - Structural
 
 
 View has active crop box
+
+
+
+Applied rotation to plan view direction vectors
 
 
 
