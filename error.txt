@@ -558,7 +558,7 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED rotation from transform matrix: -90.00 degrees
+MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
 
 
 
@@ -566,7 +566,7 @@ Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-Elevation rotated by -90.00 degrees (measured from transform)
+Elevation rotated by 90.00 degrees (CORRECTED)
 
 
 
@@ -598,7 +598,7 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED rotation from transform matrix: -90.00 degrees
+MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
 
 
 
@@ -606,7 +606,7 @@ Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-Elevation rotated by -90.00 degrees (measured from transform)
+Elevation rotated by 90.00 degrees (CORRECTED)
 
 
 
@@ -638,7 +638,7 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED rotation from transform matrix: -90.00 degrees
+MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
 
 
 
@@ -646,7 +646,7 @@ Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-Elevation rotated by -90.00 degrees (measured from transform)
+Elevation rotated by 90.00 degrees (CORRECTED)
 
 
 
@@ -714,7 +714,7 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED rotation from transform matrix: -90.00 degrees
+MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
 
 
 
@@ -722,7 +722,7 @@ Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-Elevation rotated by -90.00 degrees (measured from transform)
+Elevation rotated by 90.00 degrees (CORRECTED)
 
 
 
@@ -910,7 +910,7 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED rotation from transform matrix: -90.00 degrees
+MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
 
 
 
@@ -918,7 +918,7 @@ Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-Elevation rotated by -90.00 degrees (measured from transform)
+Elevation rotated by 90.00 degrees (CORRECTED)
 
 
 
