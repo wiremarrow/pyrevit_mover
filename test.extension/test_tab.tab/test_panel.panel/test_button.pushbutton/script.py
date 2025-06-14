@@ -901,7 +901,7 @@ def main():
     TRANSLATION_Y = 50.0     # feet  
     TRANSLATION_Z = 0.0     # feet
     ROTATION_DEGREES = 90.0  # degrees
-    ROTATION_ORIGIN = DB.XYZ(0, 0, 0)
+    ROTATION_ORIGIN = None  # Will auto-calculate building center
     
     # Create translation vector
     translation = DB.XYZ(TRANSLATION_X, TRANSLATION_Y, TRANSLATION_Z)
