@@ -36,7 +36,7 @@ Analyzing elements for transformation...
 
 
 
-Found 1472 elements to transform
+Found 1417 elements to transform
 
 
 
@@ -48,7 +48,7 @@ Bulk move successful!
 
 
 
-Successfully transformed 1472/1472 elements
+Successfully transformed 1417/1417 elements
 
 
 
@@ -77,20 +77,1257 @@ Found 39 potential elevation family instances
 
 
 
-
-ERROR [pyrevit.revit.db.transaction] Error in Transaction Context. Rolling back changes. | <type 'exceptions.AttributeError'>:'ElementId' object has no attribute 'IntegerValue'
-
-Error during transformation: 'ElementId' object has no attribute 'IntegerValue'
+Total unique elevation elements to process: 44
 
 
 
-Full traceback:
+Processing elevation element: 511938 (Type: FamilyInstance)
 
 
 
-Traceback (most recent call last): 
- File "C:\Users\hgomez.MWAARCH\OneDrive - MWA Architects\Documents\pyrevit\test.extension\test_tab.tab\test_panel.panel\test_button.pushbutton\script.py", line 595, in transform_model_and_views_v3 
- elevation_count = update_elevation_markers_v3(document, combined_transform) 
- File "C:\Users\hgomez.MWAARCH\OneDrive - MWA Architects\Documents\pyrevit\test.extension\test_tab.tab\test_panel.panel\test_button.pushbutton\script.py", line 176, in update_elevation_markers_v3 
- unique_elevations[elem.Id.IntegerValue] = elem 
-AttributeError: 'ElementId' object has no attribute 'IntegerValue' 
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511939 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511940 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511941 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511826 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511827 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511828 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511829 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511830 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512464 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512468 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511974 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511979 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 29152 (Type: ElevationMarker)
+
+
+
+Location type: Location
+
+
+
+Location type Location - trying alternative methods...
+
+
+
+SUCCESS: Moved via ElementTransformUtils
+
+
+
+Processing elevation element: 511984 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 29157 (Type: ElevationMarker)
+
+
+
+Location type: Location
+
+
+
+Location type Location - trying alternative methods...
+
+
+
+SUCCESS: Moved via ElementTransformUtils
+
+
+
+Processing elevation element: 511989 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 29162 (Type: ElevationMarker)
+
+
+
+Location type: Location
+
+
+
+Location type Location - trying alternative methods...
+
+
+
+SUCCESS: Moved via ElementTransformUtils
+
+
+
+Processing elevation element: 512121 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512122 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512123 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511998 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 29167 (Type: ElevationMarker)
+
+
+
+Location type: Location
+
+
+
+Location type Location - trying alternative methods...
+
+
+
+SUCCESS: Moved via ElementTransformUtils
+
+
+
+Processing elevation element: 511999 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512000 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512001 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512124 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511753 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512023 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512024 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512025 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512026 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511915 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511916 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511917 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511918 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511919 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 1242351 (Type: ElevationMarker)
+
+
+
+Location type: Location
+
+
+
+Location type Location - trying alternative methods...
+
+
+
+SUCCESS: Moved via ElementTransformUtils
+
+
+
+Processing elevation element: 511931 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511932 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511933 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511934 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511935 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511937 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+=== ELEVATION UPDATE SUMMARY ===
+
+
+
+Updated 44 out of 44 elevation elements
+
+
+
+Success rate: 100.0%
+
+
+
+================================
+
+
+
+=== V3 SECTION VIEW UPDATE ===
+
+
+
+Found 20 section views to process
+
+
+
+Found 9 section marker family instances
+
+
+
+Updated section marker point: 511753
+
+
+
+Updated section marker point: 512308
+
+
+
+Updated section marker point: 512386
+
+
+
+Updated section marker point: 512393
+
+
+
+Updated section marker point: 512421
+
+
+
+Updated section marker point: 512422
+
+
+
+Updated section marker point: 512448
+
+
+
+Updated section marker point: 512449
+
+
+
+Updated section marker point: 512456
+
+
+
+Processing section view: East - Architectural
+
+
+
+Updating crop box...
+
+
+
+SUCCESS: Crop box updated
+
+
+
+Processing section view: North - Architectural
+
+
+
+Updating crop box...
+
+
+
+SUCCESS: Crop box updated
+
+
+
+Processing section view: West - Architectural
+
+
+
+Updating crop box...
+
+
+
+SUCCESS: Crop box updated
+
+
+
+Processing section view: South - Architectural
+
+
+
+Updating crop box...
+
+
+
+SUCCESS: Crop box updated
+
+
+
+Processing section view: Structural Framing Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Architectural Section
+
+
+
+Skipping template view
+
+
+
+Processing section view: Site Section
+
+
+
+Skipping template view
+
+
+
+Processing section view: Structural Section
+
+
+
+Skipping template view
+
+
+
+Processing section view: Architectural Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Architectural Presentation Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Mechanical Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Mechanical Section
+
+
+
+Skipping template view
+
+
+
+Processing section view: Electrical Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Electrical Section
+
+
+
+Skipping template view
+
+
+
+Processing section view: Plumbing Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Plumbing Section
+
+
+
+Skipping template view
+
+
+
+Processing section view: Section 1
+
+
+
+WARNING: Section view Section 1 not directly updated
+
+
+
+Processing section view: Structural Building Elevation
+
+
+
+Skipping template view
+
+
+
+Processing section view: Elevation 1 - a
+
+
+
+Updating crop box...
+
+
+
+SUCCESS: Crop box updated
+
+
+
+Processing section view: Section 2
+
+
+
+Updating crop box...
+
+
+
+SUCCESS: Crop box updated
+
+
+
+Updated 6 section views
+
+
+
+Found 38 plan views to process
+
+
+
+Processing plan view: L1 - Architectural
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L1 - Architectural
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Architectural
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Architectural
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: Site
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: Architectural Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Structural Framing Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Architectural Reflected Ceiling Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Site Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Electrical Ceiling
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Electrical Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Mechanical Ceiling
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Mechanical Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Plumbing Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Plumbing Ceiling
+
+
+
+Skipping template view
+
+
+
+Processing plan view: L1 - Mechanical
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Mechanical
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L1 - Power
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Power
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L1 - Plumbing
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Plumbing
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L1 - Lighting
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Lighting
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: Electrical Power Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Electrical Lighting Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: L1 - Mechanical
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Mechanical
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L1 - Lighting
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Lighting
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L1 - Working
+
+
+
+View does not have active crop box
+
+
+
+Processing plan view: L2 - Working
+
+
+
+View does not have active crop box
+
+
+
+Processing plan view: Working View
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Structural Foundation Plan
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Structural Analytical Isolated
+
+
+
+Skipping template view
+
+
+
+Processing plan view: Working Plans
+
+
+
+Skipping template view
+
+
+
+Processing plan view: L1 - Structural
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: L2 - Structural
+
+
+
+View has active crop box
+
+
+
+SUCCESS: Plan view crop box updated
+
+
+
+Processing plan view: Working Views - Override
+
+
+
+Skipping template view
+
+
+
+Updated 19 plan views
+
+
+
+Found 7 elements in category OST_Dimensions
+
+
+
+Found 13 elements in category OST_TextNotes
+
+
+
+Found 0 elements in category OST_Tags
+
+
+
+Found 12 elements in category OST_GenericAnnotation
+
+
+
+Found 0 elements in category OST_Callouts
+
+
+
+Found 0 elements in category OST_DetailComponents
+
+
+
+Total annotations found: 32
+
+
+
+SUCCESS: Bulk moved 32 annotations
+
+
+
+
+=== TRANSFORMATION SUMMARY v3 ===
+
+
+
+Model elements: 1417/1417 transformed
+
+
+
+ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
+
+
+
+Section views: 6 updated
+
+
+
+Plan views: 19 updated
+
+
+
+Annotations: 32 transformed
+
+
+
+=====================================
+
+
+
+Enhanced transformation v3 completed!
