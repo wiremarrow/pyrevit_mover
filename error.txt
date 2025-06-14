@@ -339,163 +339,167 @@ Found 39 potential elevation family instances
 
 
 
-Total unique elevation elements to process: 44
+Total unique elevation elements found: 44
 
 
 
-Processing elevation element: 511938 (Type: FamilyInstance)
+Skipping default elevation marker: 511938 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511939 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511940 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511939 (Type: FamilyInstance)
+Skipping default elevation marker: 511941 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511826 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511827 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511940 (Type: FamilyInstance)
+Skipping default elevation marker: 511828 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511829 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511830 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511941 (Type: FamilyInstance)
+Skipping default elevation marker: 512464 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 512468 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511974 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511826 (Type: FamilyInstance)
+Skipping default elevation marker: 511979 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511984 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511989 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511827 (Type: FamilyInstance)
+Skipping default elevation marker: 512121 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 512122 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 512123 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511828 (Type: FamilyInstance)
+Skipping default elevation marker: 511998 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511999 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 512000 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511829 (Type: FamilyInstance)
+Skipping default elevation marker: 512001 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 512124 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511753 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511830 (Type: FamilyInstance)
+Skipping default elevation marker: 512023 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 512024 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 512025 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 512464 (Type: FamilyInstance)
+Skipping default elevation marker: 512026 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511915 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511916 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 512468 (Type: FamilyInstance)
+Skipping default elevation marker: 511917 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511918 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511919 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511974 (Type: FamilyInstance)
+Skipping default elevation marker: 511931 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511932 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511933 (Type: FamilyInstance)
 
 
 
-Processing elevation element: 511979 (Type: FamilyInstance)
+Skipping default elevation marker: 511934 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+Skipping default elevation marker: 511935 (Type: FamilyInstance)
 
 
 
-SUCCESS: LocationPoint updated
+Skipping default elevation marker: 511937 (Type: FamilyInstance)
+
+
+
+Filtered: 39 default markers skipped, 5 user markers to process
 
 
 
@@ -511,23 +515,15 @@ Location type Location - trying alternative methods...
 
 
 
-Elevation rotated by 90.0 degrees
+ElementTransformUtils failed: Precision not allowed in integer format specifier
 
 
 
-SUCCESS: Rotation + Translation via ElementTransformUtils
+Marker has 1 elevation views
 
 
 
-Processing elevation element: 511984 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
+WARNING: Could not update elevation element 29152
 
 
 
@@ -543,23 +539,15 @@ Location type Location - trying alternative methods...
 
 
 
-Elevation rotated by 90.0 degrees
+ElementTransformUtils failed: Precision not allowed in integer format specifier
 
 
 
-SUCCESS: Rotation + Translation via ElementTransformUtils
+Marker has 1 elevation views
 
 
 
-Processing elevation element: 511989 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
+WARNING: Could not update elevation element 29157
 
 
 
@@ -575,59 +563,15 @@ Location type Location - trying alternative methods...
 
 
 
-Elevation rotated by 90.0 degrees
+ElementTransformUtils failed: Precision not allowed in integer format specifier
 
 
 
-SUCCESS: Rotation + Translation via ElementTransformUtils
+Marker has 1 elevation views
 
 
 
-Processing elevation element: 512121 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512122 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512123 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511998 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
+WARNING: Could not update elevation element 29162
 
 
 
@@ -643,179 +587,15 @@ Location type Location - trying alternative methods...
 
 
 
-Elevation rotated by 90.0 degrees
+ElementTransformUtils failed: Precision not allowed in integer format specifier
 
 
 
-SUCCESS: Rotation + Translation via ElementTransformUtils
+Marker has 1 elevation views
 
 
 
-Processing elevation element: 511999 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512000 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512001 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512124 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511753 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512023 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512024 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512025 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 512026 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511915 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511916 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511917 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511918 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511919 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
+WARNING: Could not update elevation element 29167
 
 
 
@@ -831,83 +611,15 @@ Location type Location - trying alternative methods...
 
 
 
-Elevation rotated by 90.0 degrees
+ElementTransformUtils failed: Precision not allowed in integer format specifier
 
 
 
-SUCCESS: Rotation + Translation via ElementTransformUtils
+Marker has 1 elevation views
 
 
 
-Processing elevation element: 511931 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511932 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511933 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511934 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511935 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
-
-
-
-Processing elevation element: 511937 (Type: FamilyInstance)
-
-
-
-Location type: LocationPoint
-
-
-
-SUCCESS: LocationPoint updated
+WARNING: Could not update elevation element 1242351
 
 
 
@@ -915,11 +627,15 @@ SUCCESS: LocationPoint updated
 
 
 
-Updated 44 out of 44 elevation elements
+Updated 0 out of 5 user-created elevation elements
 
 
 
-Success rate: 100.0%
+Skipped 39 default elevation markers
+
+
+
+Success rate: 0.0%
 
 
 
@@ -932,6 +648,42 @@ Success rate: 100.0%
 
 
 Found 19 section views to process
+
+
+
+Found section marker: 511753 - callout head
+
+
+
+Found section marker: 512308 - section head - filled
+
+
+
+Found section marker: 512386 - section head - no arrow
+
+
+
+Found section marker: 512393 - section head - open
+
+
+
+Found section marker: 512421 - section tail - filled
+
+
+
+Found section marker: 512422 - section tail - filled horizontal
+
+
+
+Found section marker: 512448 - section tail - filled
+
+
+
+Found section marker: 512449 - section tail - filled horizontal
+
+
+
+Found section marker: 512456 - section tail - filled
 
 
 
@@ -1684,7 +1436,7 @@ Model elements: 8/8 transformed
 
 
 
-ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 0 updated *** KEY IMPROVEMENT ***
 
 
 
