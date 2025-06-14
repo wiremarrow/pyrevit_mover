@@ -638,25 +638,20 @@ def is_default_elevation_marker(document, marker):
 
 def update_elevation_markers_v3(document, transform):
     """
-    V3 - MAJOR ELEVATION MARKER FIXES
-    Multiple approaches to handle different elevation marker types
-    Now filters out default elevation markers
+    V3 - TESTING: NO ELEVATION MARKER TRANSFORMATION
+    HYPOTHESIS: Elevation markers should follow building automatically through view relationships
     """
     
-    print("=== V3 ELEVATION MARKER UPDATE ===")
+    print("=== V3 ELEVATION MARKER TEST - NO TRANSFORMATION ===")
+    print("TESTING: Skipping all elevation marker transformations to see if they follow building automatically")
     
-    # Method 1: Get elevation markers directly
+    # Get elevation markers for counting only
     elevation_markers = list(DB.FilteredElementCollector(document).OfClass(DB.ElevationMarker).ToElements())
-    print("Found {} ElevationMarker objects".format(len(elevation_markers)))
-    
-    # Method 2: Get by category
     elevation_by_category = list(DB.FilteredElementCollector(document)
                                 .OfCategory(DB.BuiltInCategory.OST_ElevationMarks)
                                 .WhereElementIsNotElementType()
                                 .ToElements())
-    print("Found {} elevation elements by category".format(len(elevation_by_category)))
     
-    # Method 3: Find elevation-generating family instances
     family_instances = DB.FilteredElementCollector(document).OfClass(DB.FamilyInstance).ToElements()
     elevation_families = []
     
@@ -664,238 +659,48 @@ def update_elevation_markers_v3(document, transform):
         try:
             if instance.Symbol and instance.Symbol.Family:
                 family_name = instance.Symbol.Family.Name.lower()
-                # Look for elevation-related families
                 elevation_keywords = ['elevation', 'marker', 'callout']
                 if any(keyword in family_name for keyword in elevation_keywords):
                     elevation_families.append(instance)
         except:
             continue
     
-    print("Found {} potential elevation family instances".format(len(elevation_families)))
-    
-    # Combine all found elevation elements
     all_elevation_elements = []
     all_elevation_elements.extend(elevation_markers)
     all_elevation_elements.extend(elevation_by_category)
     all_elevation_elements.extend(elevation_families)
     
-    # Remove duplicates by ID
     unique_elevations = {}
     for elem in all_elevation_elements:
         unique_elevations[elem.Id.Value] = elem
     
     final_elevation_list = list(unique_elevations.values())
-    print("Total unique elevation elements found: {}".format(len(final_elevation_list)))
     
-    # Filter out default elevation markers
-    user_elevation_list = []
-    default_count = 0
+    print("Found {} total elevation elements - SKIPPING ALL TRANSFORMATIONS".format(len(final_elevation_list)))
+    print("Hypothesis: Elevation markers should align automatically with transformed building")
     
-    for marker in final_elevation_list:
-        if is_default_elevation_marker(document, marker):  # FIXED: Pass document parameter
-            default_count += 1
-            print("Skipping default elevation marker: {} (Type: {})".format(marker.Id.Value, type(marker).__name__))
-        else:
-            user_elevation_list.append(marker)
+    print("=== ELEVATION MARKER TEST COMPLETE ===")
+    print("NO transformations applied - testing if markers follow building automatically")
+    print("Expected result: Markers should be properly aligned if hypothesis is correct")
+    print("==========================================")
     
-    print("Filtered: {} default markers skipped, {} user markers to process".format(default_count, len(user_elevation_list)))
-    
-    updated_count = 0
-    
-    for marker in user_elevation_list:
-        try:
-            marker_id = marker.Id.Value
-            print("Processing elevation element: {} (Type: {})".format(marker_id, type(marker).__name__))
-            
-            # Method A: For FamilyInstance markers, use proper rotation approach
-            if isinstance(marker, DB.FamilyInstance) and hasattr(marker, 'Location') and marker.Location:
-                try:
-                    location = marker.Location
-                    print("  FamilyInstance Location type: {}".format(type(location).__name__))
-                    
-                    if isinstance(location, DB.LocationPoint):
-                        old_point = location.Point
-                        
-                        # Step 1: Move to new position (translation only)
-                        new_position = old_point.Add(transform.Origin)
-                        location.Point = new_position
-                        print("  FamilyInstance moved to ({:.2f}, {:.2f}, {:.2f})".format(
-                            new_position.X, new_position.Y, new_position.Z))
-                        
-                        # Step 2: Rotate around its new position for orientation
-                        if not transform.IsTranslation:
-                            measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                            measured_rotation_deg = math.degrees(measured_rotation_rad)
-                            
-                            # CRITICAL FIX: Flip the sign to get correct rotation direction
-                            # Building rotated +90° clockwise, markers need +90° to match (not -90°)
-                            correct_rotation_deg = -measured_rotation_deg
-                            
-                            if abs(correct_rotation_deg) > 1.0:  # Only rotate if significant
-                                # Create rotation axis through marker's new position
-                                axis_start = new_position
-                                axis_end = new_position.Add(DB.XYZ(0, 0, 10))
-                                rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                                
-                                print("  Measured: {:.1f}°, Corrected: {:.1f}° - Rotating FamilyInstance".format(
-                                    measured_rotation_deg, correct_rotation_deg))
-                                DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(correct_rotation_deg))
-                        
-                        updated_count += 1
-                        print("  SUCCESS: FamilyInstance elevation marker transformed correctly")
-                        continue
-                        
-                    elif isinstance(location, DB.LocationCurve):
-                        old_curve = location.Curve
-                        new_curve = old_curve.CreateTransformed(transform)  # Full transform OK for curves
-                        location.Curve = new_curve
-                        updated_count += 1
-                        print("  SUCCESS: LocationCurve updated with FULL transform")
-                        continue
-                        
-                    else:
-                        print("  Location type {} - trying alternative methods...".format(type(location).__name__))
-                        
-                except Exception as loc_e:
-                    print("  FamilyInstance location method failed: {}".format(str(loc_e)))
-            
-            # Method B: Try using ElementTransformUtils (FALLBACK ONLY)
-            # NOTE: For elevation markers with generic "Location" type, try full transform
-            try:
-                element_list = List[DB.ElementId]([marker.Id])
-                
-                # Try the direct full transform approach (same as section markers)
-                if hasattr(DB.ElementTransformUtils, 'TransformElements'):
-                    DB.ElementTransformUtils.TransformElements(document, element_list, transform)
-                    print("  SUCCESS: Full transform via ElementTransformUtils")
-                    updated_count += 1
-                    continue
-                else:
-                    # For elements with generic Location type, apply the full transform
-                    # by moving them to the transformed position
-                    if hasattr(marker, 'Location') and marker.Location:
-                        # Try to get current position and transform it
-                        if hasattr(marker.Location, 'Point'):
-                            old_point = marker.Location.Point
-                            new_point = transform.OfPoint(old_point)
-                            # Use MoveElement to place at new position
-                            move_vector = new_point.Subtract(old_point)
-                            DB.ElementTransformUtils.MoveElement(document, marker.Id, move_vector)
-                            print("  SUCCESS: Transformed via move to new position")
-                            updated_count += 1
-                            continue
-                
-            except Exception as transform_e:
-                # Handle format errors in exception messages
-                try:
-                    print("  ElementTransformUtils failed: {}".format(str(transform_e)))
-                except:
-                    print("  ElementTransformUtils failed with formatting error")
-            
-            # Method C: For ElevationMarker objects, use proper ElementTransformUtils
-            if isinstance(marker, DB.ElevationMarker):
-                try:
-                    # Get marker's current position to calculate rotation center
-                    marker_location = None
-                    if hasattr(marker, 'Location') and marker.Location:
-                        if hasattr(marker.Location, 'Point'):
-                            marker_location = marker.Location.Point
-                    
-                    if marker_location is None:
-                        # Try to get position from first elevation view
-                        elevation_count = marker.CurrentViewCount
-                        print("  ElevationMarker has {} elevation views".format(elevation_count))
-                        
-                        if elevation_count > 0:
-                            elev_view_id = marker.GetViewId(0)  # FIXED: Correct API method
-                            if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
-                                elev_view = document.GetElement(elev_view_id)
-                                if elev_view and hasattr(elev_view, 'Origin'):
-                                    marker_location = elev_view.Origin
-                    
-                    if marker_location:
-                        # Calculate rotation angle from transform matrix  
-                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        measured_rotation_deg = math.degrees(measured_rotation_rad)
-                        
-                        # CRITICAL FIX: Same correction as FamilyInstance markers
-                        rotation_deg = -measured_rotation_deg
-                        
-                        # Apply translation first
-                        translation_vector = transform.Origin
-                        if translation_vector.GetLength() > 0.001:
-                            DB.ElementTransformUtils.MoveElement(document, marker.Id, translation_vector)
-                            print("  ElevationMarker translated by ({:.2f}, {:.2f}, {:.2f})".format(
-                                translation_vector.X, translation_vector.Y, translation_vector.Z))
-                        
-                        # Apply rotation using proper API method
-                        if abs(rotation_deg) > 1.0:  # Only rotate if significant angle
-                            # Create rotation axis through marker location
-                            axis_start = marker_location.Add(translation_vector)  # New position after translation
-                            axis_end = axis_start.Add(DB.XYZ(0, 0, 10))
-                            rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                            
-                            print("  Measured: {:.1f}°, Corrected: {:.1f}° - Rotating ElevationMarker around ({:.2f}, {:.2f}, {:.2f})".format(
-                                measured_rotation_deg, rotation_deg, axis_start.X, axis_start.Y, axis_start.Z))
-                            
-                            DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(rotation_deg))
-                        
-                        updated_count += 1
-                        print("  SUCCESS: ElevationMarker transformed with ElementTransformUtils")
-                        continue
-                    else:
-                        print("  Could not determine ElevationMarker position")
-                        
-                except Exception as elev_e:
-                    print("  ElevationMarker transformation failed: {}".format(str(elev_e)))
-            
-            # Method D: Try geometry-based approach for family instances
-            if isinstance(marker, DB.FamilyInstance):
-                try:
-                    # Some elevation markers might have special parameters
-                    params_to_check = ['Elevation', 'Height', 'Position', 'Origin']
-                    
-                    for param_name in params_to_check:
-                        try:
-                            param = marker.LookupParameter(param_name)
-                            if param and not param.IsReadOnly:
-                                if param.StorageType == DB.StorageType.Double:
-                                    # This is a simplified approach - you might need more sophisticated parameter handling
-                                    print("    Found parameter: {} = {}".format(param_name, param.AsDouble()))
-                        except:
-                            continue
-                            
-                except Exception as param_e:
-                    print("  Parameter check failed: {}".format(str(param_e)))
-            
-            print("  WARNING: Could not update elevation element {}".format(marker_id))
-            
-        except Exception as e:
-            print("  ERROR processing elevation element {}: {}".format(
-                marker.Id.Value if hasattr(marker, 'Id') else 'Unknown', str(e)))
-            continue
-    
-    print("=== ELEVATION UPDATE SUMMARY ===")
-    print("Updated {} out of {} user-created elevation elements".format(updated_count, len(user_elevation_list)))
-    print("Skipped {} default elevation markers".format(default_count))
-    print("Success rate: {:.1%}".format(float(updated_count) / len(user_elevation_list) if user_elevation_list else 0))
-    print("================================")
-    
-    return updated_count
+    # Return 0 to indicate no transformations were applied (this is intentional for testing)
+    return 0
 
 
 def update_section_views_v3(document, transform):
     """
-    V3 - Enhanced section view updates with better marker handling
+    V3 - TESTING: NO SECTION MARKER TRANSFORMATION
+    HYPOTHESIS: Section markers might also follow building automatically
     """
     
-    print("=== V3 SECTION VIEW UPDATE ===")
+    print("=== V3 SECTION VIEW TEST - NO MARKER TRANSFORMATION ===")
     
     section_views = DB.FilteredElementCollector(document).OfClass(DB.ViewSection).ToElements()
     print("Found {} section views to process".format(len(section_views)))
     updated_count = 0
     
-    # Find section markers/callouts with enhanced detection
+    # Find section markers for counting only
     section_markers = []
     family_instances = DB.FilteredElementCollector(document).OfClass(DB.FamilyInstance).ToElements()
     
@@ -903,7 +708,6 @@ def update_section_views_v3(document, transform):
         try:
             if instance.Symbol and instance.Symbol.Family:
                 family_name = instance.Symbol.Family.Name.lower()
-                # Enhanced detection for section-related families
                 section_keywords = ['section', 'callout', 'detail', 'marker']
                 if any(keyword in family_name for keyword in section_keywords):
                     section_markers.append(instance)
@@ -911,102 +715,10 @@ def update_section_views_v3(document, transform):
         except:
             continue
     
-    print("Found {} section marker family instances".format(len(section_markers)))
+    print("Found {} section marker family instances - SKIPPING MARKER TRANSFORMATIONS".format(len(section_markers)))
+    print("Testing: Section markers might follow building automatically through view relationships")
     
-    # Update section markers first - Apply FULL transformation
-    for marker in section_markers:
-        try:
-            marker_updated = False
-            
-            # Method 1: Proper transformation for section markers (same approach as elevation markers)
-            if hasattr(marker, 'Location') and marker.Location:
-                if isinstance(marker.Location, DB.LocationCurve):
-                    old_curve = marker.Location.Curve
-                    new_curve = old_curve.CreateTransformed(transform)
-                    marker.Location.Curve = new_curve
-                    print("Updated section marker curve: {}".format(marker.Id.Value))
-                    marker_updated = True
-                elif isinstance(marker.Location, DB.LocationPoint):
-                    old_point = marker.Location.Point
-                    
-                    # Step 1: Move to new position (translation only)
-                    new_position = old_point.Add(transform.Origin)
-                    marker.Location.Point = new_position
-                    print("  Section marker moved to ({:.2f}, {:.2f}, {:.2f})".format(
-                        new_position.X, new_position.Y, new_position.Z))
-                    
-                    # Step 2: Rotate around its new position for orientation
-                    if not transform.IsTranslation:
-                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        measured_rotation_deg = math.degrees(measured_rotation_rad)
-                        
-                        # CRITICAL FIX: Same correction as elevation markers
-                        correct_rotation_deg = -measured_rotation_deg
-                        
-                        if abs(correct_rotation_deg) > 1.0:  # Only rotate if significant
-                            # Create rotation axis through marker's new position
-                            axis_start = new_position
-                            axis_end = new_position.Add(DB.XYZ(0, 0, 10))
-                            rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                            
-                            print("  Measured: {:.1f}°, Corrected: {:.1f}° - Rotating section marker".format(
-                                measured_rotation_deg, correct_rotation_deg))
-                            DB.ElementTransformUtils.RotateElement(document, marker.Id, rotation_axis, math.radians(correct_rotation_deg))
-                    
-                    print("Updated section marker point: {} (with rotation)".format(marker.Id.Value))
-                    marker_updated = True
-            
-            # Method 2: If location method fails, try ElementTransformUtils
-            if not marker_updated:
-                try:
-                    marker_list = List[DB.ElementId]([marker.Id])
-                    
-                    # Apply rotation and translation separately for section markers
-                    print("    Section marker before transform: {} at ({:.2f}, {:.2f}, {:.2f})".format(
-                        marker.Id.Value, 
-                        marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
-                        marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
-                        marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
-                    
-                    if not transform.IsTranslation:
-                        # MEASURE the actual rotation from the transform matrix
-                        # Same correction needed as elevation markers
-                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        measured_rotation_deg = math.degrees(measured_rotation_rad)
-                        
-                        # CORRECT THE ROTATION: Section markers need same correction as elevation markers
-                        actual_rotation_deg = -measured_rotation_deg  # Flip the sign
-                        actual_rotation_rad = math.radians(actual_rotation_deg)
-                        
-                        # Use the same rotation origin as used for building elements
-                        rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Same as building center
-                        rotation_axis = DB.Line.CreateBound(rotation_origin, 
-                                                          DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
-                        
-                        print("    MEASURED: {:.2f}°, CORRECTED for section: {:.2f}° around ({:.2f}, {:.2f}, {:.2f})".format(
-                            measured_rotation_deg, actual_rotation_deg, rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
-                        
-                        DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, actual_rotation_rad)
-                    
-                    # Apply translation
-                    print("    Translating section marker by ({:.2f}, {:.2f}, {:.2f})".format(
-                        transform.Origin.X, transform.Origin.Y, transform.Origin.Z))
-                    DB.ElementTransformUtils.MoveElements(document, marker_list, transform.Origin)
-                    
-                    print("    Section marker after transform: {} at ({:.2f}, {:.2f}, {:.2f})".format(
-                        marker.Id.Value,
-                        marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
-                        marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
-                        marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
-                    
-                    print("Updated section marker via ElementTransformUtils: {}".format(marker.Id.Value))
-                    marker_updated = True
-                    
-                except Exception as trans_e:
-                    print("Section marker transform failed: {}".format(str(trans_e)))
-                    
-        except Exception as e:
-            print("Could not update section marker {}: {}".format(marker.Id.Value, str(e)))
+    # Continue with section view updates (crop boxes) - these should still work
     
     # Update section views
     for view in section_views:
