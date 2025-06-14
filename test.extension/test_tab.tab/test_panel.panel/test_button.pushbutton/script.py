@@ -642,8 +642,8 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
     Based on API research: markers must rotate around same axis as building
     """
     
-    print("=== V5 ELEVATION MARKER UPDATE - SIMPLE 45° COMPENSATION ===")
-    print("SIMPLE FIX: Adding 45° to marker rotation since they're consistently 45° off")
+    print("=== V4 ELEVATION MARKER UPDATE - BUILDING CENTER ROTATION ===")
+    print("CRITICAL FIX: Rotating around building center (same axis as building transformation)")
     print("Building center rotation axis: ({:.2f}, {:.2f}, {:.2f})".format(
         building_center.X, building_center.Y, building_center.Z))
     
@@ -693,9 +693,9 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
     
     updated_count = 0
     
-    # SIMPLE FIX V5: Add 45° compensation since markers are consistently 45° off
-    # Building rotates 90°, but markers need 135° to align properly
-    marker_rotation_degrees = rotation_degrees + 45.0  # Add 45° compensation
+    # CRITICAL FIX V4: Use building center as rotation axis for ALL markers
+    # This ensures markers rotate around the same point as the building
+    marker_rotation_degrees = rotation_degrees  # Same as building rotation
     marker_rotation_radians = math.radians(marker_rotation_degrees)
     
     # Create rotation axis through building center (same as building rotation)
@@ -704,12 +704,11 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
         DB.XYZ(building_center.X, building_center.Y, building_center.Z + 10)
     )
     
-    print("V5 SIMPLE FIX: Add 45° compensation to marker rotation")
-    print("Building rotation: {}°, Marker rotation: {}° ({}° + 45° compensation)".format(
-        rotation_degrees, marker_rotation_degrees, rotation_degrees))
+    print("V4 CRITICAL FIX: Using building center rotation axis for all markers")
     print("Rotation axis: ({:.2f}, {:.2f}, {:.2f}) to ({:.2f}, {:.2f}, {:.2f})".format(
         building_center.X, building_center.Y, building_center.Z,
         building_center.X, building_center.Y, building_center.Z + 10))
+    print("Rotation angle: {} degrees".format(marker_rotation_degrees))
     
     for marker in user_markers:
         try:
@@ -727,12 +726,11 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
                     print("  FamilyInstance moved to ({:.2f}, {:.2f}, {:.2f})".format(
                         new_point.X, new_point.Y, new_point.Z))
                     
-                    # Step 2: V5 SIMPLE FIX - Add 45° compensation
-                    print("  V5 FIX: Rotating by {}° ({}° building + 45° compensation)".format(
-                        marker_rotation_degrees, rotation_degrees))
+                    # Step 2: V4 CRITICAL FIX - Rotate around building center, not marker position
+                    print("  V4 FIX: Rotating around building center axis (not marker position)")
                     
                     DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
-                    print("  SUCCESS: FamilyInstance rotated with 45° compensation")
+                    print("  SUCCESS: FamilyInstance rotated around building center")
                     updated_count += 1
                     
             elif isinstance(marker, DB.ElevationMarker):
@@ -746,12 +744,11 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
                 print("  ElevationMarker translated by ({:.2f}, {:.2f}, {:.2f})".format(
                     translation_vector.X, translation_vector.Y, translation_vector.Z))
                 
-                # Step 2: V5 SIMPLE FIX - Add 45° compensation  
-                print("  V5 FIX: Rotating by {}° ({}° building + 45° compensation)".format(
-                    marker_rotation_degrees, rotation_degrees))
+                # Step 2: V4 CRITICAL FIX - Rotate around building center
+                print("  V4 FIX: Rotating around building center axis")
                 
                 DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
-                print("  SUCCESS: ElevationMarker rotated with 45° compensation")
+                print("  SUCCESS: ElevationMarker rotated around building center")
                 updated_count += 1
                 
         except Exception as e:
@@ -774,7 +771,7 @@ def update_section_views_v3(document, transform, rotation_degrees, building_cent
     Now uses building center as rotation axis (same as elevation markers)
     """
     
-    print("=== V5 SECTION VIEW UPDATE - SIMPLE 45° COMPENSATION ===")
+    print("=== V3 SECTION VIEW UPDATE - FIXED SECTION MARKERS ===")
     
     section_views = DB.FilteredElementCollector(document).OfClass(DB.ViewSection).ToElements()
     print("Found {} section views to process".format(len(section_views)))
@@ -797,8 +794,8 @@ def update_section_views_v3(document, transform, rotation_degrees, building_cent
     
     print("Found {} section marker family instances".format(len(section_markers)))
     
-    # V5 SIMPLE FIX: Add 45° compensation for section markers too
-    marker_rotation_degrees = rotation_degrees + 45.0  # Add 45° compensation
+    # V4 FIXED: Transform section markers using building center rotation axis
+    marker_rotation_degrees = rotation_degrees  # Same as building rotation
     marker_rotation_radians = math.radians(marker_rotation_degrees)
     
     # Create rotation axis through building center (same as building and elevation markers)
@@ -807,11 +804,10 @@ def update_section_views_v3(document, transform, rotation_degrees, building_cent
         DB.XYZ(building_center.X, building_center.Y, building_center.Z + 10)
     )
     
-    print("V5 SIMPLE FIX: Section markers with 45° compensation")
-    print("Building rotation: {}°, Section marker rotation: {}° ({}° + 45° compensation)".format(
-        rotation_degrees, marker_rotation_degrees, rotation_degrees))
+    print("V4 FIXED: Section markers using building center rotation axis")
     print("Building center axis: ({:.2f}, {:.2f}, {:.2f})".format(
         building_center.X, building_center.Y, building_center.Z))
+    print("Rotation angle: {} degrees".format(marker_rotation_degrees))
     
     for marker in section_markers:
         try:
@@ -823,12 +819,11 @@ def update_section_views_v3(document, transform, rotation_degrees, building_cent
                 print("  Section marker moved to ({:.2f}, {:.2f}, {:.2f})".format(
                     new_point.X, new_point.Y, new_point.Z))
                 
-                # Step 2: V5 SIMPLE FIX - Add 45° compensation
-                print("  V5 FIX: Rotating by {}° ({}° building + 45° compensation)".format(
-                    marker_rotation_degrees, rotation_degrees))
+                # Step 2: V4 FIX - Rotate around building center
+                print("  V4 FIX: Rotating section marker around building center")
                 
                 DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
-                print("  Updated section marker: {} (with 45° compensation)".format(marker.Id.Value))
+                print("  Updated section marker: {} (rotated around building center)".format(marker.Id.Value))
         except Exception as e:
             print("  ERROR transforming section marker {}: {}".format(marker.Id.Value, str(e)))
             continue
@@ -1263,11 +1258,11 @@ def main():
     # Show confirmation dialog
     result = UI.TaskDialog.Show(
         "Enhanced Transform Model and Views - v3",
-        "V5 SIMPLE 45° COMPENSATION FIX:\n"
-        "- SIMPLE: Add 45° to marker rotation\n"
-        "- PRAGMATIC: Stop overcomplicating the solution\n"
-        "- DIRECT: Compensate for consistent 45° offset\n"
-        "- TEST: Building 90° + Markers 135° = Aligned\n\n"
+        "V4 BREAKTHROUGH ROTATION FIXES:\n"
+        "- FIXED: Use building center as rotation axis\n"
+        "- FIXED: Markers rotate around same point as building\n"
+        "- FIXED: Coordinate system alignment issue\n"
+        "- RESEARCH: Based on Revit API documentation\n\n"
         "Transform settings:\n"
         "Translation: ({}, {}, {}) feet\n"
         "Rotation: {} degrees\n\n"
