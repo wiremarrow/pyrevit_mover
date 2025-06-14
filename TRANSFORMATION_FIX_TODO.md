@@ -231,4 +231,48 @@ document.Regenerate()
 **Validation**: ✅ Element types now show Wall, FamilyInstance, Floor  
 **API**: ✅ ElementTransformUtils.RotateElements() works correctly with proper elements  
 **Rotation Math**: ✅ Fixed elevation/section marker rotation angle calculation (flip sign)  
-**Success Criteria**: ✅ 8/8 building elements + 44/44 elevation markers + section markers transformed correctly
+**LATEST CRITICAL FIXES - ROTATION DIRECTION & FILTERING**
+
+### Issue 1: Wrong Rotation Direction (FIXED)
+**Problem**: Markers still 45° counterclockwise off despite API fixes
+**Root Cause**: Applying -90° when markers need +90° to match building rotation
+
+**Mathematical Analysis**:
+- Building rotates +90° clockwise: BasisX=(0,1,0), BasisY=(-1,0,0)
+- `atan2(-1, 0) = -90°` (measured from transform matrix)
+- But markers need +90° rotation to match building orientation
+- **Solution**: `correct_rotation_deg = -measured_rotation_deg` (flip sign)
+
+### Issue 2: Default Elevation Filtering Not Working (FIXED)
+**Problem**: "Filtered: 0 default markers skipped" - processing ALL markers including defaults
+**Root Cause**: Wrong API method + insufficient filtering logic
+
+**API Fixes**:
+- `GetElevationViewId()` → `GetViewId(index)` (correct method)
+- Check all 4 view indices (0-3) for each ElevationMarker
+- Added location-based filtering (near origin = likely default)
+- Enhanced view name detection for default elevations
+
+### Issue 3: ElevationMarker API Error (FIXED)
+**Problem**: "'ElevationMarker' object has no attribute 'GetElevationViewId'"
+**Solution**: Use correct API method `marker.GetViewId(0)`
+
+### Code Patterns Now Applied:
+```python
+# Correct rotation angle calculation
+measured_rotation_deg = math.degrees(math.atan2(transform.BasisY.X, transform.BasisX.X))
+correct_rotation_deg = -measured_rotation_deg  # Flip for proper direction
+
+# Correct ElevationMarker view access  
+elev_view_id = marker.GetViewId(0)  # Not GetElevationViewId
+
+# Enhanced default detection
+def is_default_elevation_marker(document, marker):
+    # Check view names AND location AND family names
+```
+
+**Success Criteria**: 
+✅ 8/8 building elements transformed correctly
+🔄 Elevation markers should now align properly (no 45° offset)  
+🔄 Only user-created elevation markers should be processed
+🔄 Section markers should rotate in correct direction
