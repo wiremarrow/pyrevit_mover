@@ -349,6 +349,14 @@ Bulk translation successful!
 
 
 
+Cleaning wall constraints...
+
+
+
+Wall constraint cleanup completed: 5 walls processed
+
+
+
 Successfully transformed 8/8 elements
 
 
@@ -398,7 +406,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -410,7 +418,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -422,7 +430,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -434,7 +442,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -446,7 +454,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -458,7 +466,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -470,7 +478,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -482,7 +490,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -494,7 +502,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -506,7 +514,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -518,7 +526,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -530,7 +538,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -542,7 +550,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -558,19 +566,11 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
+Marker has 1 elevation views
 
 
 
-Using rotation origin: (2.40, 7.49, 0.00)
-
-
-
-Elevation rotated by 90.00 degrees (CORRECTED)
-
-
-
-SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+WARNING: Could not update elevation element 29152
 
 
 
@@ -582,7 +582,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -598,19 +598,11 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
+Marker has 1 elevation views
 
 
 
-Using rotation origin: (2.40, 7.49, 0.00)
-
-
-
-Elevation rotated by 90.00 degrees (CORRECTED)
-
-
-
-SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+WARNING: Could not update elevation element 29157
 
 
 
@@ -622,7 +614,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -638,19 +630,11 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
+Marker has 1 elevation views
 
 
 
-Using rotation origin: (2.40, 7.49, 0.00)
-
-
-
-Elevation rotated by 90.00 degrees (CORRECTED)
-
-
-
-SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+WARNING: Could not update elevation element 29162
 
 
 
@@ -662,7 +646,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -674,7 +658,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -686,7 +670,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -698,7 +682,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -714,19 +698,11 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
+Marker has 1 elevation views
 
 
 
-Using rotation origin: (2.40, 7.49, 0.00)
-
-
-
-Elevation rotated by 90.00 degrees (CORRECTED)
-
-
-
-SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+WARNING: Could not update elevation element 29167
 
 
 
@@ -738,7 +714,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -750,7 +726,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -762,7 +738,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -774,7 +750,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -786,7 +762,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -798,7 +774,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -810,7 +786,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -822,7 +798,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -834,7 +810,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -846,7 +822,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -858,7 +834,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -870,7 +846,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -882,7 +858,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -894,7 +870,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -910,19 +886,11 @@ Location type Location - trying alternative methods...
 
 
 
-MEASURED from matrix: -90.00°, CORRECTED for elevation: 90.00°
+Marker has 1 elevation views
 
 
 
-Using rotation origin: (2.40, 7.49, 0.00)
-
-
-
-Elevation rotated by 90.00 degrees (CORRECTED)
-
-
-
-SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+WARNING: Could not update elevation element 1242351
 
 
 
@@ -934,7 +902,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -946,7 +914,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -958,7 +926,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -970,7 +938,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -982,7 +950,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -994,7 +962,7 @@ Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated
+SUCCESS: LocationPoint updated with FULL transform
 
 
 
@@ -1002,7 +970,7 @@ SUCCESS: LocationPoint updated
 
 
 
-Updated 44 out of 44 user-created elevation elements
+Updated 39 out of 44 user-created elevation elements
 
 
 
@@ -1010,7 +978,7 @@ Skipped 0 default elevation markers
 
 
 
-Success rate: 100.0%
+Success rate: 88.6%
 
 
 
@@ -1811,7 +1779,7 @@ Model elements: 8/8 transformed
 
 
 
-ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 39 updated *** KEY IMPROVEMENT ***
 
 
 
