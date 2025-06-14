@@ -8,7 +8,11 @@ Found 1413 elements to transform
 
 
 
-Using provided rotation origin: (0.00, 0.00, 0.00)
+Calculated building center for rotation: (43.37, -166.22, -98.63)
+
+
+
+Using calculated building center as rotation origin
 
 
 
@@ -20,11 +24,11 @@ Original point: (0.0, 0.0, 0.0)
 
 
 
-Transformed point: (50.0, 50.0, 0.0)
+Transformed point: (-72.8455572840, -159.587271449, 2.84217094304e-14)
 
 
 
-Translation: (50.0, 50.0, 0.0)
+Translation: (-72.8455572840, -159.587271449, 2.84217094304e-14)
 
 
 
@@ -48,7 +52,7 @@ Applying rotation of 90.0 degrees...
 
 
 
-Rotation center: (0.00, 0.00, 0.00)
+Rotation center: (43.37, -166.22, -98.63)
 
 
 
@@ -56,7 +60,28 @@ Rotation radians: 1.5708
 
 
 
+
+Analyzing elements before rotation:
+
+
+
+Element types to rotate: {'Material': 8, 'Level': 2}
+
+
+
+Non-hosted elements: 1410, Hosted elements: 3
+
+
+
+Rotating 1410 non-hosted elements around axis from (43.37, -166.22, -98.63) to (43.37, -166.22, -88.63)
+
+
+
 Non-hosted elements rotation successful!
+
+
+
+Rotating 3 hosted elements
 
 
 
@@ -64,7 +89,16 @@ Hosted elements rotation successful!
 
 
 
-Applying translation: (50.0, 50.0, 0.0)...
+
+Checking element positions after rotation:
+
+
+
+Checked 0 elements for position changes
+
+
+
+Applying translation: (-72.8455572840, -159.587271449, 2.84217094304e-14)...
 
 
 
