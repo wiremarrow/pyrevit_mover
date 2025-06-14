@@ -40,19 +40,19 @@ Found 1413 elements to transform
 
 
 
-Complex transformation - using TransformElements...
+Complex transformation - applying to each element...
 
 
 
-Bulk transformation failed: 'type' object has no attribute 'TransformElements'
+Transformed 524/1413 elements
 
 
 
-Successfully transformed 0/1413 elements
+Successfully transformed 524/1413 elements
 
 
 
-Success rate: 0.0% of elements transformed
+Success rate: 37.1% of elements transformed
 
 
 
@@ -249,15 +249,7 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
-
-
-
-Marker has 1 elevation views
-
-
-
-WARNING: Could not update elevation element 29152
+SUCCESS: Transformed via ElementTransformUtils
 
 
 
@@ -285,15 +277,7 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
-
-
-
-Marker has 1 elevation views
-
-
-
-WARNING: Could not update elevation element 29157
+SUCCESS: Transformed via ElementTransformUtils
 
 
 
@@ -321,15 +305,7 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
-
-
-
-Marker has 1 elevation views
-
-
-
-WARNING: Could not update elevation element 29162
+SUCCESS: Transformed via ElementTransformUtils
 
 
 
@@ -393,15 +369,7 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
-
-
-
-Marker has 1 elevation views
-
-
-
-WARNING: Could not update elevation element 29167
+SUCCESS: Transformed via ElementTransformUtils
 
 
 
@@ -585,15 +553,7 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
-
-
-
-Marker has 1 elevation views
-
-
-
-WARNING: Could not update elevation element 1242351
+SUCCESS: Transformed via ElementTransformUtils
 
 
 
@@ -673,11 +633,11 @@ SUCCESS: LocationPoint updated
 
 
 
-Updated 39 out of 44 elevation elements
+Updated 44 out of 44 elevation elements
 
 
 
-Success rate: 88.6%
+Success rate: 100.0%
 
 
 
@@ -1329,7 +1289,7 @@ Total annotations found: 32
 
 
 
-Bulk annotation transform failed: 'type' object has no attribute 'TransformElements'
+SUCCESS: Bulk transformed 32 annotations
 
 
 
@@ -1338,11 +1298,11 @@ Bulk annotation transform failed: 'type' object has no attribute 'TransformEleme
 
 
 
-Model elements: 0/1413 transformed
+Model elements: 524/1413 transformed
 
 
 
-ELEVATION MARKERS: 39 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
 
 
 
@@ -1354,7 +1314,7 @@ Plan views: 19 updated
 
 
 
-Annotations: 0 transformed
+Annotations: 32 transformed
 
 
 
