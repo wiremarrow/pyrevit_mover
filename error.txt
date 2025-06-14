@@ -374,7 +374,15 @@ Success rate: 100.0% of elements transformed
 
 
 
-=== V3 ELEVATION MARKER UPDATE - FIXED ROTATION ===
+=== V4 ELEVATION MARKER UPDATE - BUILDING CENTER ROTATION ===
+
+
+
+CRITICAL FIX: Rotating around building center (same axis as building transformation)
+
+
+
+Building center rotation axis: (2.40, 7.49, -0.00)
 
 
 
@@ -386,7 +394,15 @@ Filtered: 0 default markers skipped, 44 user markers to process
 
 
 
-FIXED: Using original rotation angle directly: 90.0 degrees
+V4 CRITICAL FIX: Using building center rotation axis for all markers
+
+
+
+Rotation axis: (2.40, 7.49, -0.00) to (2.40, 7.49, 10.00)
+
+
+
+Rotation angle: 90.0 degrees
 
 
 
@@ -402,11 +418,11 @@ FamilyInstance moved to (70.35, 76.34, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -418,15 +434,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-16.45, 125.43, 0.00)
+FamilyInstance moved to (-15.55, -11.36, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -438,15 +454,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-65.55, 38.64, 0.00)
+FamilyInstance moved to (70.35, 76.34, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -458,15 +474,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (21.25, -10.46, 0.00)
+FamilyInstance moved to (-15.55, -11.36, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -482,11 +498,11 @@ FamilyInstance moved to (70.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -498,15 +514,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (1.80, 125.43, 0.00)
+FamilyInstance moved to (-15.55, 6.89, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -518,15 +534,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-65.55, 56.89, 0.00)
+FamilyInstance moved to (70.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -538,15 +554,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (3.00, -10.46, 0.00)
+FamilyInstance moved to (-15.55, 6.89, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -562,11 +578,11 @@ FamilyInstance moved to (70.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -582,11 +598,11 @@ FamilyInstance moved to (133.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -602,11 +618,11 @@ FamilyInstance moved to (136.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -622,11 +638,11 @@ FamilyInstance moved to (76.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -642,11 +658,11 @@ FamilyInstance moved to (76.35, 64.17, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -662,11 +678,11 @@ ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis
 
 
 
-SUCCESS: ElevationMarker transformed with ElementTransformUtils
+SUCCESS: ElevationMarker rotated around building center
 
 
 
@@ -682,11 +698,11 @@ FamilyInstance moved to (76.35, 70.25, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -702,11 +718,11 @@ ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis
 
 
 
-SUCCESS: ElevationMarker transformed with ElementTransformUtils
+SUCCESS: ElevationMarker rotated around building center
 
 
 
@@ -722,11 +738,11 @@ FamilyInstance moved to (76.35, 76.34, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -742,11 +758,11 @@ ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis
 
 
 
-SUCCESS: ElevationMarker transformed with ElementTransformUtils
+SUCCESS: ElevationMarker rotated around building center
 
 
 
@@ -762,11 +778,11 @@ FamilyInstance moved to (94.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -782,11 +798,11 @@ FamilyInstance moved to (94.35, 64.17, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -802,11 +818,11 @@ FamilyInstance moved to (94.35, 70.25, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -818,15 +834,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (1.80, 131.43, 0.00)
+FamilyInstance moved to (-21.55, 6.89, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -842,11 +858,11 @@ ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis
 
 
 
-SUCCESS: ElevationMarker transformed with ElementTransformUtils
+SUCCESS: ElevationMarker rotated around building center
 
 
 
@@ -858,15 +874,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-4.28, 131.43, 0.00)
+FamilyInstance moved to (-21.55, 0.80, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -878,15 +894,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-10.37, 131.43, 0.00)
+FamilyInstance moved to (-21.55, -5.28, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -898,15 +914,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-16.45, 131.43, 0.00)
+FamilyInstance moved to (-21.55, -11.36, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -922,11 +938,11 @@ FamilyInstance moved to (94.35, 76.34, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -942,11 +958,11 @@ FamilyInstance moved to (64.36, 58.07, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -962,11 +978,11 @@ FamilyInstance moved to (88.35, 58.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -982,11 +998,11 @@ FamilyInstance moved to (88.35, 64.17, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1002,11 +1018,11 @@ FamilyInstance moved to (88.35, 70.25, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1022,11 +1038,11 @@ FamilyInstance moved to (88.35, 76.34, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1042,11 +1058,11 @@ FamilyInstance moved to (70.35, 64.17, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1058,15 +1074,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-4.28, 125.43, 0.00)
+FamilyInstance moved to (-15.55, 0.80, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1078,15 +1094,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-65.55, 50.80, 0.00)
+FamilyInstance moved to (70.35, 64.17, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1098,15 +1114,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (9.08, -10.46, 0.00)
+FamilyInstance moved to (-15.55, 0.80, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1122,11 +1138,11 @@ FamilyInstance moved to (70.35, 64.17, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1142,11 +1158,11 @@ ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis
 
 
 
-SUCCESS: ElevationMarker transformed with ElementTransformUtils
+SUCCESS: ElevationMarker rotated around building center
 
 
 
@@ -1162,11 +1178,11 @@ FamilyInstance moved to (70.35, 70.25, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1178,15 +1194,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-10.37, 125.43, 0.00)
+FamilyInstance moved to (-15.55, -5.28, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1198,15 +1214,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-65.55, 44.72, 0.00)
+FamilyInstance moved to (70.35, 70.25, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1218,15 +1234,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (15.17, -10.46, 0.00)
+FamilyInstance moved to (-15.55, -5.28, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1242,11 +1258,11 @@ FamilyInstance moved to (70.35, 70.25, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1262,11 +1278,11 @@ FamilyInstance moved to (70.35, 76.34, 0.00)
 
 
 
-FIXED: Rotating by original angle: 90.0°
+V4 FIX: Rotating around building center axis (not marker position)
 
 
 
-SUCCESS: FamilyInstance elevation marker transformed correctly
+SUCCESS: FamilyInstance rotated around building center
 
 
 
@@ -1346,19 +1362,27 @@ Found 9 section marker family instances
 
 
 
-FIXED: Transforming section markers by 90.0 degrees
+V4 FIXED: Section markers using building center rotation axis
 
 
 
-Section marker moved to (1.82, 119.45, 0.00)
+Building center axis: (2.40, 7.49, -0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+Rotation angle: 90.0 degrees
 
 
 
-Updated section marker point: 511753 (with rotation)
+Section marker moved to (-9.56, 6.90, 0.00)
+
+
+
+V4 FIX: Rotating section marker around building center
+
+
+
+Updated section marker: 511753 (rotated around building center)
 
 
 
@@ -1366,11 +1390,11 @@ Section marker moved to (118.35, 59.09, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512308 (with rotation)
+Updated section marker: 512308 (rotated around building center)
 
 
 
@@ -1378,11 +1402,11 @@ Section marker moved to (121.35, 59.09, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512386 (with rotation)
+Updated section marker: 512386 (rotated around building center)
 
 
 
@@ -1390,11 +1414,11 @@ Section marker moved to (124.35, 59.09, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512393 (with rotation)
+Updated section marker: 512393 (rotated around building center)
 
 
 
@@ -1402,11 +1426,11 @@ Section marker moved to (127.35, 58.21, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512421 (with rotation)
+Updated section marker: 512421 (rotated around building center)
 
 
 
@@ -1414,11 +1438,11 @@ Section marker moved to (130.35, 59.09, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512422 (with rotation)
+Updated section marker: 512422 (rotated around building center)
 
 
 
@@ -1426,11 +1450,11 @@ Section marker moved to (127.35, 63.21, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512448 (with rotation)
+Updated section marker: 512448 (rotated around building center)
 
 
 
@@ -1438,11 +1462,11 @@ Section marker moved to (130.35, 64.09, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512449 (with rotation)
+Updated section marker: 512449 (rotated around building center)
 
 
 
@@ -1450,11 +1474,11 @@ Section marker moved to (127.35, 68.21, 0.00)
 
 
 
-FIXED: Rotating section marker by 90.0°
+V4 FIX: Rotating section marker around building center
 
 
 
-Updated section marker point: 512456 (with rotation)
+Updated section marker: 512456 (rotated around building center)
 
 
 
