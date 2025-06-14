@@ -642,7 +642,7 @@ def main():
     TRANSLATION_X = 50.0   # feet
     TRANSLATION_Y = 50.0     # feet  
     TRANSLATION_Z = 0.0     # feet
-    ROTATION_DEGREES = 0.0  # degrees
+    ROTATION_DEGREES = 90.0  # degrees
     ROTATION_ORIGIN = DB.XYZ(0, 0, 0)
     
     # Create translation vector

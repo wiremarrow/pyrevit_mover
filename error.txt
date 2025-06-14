@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 
 === TRANSFORMATION DEBUG ===
 
@@ -24,7 +24,7 @@ Transform determinant: 1.0
 
 
 
-Is translation only: True
+Is translation only: False
 
 
 
@@ -36,23 +36,23 @@ Analyzing elements for transformation...
 
 
 
-Found 1417 elements to transform
+Found 1413 elements to transform
 
 
 
-Using MoveElements for translation...
+Complex transformation - using TransformElements...
 
 
 
-Bulk move successful!
+Bulk transformation failed: 'type' object has no attribute 'TransformElements'
 
 
 
-Successfully transformed 1417/1417 elements
+Successfully transformed 0/1413 elements
 
 
 
-Success rate: 100.0% of elements transformed
+Success rate: 0.0% of elements transformed
 
 
 
@@ -249,7 +249,15 @@ Location type Location - trying alternative methods...
 
 
 
-SUCCESS: Moved via ElementTransformUtils
+ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
+
+
+
+Marker has 1 elevation views
+
+
+
+WARNING: Could not update elevation element 29152
 
 
 
@@ -277,7 +285,15 @@ Location type Location - trying alternative methods...
 
 
 
-SUCCESS: Moved via ElementTransformUtils
+ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
+
+
+
+Marker has 1 elevation views
+
+
+
+WARNING: Could not update elevation element 29157
 
 
 
@@ -305,7 +321,15 @@ Location type Location - trying alternative methods...
 
 
 
-SUCCESS: Moved via ElementTransformUtils
+ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
+
+
+
+Marker has 1 elevation views
+
+
+
+WARNING: Could not update elevation element 29162
 
 
 
@@ -369,7 +393,15 @@ Location type Location - trying alternative methods...
 
 
 
-SUCCESS: Moved via ElementTransformUtils
+ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
+
+
+
+Marker has 1 elevation views
+
+
+
+WARNING: Could not update elevation element 29167
 
 
 
@@ -553,7 +585,15 @@ Location type Location - trying alternative methods...
 
 
 
-SUCCESS: Moved via ElementTransformUtils
+ElementTransformUtils failed: 'type' object has no attribute 'TransformElements'
+
+
+
+Marker has 1 elevation views
+
+
+
+WARNING: Could not update elevation element 1242351
 
 
 
@@ -633,11 +673,11 @@ SUCCESS: LocationPoint updated
 
 
 
-Updated 44 out of 44 elevation elements
+Updated 39 out of 44 elevation elements
 
 
 
-Success rate: 100.0%
+Success rate: 88.6%
 
 
 
@@ -649,7 +689,7 @@ Success rate: 100.0%
 
 
 
-Found 20 section views to process
+Found 19 section views to process
 
 
 
@@ -834,14 +874,6 @@ Processing section view: Plumbing Section
 
 
 Skipping template view
-
-
-
-Processing section view: Section 1
-
-
-
-WARNING: Section view Section 1 not directly updated
 
 
 
@@ -1297,7 +1329,7 @@ Total annotations found: 32
 
 
 
-SUCCESS: Bulk moved 32 annotations
+Bulk annotation transform failed: 'type' object has no attribute 'TransformElements'
 
 
 
@@ -1306,11 +1338,11 @@ SUCCESS: Bulk moved 32 annotations
 
 
 
-Model elements: 1417/1417 transformed
+Model elements: 0/1413 transformed
 
 
 
-ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 39 updated *** KEY IMPROVEMENT ***
 
 
 
@@ -1322,7 +1354,7 @@ Plan views: 19 updated
 
 
 
-Annotations: 32 transformed
+Annotations: 0 transformed
 
 
 
