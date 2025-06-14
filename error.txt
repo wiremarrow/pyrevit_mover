@@ -414,6 +414,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (20.35, 26.34, 0.00)
 
 
@@ -431,6 +435,10 @@ Processing elevation element: 511939 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, -48.000000000, 0.000000000), HandOrientation=(-48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -454,6 +462,14 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(-48.000000000, 0.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
 FamilyInstance moved to (20.35, 26.34, 0.00)
 
 
@@ -471,6 +487,14 @@ Processing elevation element: 511941 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(0.000000000, -48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
 
 
 
@@ -494,6 +518,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
@@ -511,6 +539,10 @@ Processing elevation element: 511827 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
 
 
 
@@ -534,6 +566,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
@@ -551,6 +587,14 @@ Processing elevation element: 511829 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
 
 
 
@@ -574,6 +618,14 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
 FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
@@ -591,6 +643,10 @@ Processing elevation element: 512464 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -614,6 +670,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (86.35, 8.09, 0.00)
 
 
@@ -634,6 +694,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (26.35, 8.09, 0.00)
 
 
@@ -651,6 +715,10 @@ Processing elevation element: 511979 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -694,6 +762,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (26.35, 20.25, 0.00)
 
 
@@ -731,6 +803,10 @@ Processing elevation element: 511989 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -774,6 +850,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (44.35, 8.09, 0.00)
 
 
@@ -791,6 +871,10 @@ Processing elevation element: 512122 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -814,6 +898,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (44.35, 20.25, 0.00)
 
 
@@ -831,6 +919,10 @@ Processing elevation element: 511998 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
 
 
 
@@ -874,6 +966,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (-21.55, 0.80, 0.00)
 
 
@@ -891,6 +987,10 @@ Processing elevation element: 512000 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
 
 
 
@@ -914,6 +1014,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (-21.55, -11.36, 0.00)
 
 
@@ -931,6 +1035,10 @@ Processing elevation element: 512124 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -954,6 +1062,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (14.36, 8.07, 0.00)
 
 
@@ -971,6 +1083,10 @@ Processing elevation element: 512023 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -994,6 +1110,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (38.35, 14.17, 0.00)
 
 
@@ -1011,6 +1131,10 @@ Processing elevation element: 512025 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -1034,6 +1158,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (38.35, 26.34, 0.00)
 
 
@@ -1051,6 +1179,10 @@ Processing elevation element: 511915 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
@@ -1074,6 +1206,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (-15.55, 0.80, 0.00)
 
 
@@ -1091,6 +1227,10 @@ Processing elevation element: 511917 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
 
 
 
@@ -1114,6 +1254,14 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
 FamilyInstance moved to (-15.55, 0.80, 0.00)
 
 
@@ -1131,6 +1279,14 @@ Processing elevation element: 511919 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
 
 
 
@@ -1174,6 +1330,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
@@ -1191,6 +1351,10 @@ Processing elevation element: 511932 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
 
 
 
@@ -1214,6 +1378,10 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+
+
+
 FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
@@ -1231,6 +1399,14 @@ Processing elevation element: 511934 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
 
 
 
@@ -1254,6 +1430,14 @@ FamilyInstance Location type: LocationPoint
 
 
 
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
 FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
@@ -1271,6 +1455,10 @@ Processing elevation element: 511937 (Type: FamilyInstance)
 
 
 FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
