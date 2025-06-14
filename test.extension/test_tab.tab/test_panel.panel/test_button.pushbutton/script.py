@@ -88,6 +88,57 @@ def store_wall_joins(document, element_ids):
     return wall_joins
 
 
+def clean_wall_constraints(document, element_ids):
+    """
+    Clean up wall constraints that may cause errors after transformation
+    """
+    print("Cleaning wall constraints...")
+    walls_processed = 0
+    
+    for element_id in element_ids:
+        try:
+            element = document.GetElement(element_id)
+            if element and isinstance(element, DB.Wall):
+                # Try to auto-join walls at their endpoints
+                try:
+                    # Get all other walls to check for auto-joining
+                    all_walls = [document.GetElement(eid) for eid in element_ids 
+                                if document.GetElement(eid) and isinstance(document.GetElement(eid), DB.Wall)]
+                    
+                    for other_wall in all_walls:
+                        if other_wall.Id != element.Id:
+                            try:
+                                # Let Revit auto-join walls if they're close
+                                if not DB.JoinGeometryUtils.AreElementsJoined(document, element, other_wall):
+                                    # Check if endpoints are close (within 0.1 feet for precision)
+                                    if hasattr(element, 'Location') and hasattr(other_wall, 'Location'):
+                                        if isinstance(element.Location, DB.LocationCurve) and isinstance(other_wall.Location, DB.LocationCurve):
+                                            curve1 = element.Location.Curve
+                                            curve2 = other_wall.Location.Curve
+                                            
+                                            endpoints1 = [curve1.GetEndPoint(0), curve1.GetEndPoint(1)]
+                                            endpoints2 = [curve2.GetEndPoint(0), curve2.GetEndPoint(1)]
+                                            
+                                            for ep1 in endpoints1:
+                                                for ep2 in endpoints2:
+                                                    distance = ep1.DistanceTo(ep2)
+                                                    if distance < 0.1:  # Very close - should auto-join
+                                                        DB.JoinGeometryUtils.JoinGeometry(document, element, other_wall)
+                                                        print("  Auto-joined walls {} and {} (distance: {:.3f})".format(
+                                                            element.Id.Value, other_wall.Id.Value, distance))
+                                                        break
+                            except:
+                                continue
+                                
+                    walls_processed += 1
+                except:
+                    continue
+        except:
+            continue
+    
+    print("Wall constraint cleanup completed: {} walls processed".format(walls_processed))
+
+
 def restore_wall_joins(document, wall_joins):
     """
     Restore wall-to-wall join relationships after transformation
@@ -513,7 +564,8 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
             valid_elements = get_valid_elements(document, element_ids)
             transformed_count = len(valid_elements)
         
-        # Step 3: Restore wall joins
+        # Step 3: Clean wall constraints and restore wall joins
+        clean_wall_constraints(document, element_ids)
         restore_wall_joins(document, wall_joins)
         
         print("Successfully transformed {}/{} elements".format(transformed_count, original_count))
@@ -634,7 +686,7 @@ def update_elevation_markers_v3(document, transform):
             marker_id = marker.Id.Value
             print("Processing elevation element: {} (Type: {})".format(marker_id, type(marker).__name__))
             
-            # Method A: Try direct location transformation
+            # Method A: Try direct location transformation (SAME AS SECTION MARKERS)
             if hasattr(marker, 'Location') and marker.Location:
                 try:
                     location = marker.Location
@@ -642,18 +694,18 @@ def update_elevation_markers_v3(document, transform):
                     
                     if isinstance(location, DB.LocationPoint):
                         old_point = location.Point
-                        new_point = transform.OfPoint(old_point)
+                        new_point = transform.OfPoint(old_point)  # Apply FULL transform directly
                         location.Point = new_point
                         updated_count += 1
-                        print("  SUCCESS: LocationPoint updated")
+                        print("  SUCCESS: LocationPoint updated with FULL transform")
                         continue
                         
                     elif isinstance(location, DB.LocationCurve):
                         old_curve = location.Curve
-                        new_curve = old_curve.CreateTransformed(transform)
+                        new_curve = old_curve.CreateTransformed(transform)  # Apply FULL transform directly
                         location.Curve = new_curve
                         updated_count += 1
-                        print("  SUCCESS: LocationCurve updated")
+                        print("  SUCCESS: LocationCurve updated with FULL transform")
                         continue
                         
                     else:
@@ -662,69 +714,31 @@ def update_elevation_markers_v3(document, transform):
                 except Exception as loc_e:
                     print("  Location method failed: {}".format(str(loc_e)))
             
-            # Method B: Try using ElementTransformUtils
+            # Method B: Try using ElementTransformUtils (FALLBACK ONLY)
+            # NOTE: For elevation markers with generic "Location" type, try full transform
             try:
                 element_list = List[DB.ElementId]([marker.Id])
                 
-                # Apply the FULL transformation (rotation + translation)
-                # Use the combined transform, not just translation
+                # Try the direct full transform approach (same as section markers)
                 if hasattr(DB.ElementTransformUtils, 'TransformElements'):
                     DB.ElementTransformUtils.TransformElements(document, element_list, transform)
                     print("  SUCCESS: Full transform via ElementTransformUtils")
+                    updated_count += 1
+                    continue
                 else:
-                    # Fallback: apply rotation and translation separately  
-                    if not transform.IsTranslation:
-                        # MEASURE the actual rotation from the transform matrix
-                        # For +90° building rotation: BasisX=(0,1,0), BasisY=(-1,0,0)
-                        # atan2(-1, 0) = -90°, but we need +90° for elevation markers
-                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        measured_rotation_deg = math.degrees(measured_rotation_rad)
-                        
-                        # CORRECT THE ROTATION: Elevation markers need OPPOSITE rotation
-                        # If building rotated +90°, elevation markers need +90° to match
-                        actual_rotation_deg = -measured_rotation_deg  # Flip the sign
-                        actual_rotation_rad = math.radians(actual_rotation_deg)
-                        
-                        print("  MEASURED from matrix: {:.2f}°, CORRECTED for elevation: {:.2f}°".format(
-                            measured_rotation_deg, actual_rotation_deg))
-                        
-                        # Use the measured rotation
-                        # Get the actual rotation origin from the transform
-                        # The rotation center should be calculated dynamically
-                        rotation_origin = calculate_building_center(document, [e.Id for e in [marker]])
-                        if rotation_origin.GetLength() < 0.001:  # If marker center calc fails
-                            rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Use building center fallback
-                        
-                        print("  Using rotation origin: ({:.2f}, {:.2f}, {:.2f})".format(
-                            rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
-                        
-                        rotation_axis = DB.Line.CreateBound(rotation_origin, 
-                                                          DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
-                        
-                        # Debug: show marker position before
-                        if hasattr(marker, 'Location') and hasattr(marker.Location, 'Point'):
-                            print("  Elevation marker before rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
-                                marker.Location.Point.X,
-                                marker.Location.Point.Y,
-                                marker.Location.Point.Z))
-                        
-                        # Rotate using the CORRECTED angle
-                        DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, actual_rotation_rad)
-                        print("  Elevation rotated by {:.2f} degrees (CORRECTED)".format(actual_rotation_deg))
-                        
-                        # Debug: show marker position after
-                        if hasattr(marker, 'Location') and hasattr(marker.Location, 'Point'):
-                            print("  Elevation marker after rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
-                                marker.Location.Point.X,
-                                marker.Location.Point.Y,
-                                marker.Location.Point.Z))
-                    
-                    # Then translate
-                    DB.ElementTransformUtils.MoveElements(document, element_list, transform.Origin)
-                    print("  SUCCESS: Measured Rotation + Translation via ElementTransformUtils")
-                
-                updated_count += 1
-                continue
+                    # For elements with generic Location type, apply the full transform
+                    # by moving them to the transformed position
+                    if hasattr(marker, 'Location') and marker.Location:
+                        # Try to get current position and transform it
+                        if hasattr(marker.Location, 'Point'):
+                            old_point = marker.Location.Point
+                            new_point = transform.OfPoint(old_point)
+                            # Use MoveElement to place at new position
+                            move_vector = new_point.Subtract(old_point)
+                            DB.ElementTransformUtils.MoveElement(document, marker.Id, move_vector)
+                            print("  SUCCESS: Transformed via move to new position")
+                            updated_count += 1
+                            continue
                 
             except Exception as transform_e:
                 # Handle format errors in exception messages
