@@ -180,11 +180,11 @@ Original point: (0.0, 0.0, 0.0)
 
 
 
-Transformed point: (59.8868764606, 55.0875342152, 6.31088724177e-30)
+Transformed point: (9.88687646063, 5.08753421521, 6.31088724177e-30)
 
 
 
-Translation: (59.8868764606, 55.0875342152, 6.31088724177e-30)
+Translation: (9.88687646063, 5.08753421521, 6.31088724177e-30)
 
 
 
@@ -341,7 +341,7 @@ Checked 5 elements for position changes
 
 
 
-Applying translation: (59.8868764606, 55.0875342152, 6.31088724177e-30)...
+Applying translation: (9.88687646063, 5.08753421521, 6.31088724177e-30)...
 
 
 
@@ -414,7 +414,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 76.34, 0.00)
+FamilyInstance moved to (20.35, 26.34, 0.00)
 
 
 
@@ -454,7 +454,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 76.34, 0.00)
+FamilyInstance moved to (20.35, 26.34, 0.00)
 
 
 
@@ -494,7 +494,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 58.09, 0.00)
+FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
 
@@ -534,7 +534,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 58.09, 0.00)
+FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
 
@@ -574,7 +574,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 58.09, 0.00)
+FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
 
@@ -594,7 +594,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (133.35, 58.09, 0.00)
+FamilyInstance moved to (83.35, 8.09, 0.00)
 
 
 
@@ -614,7 +614,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (136.35, 58.09, 0.00)
+FamilyInstance moved to (86.35, 8.09, 0.00)
 
 
 
@@ -634,7 +634,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (76.35, 58.09, 0.00)
+FamilyInstance moved to (26.35, 8.09, 0.00)
 
 
 
@@ -654,7 +654,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (76.35, 64.17, 0.00)
+FamilyInstance moved to (26.35, 14.17, 0.00)
 
 
 
@@ -674,7 +674,7 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker translated by (59.89, 55.09, 0.00)
+ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
@@ -694,7 +694,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (76.35, 70.25, 0.00)
+FamilyInstance moved to (26.35, 20.25, 0.00)
 
 
 
@@ -714,7 +714,7 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker translated by (59.89, 55.09, 0.00)
+ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
@@ -734,7 +734,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (76.35, 76.34, 0.00)
+FamilyInstance moved to (26.35, 26.34, 0.00)
 
 
 
@@ -754,7 +754,7 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker translated by (59.89, 55.09, 0.00)
+ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
@@ -774,7 +774,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (94.35, 58.09, 0.00)
+FamilyInstance moved to (44.35, 8.09, 0.00)
 
 
 
@@ -794,7 +794,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (94.35, 64.17, 0.00)
+FamilyInstance moved to (44.35, 14.17, 0.00)
 
 
 
@@ -814,7 +814,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (94.35, 70.25, 0.00)
+FamilyInstance moved to (44.35, 20.25, 0.00)
 
 
 
@@ -854,7 +854,7 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker translated by (59.89, 55.09, 0.00)
+ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
@@ -934,7 +934,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (94.35, 76.34, 0.00)
+FamilyInstance moved to (44.35, 26.34, 0.00)
 
 
 
@@ -954,7 +954,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (64.36, 58.07, 0.00)
+FamilyInstance moved to (14.36, 8.07, 0.00)
 
 
 
@@ -974,7 +974,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (88.35, 58.09, 0.00)
+FamilyInstance moved to (38.35, 8.09, 0.00)
 
 
 
@@ -994,7 +994,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (88.35, 64.17, 0.00)
+FamilyInstance moved to (38.35, 14.17, 0.00)
 
 
 
@@ -1014,7 +1014,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (88.35, 70.25, 0.00)
+FamilyInstance moved to (38.35, 20.25, 0.00)
 
 
 
@@ -1034,7 +1034,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (88.35, 76.34, 0.00)
+FamilyInstance moved to (38.35, 26.34, 0.00)
 
 
 
@@ -1054,7 +1054,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 64.17, 0.00)
+FamilyInstance moved to (20.35, 14.17, 0.00)
 
 
 
@@ -1094,7 +1094,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 64.17, 0.00)
+FamilyInstance moved to (20.35, 14.17, 0.00)
 
 
 
@@ -1134,7 +1134,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 64.17, 0.00)
+FamilyInstance moved to (20.35, 14.17, 0.00)
 
 
 
@@ -1154,7 +1154,7 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker translated by (59.89, 55.09, 0.00)
+ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
@@ -1174,7 +1174,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 70.25, 0.00)
+FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
 
@@ -1214,7 +1214,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 70.25, 0.00)
+FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
 
@@ -1254,7 +1254,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 70.25, 0.00)
+FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
 
@@ -1274,7 +1274,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (70.35, 76.34, 0.00)
+FamilyInstance moved to (20.35, 26.34, 0.00)
 
 
 
@@ -1386,7 +1386,7 @@ Updated section marker: 511753 (rotated around building center)
 
 
 
-Section marker moved to (118.35, 59.09, 0.00)
+Section marker moved to (68.35, 9.09, 0.00)
 
 
 
@@ -1398,7 +1398,7 @@ Updated section marker: 512308 (rotated around building center)
 
 
 
-Section marker moved to (121.35, 59.09, 0.00)
+Section marker moved to (71.35, 9.09, 0.00)
 
 
 
@@ -1410,7 +1410,7 @@ Updated section marker: 512386 (rotated around building center)
 
 
 
-Section marker moved to (124.35, 59.09, 0.00)
+Section marker moved to (74.35, 9.09, 0.00)
 
 
 
@@ -1422,7 +1422,7 @@ Updated section marker: 512393 (rotated around building center)
 
 
 
-Section marker moved to (127.35, 58.21, 0.00)
+Section marker moved to (77.35, 8.21, 0.00)
 
 
 
@@ -1434,7 +1434,7 @@ Updated section marker: 512421 (rotated around building center)
 
 
 
-Section marker moved to (130.35, 59.09, 0.00)
+Section marker moved to (80.35, 9.09, 0.00)
 
 
 
@@ -1446,7 +1446,7 @@ Updated section marker: 512422 (rotated around building center)
 
 
 
-Section marker moved to (127.35, 63.21, 0.00)
+Section marker moved to (77.35, 13.21, 0.00)
 
 
 
@@ -1458,7 +1458,7 @@ Updated section marker: 512448 (rotated around building center)
 
 
 
-Section marker moved to (130.35, 64.09, 0.00)
+Section marker moved to (80.35, 14.09, 0.00)
 
 
 
@@ -1470,7 +1470,7 @@ Updated section marker: 512449 (rotated around building center)
 
 
 
-Section marker moved to (127.35, 68.21, 0.00)
+Section marker moved to (77.35, 18.21, 0.00)
 
 
 
