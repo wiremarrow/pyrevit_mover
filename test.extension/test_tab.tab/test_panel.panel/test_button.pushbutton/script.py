@@ -213,14 +213,26 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
         # Step 1: Apply rotation if needed
         if rotation_degrees != 0 and rotation_origin is not None:
             print("Applying rotation of {} degrees...".format(rotation_degrees))
+            print("Rotation center: ({:.2f}, {:.2f}, {:.2f})".format(
+                rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
             
-            # Create rotation axis (Z-axis through origin)
+            # Create rotation axis (Z-axis through rotation center)
             axis_start = rotation_origin
             axis_end = DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10)
             rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
             
             # Convert degrees to radians
             rotation_radians = rotation_degrees * 3.14159265359 / 180.0
+            print("Rotation radians: {:.4f}".format(rotation_radians))
+            
+            # Debug: Check a sample element before rotation
+            if element_ids:
+                sample_element = document.GetElement(element_ids[0])
+                if sample_element and sample_element.Location:
+                    if hasattr(sample_element.Location, 'Point'):
+                        before_point = sample_element.Location.Point
+                        print("Sample element before rotation: ({:.2f}, {:.2f}, {:.2f})".format(
+                            before_point.X, before_point.Y, before_point.Z))
             
             # Separate hosted and non-hosted elements
             hosted_elements, non_hosted_elements = separate_hosted_elements(document, element_ids)
@@ -252,6 +264,15 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
                             DB.ElementTransformUtils.RotateElement(document, element_id, rotation_axis, rotation_radians)
                         except:
                             continue
+            
+            # Debug: Check the same sample element after rotation
+            if element_ids:
+                sample_element = document.GetElement(element_ids[0])
+                if sample_element and sample_element.Location:
+                    if hasattr(sample_element.Location, 'Point'):
+                        after_point = sample_element.Location.Point
+                        print("Sample element after rotation: ({:.2f}, {:.2f}, {:.2f})".format(
+                            after_point.X, after_point.Y, after_point.Z))
         
         # Step 2: Apply translation if needed  
         translation_vector = transform.Origin
@@ -756,13 +777,63 @@ def debug_transformation(document, transform, test_point=None):
     print("===========================")
 
 
+def calculate_building_center(document, element_ids):
+    """
+    Calculate the center point of all building elements for rotation
+    """
+    if not element_ids:
+        return DB.XYZ(0, 0, 0)
+    
+    min_x = min_y = min_z = float('inf')
+    max_x = max_y = max_z = float('-inf')
+    valid_count = 0
+    
+    for element_id in element_ids:
+        try:
+            element = document.GetElement(element_id)
+            if element:
+                bbox = element.get_BoundingBox(None)
+                if bbox:
+                    min_x = min(min_x, bbox.Min.X)
+                    min_y = min(min_y, bbox.Min.Y)
+                    min_z = min(min_z, bbox.Min.Z)
+                    max_x = max(max_x, bbox.Max.X)
+                    max_y = max(max_y, bbox.Max.Y)
+                    max_z = max(max_z, bbox.Max.Z)
+                    valid_count += 1
+        except:
+            continue
+    
+    if valid_count == 0:
+        return DB.XYZ(0, 0, 0)
+    
+    # Calculate center point
+    center_x = (min_x + max_x) / 2.0
+    center_y = (min_y + max_y) / 2.0
+    center_z = min_z  # Use base level for rotation
+    
+    center = DB.XYZ(center_x, center_y, center_z)
+    print("Calculated building center for rotation: ({:.2f}, {:.2f}, {:.2f})".format(
+        center.X, center.Y, center.Z))
+    
+    return center
+
+
 def transform_model_and_views_v3(document, translation_vector, rotation_angle_degrees, rotation_origin=None):
     """
     V3 - Enhanced transform with major elevation marker improvements
     """
     
+    # Get elements first to calculate proper rotation center
+    elements_to_transform = get_model_elements(document)
+    
     if rotation_origin is None:
-        rotation_origin = DB.XYZ(0, 0, 0)
+        # Calculate the actual center of the building for rotation
+        rotation_origin = calculate_building_center(document, elements_to_transform)
+        print("Using calculated building center as rotation origin")
+    else:
+        print("Using provided rotation origin: ({:.2f}, {:.2f}, {:.2f})".format(
+            rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
     
     rotation_angle_radians = math.radians(rotation_angle_degrees)
     
@@ -782,8 +853,7 @@ def transform_model_and_views_v3(document, translation_vector, rotation_angle_de
         
         with revit.Transaction("Enhanced Transform Model and Views - v3"):
             
-            # 1. Transform model elements (proven to work)
-            elements_to_transform = get_model_elements(document)
+            # 1. Transform model elements (using pre-gathered elements)
             if elements_to_transform:
                 transformed_count = transform_elements_robust(document, elements_to_transform, combined_transform, rotation_angle_degrees, rotation_origin)
                 print("Successfully transformed {}/{} elements".format(transformed_count, len(elements_to_transform)))
