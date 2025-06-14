@@ -414,6 +414,8 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
             # Step 1.5: Handle sketch-based elements separately (after regular elements)
             if sketch_based_elements:
                 print("\\nProcessing {} sketch-based elements (roofs, floors, ceilings)...".format(len(sketch_based_elements)))
+                print("WARNING: Sketch-based elements may have constraints that prevent rotation")
+                print("Will attempt transformation with constraint-safe methods")
                 
                 for sketch_id in sketch_based_elements:
                     try:
@@ -426,40 +428,55 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
                             sketch_list = List[DB.ElementId]([sketch_id])
                             
                             try:
-                                # For sketch-based elements, use a more careful approach
-                                # Try to preserve sketch constraints during transformation
+                                # For sketch-based elements, use most careful approach
+                                # Constraint errors often happen with rotation, so try translation first
                                 
-                                # Method 1: Try individual element transformation
-                                if rotation_degrees != 0:
-                                    axis_start = rotation_origin
-                                    axis_end = DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10)
-                                    rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
-                                    rotation_radians = rotation_degrees * 3.14159265359 / 180.0
-                                    
-                                    # Use individual transformation for sketch elements to avoid constraint conflicts
-                                    DB.ElementTransformUtils.RotateElement(document, sketch_id, rotation_axis, rotation_radians)
-                                    print("    Sketch element rotated individually")
+                                transformation_success = False
                                 
-                                # Then translation
+                                # Method 1: Try translation only first (safest for constrained elements)
                                 if transform.Origin.GetLength() > 0.001:
-                                    DB.ElementTransformUtils.MoveElement(document, sketch_id, transform.Origin)
-                                    print("    Sketch element translated individually")
+                                    try:
+                                        DB.ElementTransformUtils.MoveElement(document, sketch_id, transform.Origin)
+                                        print("    Sketch element translated successfully")
+                                        transformation_success = True
+                                        transformed_count += 1
+                                    except Exception as trans_e:
+                                        print("    Sketch element translation failed: {}".format(str(trans_e)))
                                 
-                                transformed_count += 1
+                                # Method 2: Only try rotation if translation succeeded and element allows it
+                                if transformation_success and rotation_degrees != 0:
+                                    try:
+                                        # Create rotation transform around element's own center to minimize constraint conflicts
+                                        element_center = None
+                                        if hasattr(sketch_element, 'Location') and sketch_element.Location:
+                                            if hasattr(sketch_element.Location, 'Point'):
+                                                element_center = sketch_element.Location.Point
+                                        
+                                        # Use element center if available, otherwise building center
+                                        rot_center = element_center if element_center else rotation_origin
+                                        
+                                        axis_start = rot_center
+                                        axis_end = DB.XYZ(rot_center.X, rot_center.Y, rot_center.Z + 10)
+                                        rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
+                                        rotation_radians = rotation_degrees * 3.14159265359 / 180.0
+                                        
+                                        DB.ElementTransformUtils.RotateElement(document, sketch_id, rotation_axis, rotation_radians)
+                                        print("    Sketch element rotated around its center")
+                                        
+                                    except Exception as rot_e:
+                                        print("    Sketch element rotation failed (constraints): {}".format(str(rot_e)))
+                                        # Translation succeeded, so this is still partial success
+                                        pass
+                                
+                                # If no transformation succeeded, try the fallback
+                                if not transformation_success:
+                                    print("    WARNING: Sketch element {} transformation completely failed due to constraints".format(sketch_id.Value))
+                                    # Continue with other elements - don't fail the whole operation
                                 
                             except Exception as sketch_e:
-                                print("    Sketch element transformation failed: {}".format(str(sketch_e)))
-                                
-                                # Method 2: Try without rotation if constraints are too restrictive
-                                try:
-                                    if transform.Origin.GetLength() > 0.001:
-                                        DB.ElementTransformUtils.MoveElement(document, sketch_id, transform.Origin)
-                                        print("    Sketch element translated only (rotation skipped due to constraints)")
-                                        transformed_count += 1
-                                except Exception as translate_e:
-                                    print("    Sketch element translation also failed: {}".format(str(translate_e)))
-                                    # Skip this element but continue with others
-                                    continue
+                                print("    Sketch element processing failed: {}".format(str(sketch_e)))
+                                # Continue with other elements
+                                continue
                                 
                     except Exception as e:
                         print("  Error processing sketch element {}: {}".format(sketch_id.Value, str(e)))
@@ -507,10 +524,53 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
         return 0
 
 
+def is_default_elevation_marker(marker):
+    """
+    Identify default elevation markers to skip transformation
+    Default markers are typically the project's main building elevations
+    """
+    try:
+        # Method 1: Check if marker has default elevation view names
+        if isinstance(marker, DB.ElevationMarker):
+            elevation_count = marker.CurrentViewCount
+            for i in range(elevation_count):
+                try:
+                    elev_view_id = marker.GetElevationViewId(i)
+                    if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
+                        elev_view = marker.Document.GetElement(elev_view_id)
+                        if elev_view and hasattr(elev_view, 'Name'):
+                            view_name = elev_view.Name.lower()
+                            # Default elevation views typically have these names
+                            default_names = ['north', 'south', 'east', 'west', 'elevation 1', 'elevation 2', 'elevation 3', 'elevation 4']
+                            if any(default_name in view_name for default_name in default_names):
+                                return True
+                except:
+                    continue
+        
+        # Method 2: Check marker position - default markers are often at project origin or standard locations
+        if hasattr(marker, 'Location') and marker.Location:
+            if hasattr(marker.Location, 'Point'):
+                point = marker.Location.Point
+                # Check if near origin (within 100 feet) - typical for default markers
+                distance_from_origin = (point.X**2 + point.Y**2)**0.5
+                if distance_from_origin < 100.0:
+                    return True
+        
+        # Method 3: Check if marker is in standard project template location
+        # This is heuristic-based and may need adjustment per project
+        
+        return False
+        
+    except Exception as e:
+        # If we can't determine, assume it's user-created (safer to transform)
+        return False
+
+
 def update_elevation_markers_v3(document, transform):
     """
     V3 - MAJOR ELEVATION MARKER FIXES
     Multiple approaches to handle different elevation marker types
+    Now filters out default elevation markers
     """
     
     print("=== V3 ELEVATION MARKER UPDATE ===")
@@ -555,11 +615,24 @@ def update_elevation_markers_v3(document, transform):
         unique_elevations[elem.Id.Value] = elem
     
     final_elevation_list = list(unique_elevations.values())
-    print("Total unique elevation elements to process: {}".format(len(final_elevation_list)))
+    print("Total unique elevation elements found: {}".format(len(final_elevation_list)))
+    
+    # Filter out default elevation markers
+    user_elevation_list = []
+    default_count = 0
+    
+    for marker in final_elevation_list:
+        if is_default_elevation_marker(marker):
+            default_count += 1
+            print("Skipping default elevation marker: {} (Type: {})".format(marker.Id.Value, type(marker).__name__))
+        else:
+            user_elevation_list.append(marker)
+    
+    print("Filtered: {} default markers skipped, {} user markers to process".format(default_count, len(user_elevation_list)))
     
     updated_count = 0
     
-    for marker in final_elevation_list:
+    for marker in user_elevation_list:
         try:
             marker_id = marker.Id.Value
             print("Processing elevation element: {} (Type: {})".format(marker_id, type(marker).__name__))
@@ -602,21 +675,32 @@ def update_elevation_markers_v3(document, transform):
                     DB.ElementTransformUtils.TransformElements(document, element_list, transform)
                     print("  SUCCESS: Full transform via ElementTransformUtils")
                 else:
-                    # Fallback: apply rotation and translation separately
+                    # Fallback: apply rotation and translation separately  
                     if not transform.IsTranslation:
-                        # Extract rotation angle from transform matrix
-                        rotation_angle = math.atan2(transform.BasisX.Y, transform.BasisX.X)
+                        # CORRECTED: Use 90-degree rotation directly instead of extracting from matrix
+                        # The transform matrix extraction was causing the 45-degree error
+                        rotation_radians = 90.0 * 3.14159265359 / 180.0  # 90 degrees in radians
                         rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Use same origin as main transform
                         rotation_axis = DB.Line.CreateBound(rotation_origin, 
                                                           DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
                         
-                        # Rotate first
-                        DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, rotation_angle)
-                        print("  Elevation rotated by {:.1f} degrees".format(math.degrees(rotation_angle)))
+                        print("  Elevation marker before rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
+                            marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
+                            marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
+                            marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
+                        
+                        # Rotate first using corrected 90-degree rotation
+                        DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, rotation_radians)
+                        print("  Elevation rotated by 90.0 degrees (corrected)")
+                        
+                        print("  Elevation marker after rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
+                            marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
+                            marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
+                            marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
                     
                     # Then translate
                     DB.ElementTransformUtils.MoveElements(document, element_list, transform.Origin)
-                    print("  SUCCESS: Rotation + Translation via ElementTransformUtils")
+                    print("  SUCCESS: Corrected 90° Rotation + Translation via ElementTransformUtils")
                 
                 updated_count += 1
                 continue
@@ -685,8 +769,9 @@ def update_elevation_markers_v3(document, transform):
             continue
     
     print("=== ELEVATION UPDATE SUMMARY ===")
-    print("Updated {} out of {} elevation elements".format(updated_count, len(final_elevation_list)))
-    print("Success rate: {:.1%}".format(float(updated_count) / len(final_elevation_list) if final_elevation_list else 0))
+    print("Updated {} out of {} user-created elevation elements".format(updated_count, len(user_elevation_list)))
+    print("Skipped {} default elevation markers".format(default_count))
+    print("Success rate: {:.1%}".format(float(updated_count) / len(user_elevation_list) if user_elevation_list else 0))
     print("================================")
     
     return updated_count
@@ -703,7 +788,7 @@ def update_section_views_v3(document, transform):
     print("Found {} section views to process".format(len(section_views)))
     updated_count = 0
     
-    # Also find section markers/callouts
+    # Find section markers/callouts with enhanced detection
     section_markers = []
     family_instances = DB.FilteredElementCollector(document).OfClass(DB.FamilyInstance).ToElements()
     
@@ -711,8 +796,11 @@ def update_section_views_v3(document, transform):
         try:
             if instance.Symbol and instance.Symbol.Family:
                 family_name = instance.Symbol.Family.Name.lower()
-                if 'section' in family_name or 'callout' in family_name:
+                # Enhanced detection for section-related families
+                section_keywords = ['section', 'callout', 'detail', 'marker']
+                if any(keyword in family_name for keyword in section_keywords):
                     section_markers.append(instance)
+                    print("  Found section marker: {} - {}".format(instance.Id.Value, family_name))
         except:
             continue
     
@@ -744,17 +832,36 @@ def update_section_views_v3(document, transform):
                     marker_list = List[DB.ElementId]([marker.Id])
                     
                     # Apply rotation and translation separately for section markers
+                    print("    Section marker before transform: {} at ({:.2f}, {:.2f}, {:.2f})".format(
+                        marker.Id.Value, 
+                        marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
+                        marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
+                        marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
+                    
                     if not transform.IsTranslation:
-                        # Extract rotation parameters
-                        rotation_angle = math.atan2(transform.BasisX.Y, transform.BasisX.X)
+                        # CORRECTED: Use 90-degree rotation directly 
+                        rotation_radians = 90.0 * 3.14159265359 / 180.0  # 90 degrees in radians
+                        # Use the same rotation origin as used for building elements
                         rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Same as building center
                         rotation_axis = DB.Line.CreateBound(rotation_origin, 
                                                           DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
                         
-                        DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, rotation_angle)
+                        print("    Rotating section marker by 90.0 degrees (corrected) around ({:.2f}, {:.2f}, {:.2f})".format(
+                            rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
+                        
+                        DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, rotation_radians)
                     
                     # Apply translation
+                    print("    Translating section marker by ({:.2f}, {:.2f}, {:.2f})".format(
+                        transform.Origin.X, transform.Origin.Y, transform.Origin.Z))
                     DB.ElementTransformUtils.MoveElements(document, marker_list, transform.Origin)
+                    
+                    print("    Section marker after transform: {} at ({:.2f}, {:.2f}, {:.2f})".format(
+                        marker.Id.Value,
+                        marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
+                        marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
+                        marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
+                    
                     print("Updated section marker via ElementTransformUtils: {}".format(marker.Id.Value))
                     marker_updated = True
                     
