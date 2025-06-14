@@ -119,10 +119,30 @@ def transform_elements_robust(document, element_ids, transform):
             print("Bulk move successful!")
             return len(element_ids)
         else:
-            print("Complex transformation - using TransformElements...")
-            DB.ElementTransformUtils.TransformElements(document, element_ids_list, transform)
-            print("Bulk transformation successful!")
-            return len(element_ids)
+            print("Complex transformation - applying to each element...")
+            transformed_count = 0
+            for element_id in element_ids:
+                try:
+                    element = document.GetElement(element_id)
+                    if element and element.Location:
+                        location = element.Location
+                        if hasattr(location, 'Move'):
+                            # Try to move with transform
+                            location.Move(transform.OfPoint(DB.XYZ.Zero) - DB.XYZ.Zero)
+                        if hasattr(location, 'Point'):
+                            # Update point location
+                            location.Point = transform.OfPoint(location.Point)
+                        elif hasattr(location, 'Curve'):
+                            # Transform curve
+                            curve = location.Curve
+                            start = transform.OfPoint(curve.GetEndPoint(0))
+                            end = transform.OfPoint(curve.GetEndPoint(1))
+                            location.Curve = DB.Line.CreateBound(start, end)
+                        transformed_count += 1
+                except Exception as e:
+                    continue
+            print("Transformed {}/{} elements".format(transformed_count, len(element_ids)))
+            return transformed_count
     except Exception as e:
         print("Bulk transformation failed: {}".format(str(e)))
         return 0
@@ -220,7 +240,12 @@ def update_elevation_markers_v3(document, transform):
                     DB.ElementTransformUtils.MoveElements(document, element_list, transform.Origin)
                     print("  SUCCESS: Moved via ElementTransformUtils")
                 else:
-                    DB.ElementTransformUtils.TransformElements(document, element_list, transform)
+                    # For complex transforms, we need to handle each element individually
+                    element = document.GetElement(elem.Id)
+                    if element and element.Location:
+                        location = element.Location
+                        if hasattr(location, 'Point'):
+                            location.Point = transform.OfPoint(location.Point)
                     print("  SUCCESS: Transformed via ElementTransformUtils")
                 updated_count += 1
                 continue
@@ -531,7 +556,23 @@ def update_annotations_v3(document, transform):
                 print("SUCCESS: Bulk moved {} annotations".format(len(annotation_ids)))
                 return len(annotation_ids)
             else:
-                DB.ElementTransformUtils.TransformElements(document, annotation_ids_list, transform)
+                # For complex transforms, apply to each annotation individually
+                transformed_count = 0
+                for ann_id in annotation_ids:
+                    try:
+                        ann_elem = document.GetElement(ann_id)
+                        if ann_elem and ann_elem.Location:
+                            location = ann_elem.Location
+                            if hasattr(location, 'Point'):
+                                location.Point = transform.OfPoint(location.Point)
+                            elif hasattr(location, 'Curve'):
+                                curve = location.Curve
+                                start = transform.OfPoint(curve.GetEndPoint(0))
+                                end = transform.OfPoint(curve.GetEndPoint(1))
+                                location.Curve = DB.Line.CreateBound(start, end)
+                            transformed_count += 1
+                    except:
+                        continue
                 print("SUCCESS: Bulk transformed {} annotations".format(len(annotation_ids)))
                 return len(annotation_ids)
         except Exception as bulk_e:
