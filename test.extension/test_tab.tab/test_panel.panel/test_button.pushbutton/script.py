@@ -527,37 +527,34 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
 def is_default_elevation_marker(marker):
     """
     Identify default elevation markers to skip transformation
-    Default markers are typically the project's main building elevations
+    REVISED: Only skip the 4 main building elevations (North, South, East, West)
     """
     try:
-        # Method 1: Check if marker has default elevation view names
-        if isinstance(marker, DB.ElevationMarker):
-            elevation_count = marker.CurrentViewCount
-            for i in range(elevation_count):
-                try:
-                    elev_view_id = marker.GetElevationViewId(i)
-                    if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
-                        elev_view = marker.Document.GetElement(elev_view_id)
-                        if elev_view and hasattr(elev_view, 'Name'):
-                            view_name = elev_view.Name.lower()
-                            # Default elevation views typically have these names
-                            default_names = ['north', 'south', 'east', 'west', 'elevation 1', 'elevation 2', 'elevation 3', 'elevation 4']
-                            if any(default_name in view_name for default_name in default_names):
-                                return True
-                except:
-                    continue
-        
-        # Method 2: Check marker position - default markers are often at project origin or standard locations
-        if hasattr(marker, 'Location') and marker.Location:
-            if hasattr(marker.Location, 'Point'):
-                point = marker.Location.Point
-                # Check if near origin (within 100 feet) - typical for default markers
-                distance_from_origin = (point.X**2 + point.Y**2)**0.5
-                if distance_from_origin < 100.0:
-                    return True
-        
-        # Method 3: Check if marker is in standard project template location
-        # This is heuristic-based and may need adjustment per project
+        # Only ElevationMarker objects can be default project elevations
+        # FamilyInstance elevation markers are typically user-created
+        if not isinstance(marker, DB.ElevationMarker):
+            return False
+            
+        # Check if marker has default elevation view names
+        elevation_count = marker.CurrentViewCount
+        for i in range(elevation_count):
+            try:
+                elev_view_id = marker.GetElevationViewId(i)
+                if elev_view_id and elev_view_id != DB.ElementId.InvalidElementId:
+                    elev_view = marker.Document.GetElement(elev_view_id)
+                    if elev_view and hasattr(elev_view, 'Name'):
+                        view_name = elev_view.Name.lower()
+                        # ONLY consider the 4 main compass directions as default
+                        # More specific matching to avoid over-filtering
+                        if view_name in ['north', 'south', 'east', 'west']:
+                            print("    Identified as default elevation: {}".format(view_name))
+                            return True
+                        # Check for exact matches like "Elevation 1 - North"
+                        if view_name.startswith('elevation') and any(dir in view_name for dir in ['north', 'south', 'east', 'west']):
+                            print("    Identified as default elevation: {}".format(view_name))
+                            return True
+            except:
+                continue
         
         return False
         
@@ -677,36 +674,57 @@ def update_elevation_markers_v3(document, transform):
                 else:
                     # Fallback: apply rotation and translation separately  
                     if not transform.IsTranslation:
-                        # CORRECTED: Use 90-degree rotation directly instead of extracting from matrix
-                        # The transform matrix extraction was causing the 45-degree error
-                        rotation_radians = 90.0 * 3.14159265359 / 180.0  # 90 degrees in radians
-                        rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Use same origin as main transform
+                        # MEASURE the actual rotation from the transform matrix
+                        # This ensures we match the building rotation exactly
+                        actual_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        actual_rotation_deg = math.degrees(actual_rotation_rad)
+                        
+                        print("  MEASURED rotation from transform matrix: {:.2f} degrees".format(actual_rotation_deg))
+                        
+                        # Use the measured rotation
+                        # Get the actual rotation origin from the transform
+                        # The rotation center should be calculated dynamically
+                        rotation_origin = calculate_building_center(document, [e.Id for e in [marker]])
+                        if rotation_origin.GetLength() < 0.001:  # If marker center calc fails
+                            rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Use building center fallback
+                        
+                        print("  Using rotation origin: ({:.2f}, {:.2f}, {:.2f})".format(
+                            rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
+                        
                         rotation_axis = DB.Line.CreateBound(rotation_origin, 
                                                           DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
                         
-                        print("  Elevation marker before rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
-                            marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
-                            marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
-                            marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
+                        # Debug: show marker position before
+                        if hasattr(marker, 'Location') and hasattr(marker.Location, 'Point'):
+                            print("  Elevation marker before rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
+                                marker.Location.Point.X,
+                                marker.Location.Point.Y,
+                                marker.Location.Point.Z))
                         
-                        # Rotate first using corrected 90-degree rotation
-                        DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, rotation_radians)
-                        print("  Elevation rotated by 90.0 degrees (corrected)")
+                        # Rotate using the measured angle
+                        DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, actual_rotation_rad)
+                        print("  Elevation rotated by {:.2f} degrees (measured from transform)".format(actual_rotation_deg))
                         
-                        print("  Elevation marker after rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
-                            marker.Location.Point.X if hasattr(marker.Location, 'Point') else 0,
-                            marker.Location.Point.Y if hasattr(marker.Location, 'Point') else 0,
-                            marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
+                        # Debug: show marker position after
+                        if hasattr(marker, 'Location') and hasattr(marker.Location, 'Point'):
+                            print("  Elevation marker after rotation: at ({:.2f}, {:.2f}, {:.2f})".format(
+                                marker.Location.Point.X,
+                                marker.Location.Point.Y,
+                                marker.Location.Point.Z))
                     
                     # Then translate
                     DB.ElementTransformUtils.MoveElements(document, element_list, transform.Origin)
-                    print("  SUCCESS: Corrected 90° Rotation + Translation via ElementTransformUtils")
+                    print("  SUCCESS: Measured Rotation + Translation via ElementTransformUtils")
                 
                 updated_count += 1
                 continue
                 
             except Exception as transform_e:
-                print("  ElementTransformUtils failed: {}".format(str(transform_e)))
+                # Handle format errors in exception messages
+                try:
+                    print("  ElementTransformUtils failed: {}".format(str(transform_e)))
+                except:
+                    print("  ElementTransformUtils failed with formatting error")
             
             # Method C: For ElevationMarker objects, try specific methods
             if isinstance(marker, DB.ElevationMarker):
@@ -839,17 +857,19 @@ def update_section_views_v3(document, transform):
                         marker.Location.Point.Z if hasattr(marker.Location, 'Point') else 0))
                     
                     if not transform.IsTranslation:
-                        # CORRECTED: Use 90-degree rotation directly 
-                        rotation_radians = 90.0 * 3.14159265359 / 180.0  # 90 degrees in radians
+                        # MEASURE the actual rotation from the transform matrix
+                        actual_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        actual_rotation_deg = math.degrees(actual_rotation_rad)
+                        
                         # Use the same rotation origin as used for building elements
                         rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Same as building center
                         rotation_axis = DB.Line.CreateBound(rotation_origin, 
                                                           DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
                         
-                        print("    Rotating section marker by 90.0 degrees (corrected) around ({:.2f}, {:.2f}, {:.2f})".format(
-                            rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
+                        print("    Rotating section marker by {:.2f} degrees (measured) around ({:.2f}, {:.2f}, {:.2f})".format(
+                            actual_rotation_deg, rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
                         
-                        DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, rotation_radians)
+                        DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, actual_rotation_rad)
                     
                     # Apply translation
                     print("    Translating section marker by ({:.2f}, {:.2f}, {:.2f})".format(
@@ -1109,7 +1129,7 @@ def update_annotations_v3(document, transform):
 
 
 def debug_transformation(document, transform, test_point=None):
-    """Debug transformation by testing on a known point"""
+    """Debug transformation by testing on a known point - ENHANCED"""
     
     if test_point is None:
         test_point = DB.XYZ(0, 0, 0)
@@ -1125,11 +1145,37 @@ def debug_transformation(document, transform, test_point=None):
         transformed_point.Z - test_point.Z
     ))
     
+    # MEASURE ROTATION ANGLE
+    print("\n--- ROTATION ANALYSIS ---")
+    print("Transform Matrix:")
+    print("  BasisX: ({:.4f}, {:.4f}, {:.4f})".format(transform.BasisX.X, transform.BasisX.Y, transform.BasisX.Z))
+    print("  BasisY: ({:.4f}, {:.4f}, {:.4f})".format(transform.BasisY.X, transform.BasisY.Y, transform.BasisY.Z))
+    print("  BasisZ: ({:.4f}, {:.4f}, {:.4f})".format(transform.BasisZ.X, transform.BasisZ.Y, transform.BasisZ.Z))
+    
+    # Calculate actual rotation angle from matrix
+    rotation_angle_rad = math.atan2(transform.BasisX.Y, transform.BasisX.X)
+    rotation_angle_deg = math.degrees(rotation_angle_rad)
+    print("Rotation angle from BasisX: {:.2f} degrees".format(rotation_angle_deg))
+    
+    # Also check Y basis rotation
+    y_rotation_rad = math.atan2(-transform.BasisY.X, transform.BasisY.Y)
+    y_rotation_deg = math.degrees(y_rotation_rad)
+    print("Rotation angle from BasisY: {:.2f} degrees".format(y_rotation_deg))
+    
+    # Test rotation of unit vectors
+    unit_x = DB.XYZ(1, 0, 0)
+    unit_y = DB.XYZ(0, 1, 0)
+    rotated_x = transform.OfVector(unit_x)
+    rotated_y = transform.OfVector(unit_y)
+    print("\nUnit vector transformations:")
+    print("  X(1,0,0) -> ({:.4f}, {:.4f}, {:.4f})".format(rotated_x.X, rotated_x.Y, rotated_x.Z))
+    print("  Y(0,1,0) -> ({:.4f}, {:.4f}, {:.4f})".format(rotated_y.X, rotated_y.Y, rotated_y.Z))
+    
     try:
         inverse_transform = transform.Inverse
-        print("Transform is invertible: True")
+        print("\nTransform is invertible: True")
     except:
-        print("Transform is invertible: False")
+        print("\nTransform is invertible: False")
     
     print("Transform determinant: {}".format(transform.Determinant))
     print("Is translation only: {}".format(transform.IsTranslation))
