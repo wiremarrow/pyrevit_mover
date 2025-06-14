@@ -188,6 +188,49 @@ Translation: (59.8868764606, 55.0875342152, 6.31088724177e-30)
 
 
 
+
+--- ROTATION ANALYSIS ---
+
+
+
+Transform Matrix:
+
+
+
+BasisX: (0.0000, 1.0000, 0.0000)
+
+
+
+BasisY: (-1.0000, 0.0000, 0.0000)
+
+
+
+BasisZ: (0.0000, 0.0000, 1.0000)
+
+
+
+Rotation angle from BasisX: 90.00 degrees
+
+
+
+Rotation angle from BasisY: 90.00 degrees
+
+
+
+
+Unit vector transformations:
+
+
+
+X(1,0,0) -> (0.0000, 1.0000, 0.0000)
+
+
+
+Y(0,1,0) -> (-1.0000, 0.0000, 0.0000)
+
+
+
+
 Transform is invertible: True
 
 
@@ -343,163 +386,163 @@ Total unique elevation elements found: 44
 
 
 
-Skipping default elevation marker: 511938 (Type: FamilyInstance)
+Filtered: 0 default markers skipped, 44 user markers to process
 
 
 
-Skipping default elevation marker: 511939 (Type: FamilyInstance)
+Processing elevation element: 511938 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511940 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511941 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511826 (Type: FamilyInstance)
+Processing elevation element: 511939 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511827 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511828 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511829 (Type: FamilyInstance)
+Processing elevation element: 511940 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511830 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 512464 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 512468 (Type: FamilyInstance)
+Processing elevation element: 511941 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511974 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511979 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511984 (Type: FamilyInstance)
+Processing elevation element: 511826 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511989 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 512121 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 512122 (Type: FamilyInstance)
+Processing elevation element: 511827 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 512123 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511998 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511999 (Type: FamilyInstance)
+Processing elevation element: 511828 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 512000 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 512001 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 512124 (Type: FamilyInstance)
+Processing elevation element: 511829 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511753 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 512023 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 512024 (Type: FamilyInstance)
+Processing elevation element: 511830 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 512025 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 512026 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511915 (Type: FamilyInstance)
+Processing elevation element: 512464 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511916 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511917 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511918 (Type: FamilyInstance)
+Processing elevation element: 512468 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511919 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511931 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511932 (Type: FamilyInstance)
+Processing elevation element: 511974 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511933 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Skipping default elevation marker: 511934 (Type: FamilyInstance)
+SUCCESS: LocationPoint updated
 
 
 
-Skipping default elevation marker: 511935 (Type: FamilyInstance)
+Processing elevation element: 511979 (Type: FamilyInstance)
 
 
 
-Skipping default elevation marker: 511937 (Type: FamilyInstance)
+Location type: LocationPoint
 
 
 
-Filtered: 39 default markers skipped, 5 user markers to process
+SUCCESS: LocationPoint updated
 
 
 
@@ -515,15 +558,31 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: Precision not allowed in integer format specifier
+MEASURED rotation from transform matrix: -90.00 degrees
 
 
 
-Marker has 1 elevation views
+Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-WARNING: Could not update elevation element 29152
+Elevation rotated by -90.00 degrees (measured from transform)
+
+
+
+SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+
+
+
+Processing elevation element: 511984 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
 
 
 
@@ -539,15 +598,31 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: Precision not allowed in integer format specifier
+MEASURED rotation from transform matrix: -90.00 degrees
 
 
 
-Marker has 1 elevation views
+Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-WARNING: Could not update elevation element 29157
+Elevation rotated by -90.00 degrees (measured from transform)
+
+
+
+SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+
+
+
+Processing elevation element: 511989 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
 
 
 
@@ -563,15 +638,67 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: Precision not allowed in integer format specifier
+MEASURED rotation from transform matrix: -90.00 degrees
 
 
 
-Marker has 1 elevation views
+Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-WARNING: Could not update elevation element 29162
+Elevation rotated by -90.00 degrees (measured from transform)
+
+
+
+SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+
+
+
+Processing elevation element: 512121 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512122 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512123 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511998 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
 
 
 
@@ -587,15 +714,187 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: Precision not allowed in integer format specifier
+MEASURED rotation from transform matrix: -90.00 degrees
 
 
 
-Marker has 1 elevation views
+Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-WARNING: Could not update elevation element 29167
+Elevation rotated by -90.00 degrees (measured from transform)
+
+
+
+SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+
+
+
+Processing elevation element: 511999 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512000 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512001 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512124 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511753 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512023 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512024 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512025 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 512026 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511915 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511916 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511917 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511918 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511919 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
 
 
 
@@ -611,15 +910,91 @@ Location type Location - trying alternative methods...
 
 
 
-ElementTransformUtils failed: Precision not allowed in integer format specifier
+MEASURED rotation from transform matrix: -90.00 degrees
 
 
 
-Marker has 1 elevation views
+Using rotation origin: (2.40, 7.49, 0.00)
 
 
 
-WARNING: Could not update elevation element 1242351
+Elevation rotated by -90.00 degrees (measured from transform)
+
+
+
+SUCCESS: Measured Rotation + Translation via ElementTransformUtils
+
+
+
+Processing elevation element: 511931 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511932 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511933 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511934 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511935 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
+
+
+
+Processing elevation element: 511937 (Type: FamilyInstance)
+
+
+
+Location type: LocationPoint
+
+
+
+SUCCESS: LocationPoint updated
 
 
 
@@ -627,15 +1002,15 @@ WARNING: Could not update elevation element 1242351
 
 
 
-Updated 0 out of 5 user-created elevation elements
+Updated 44 out of 44 user-created elevation elements
 
 
 
-Skipped 39 default elevation markers
+Skipped 0 default elevation markers
 
 
 
-Success rate: 0.0%
+Success rate: 100.0%
 
 
 
@@ -1436,7 +1811,7 @@ Model elements: 8/8 transformed
 
 
 
-ELEVATION MARKERS: 0 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
 
 
 
