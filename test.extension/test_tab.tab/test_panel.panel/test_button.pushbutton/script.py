@@ -57,7 +57,7 @@ def get_model_elements(document):
                 
             # Skip excluded categories
             try:
-                category_id = element.Category.Id.IntegerValue
+                category_id = element.Category.Id.Value
                 excluded_category_values = [int(cat) for cat in excluded_categories]
                 
                 if category_id in excluded_category_values:
@@ -173,7 +173,7 @@ def update_elevation_markers_v3(document, transform):
     # Remove duplicates by ID
     unique_elevations = {}
     for elem in all_elevation_elements:
-        unique_elevations[elem.Id.IntegerValue] = elem
+        unique_elevations[elem.Id.Value] = elem
     
     final_elevation_list = list(unique_elevations.values())
     print("Total unique elevation elements to process: {}".format(len(final_elevation_list)))
@@ -182,7 +182,7 @@ def update_elevation_markers_v3(document, transform):
     
     for marker in final_elevation_list:
         try:
-            marker_id = marker.Id.IntegerValue
+            marker_id = marker.Id.Value
             print("Processing elevation element: {} (Type: {})".format(marker_id, type(marker).__name__))
             
             # Method A: Try direct location transformation
@@ -285,7 +285,7 @@ def update_elevation_markers_v3(document, transform):
             
         except Exception as e:
             print("  ERROR processing elevation element {}: {}".format(
-                marker.Id.IntegerValue if hasattr(marker, 'Id') else 'Unknown', str(e)))
+                marker.Id.Value if hasattr(marker, 'Id') else 'Unknown', str(e)))
             continue
     
     print("=== ELEVATION UPDATE SUMMARY ===")
