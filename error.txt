@@ -402,11 +402,19 @@ Processing elevation element: 511938 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (81.14, 44.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -414,11 +422,19 @@ Processing elevation element: 511939 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (141.02, 99.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -426,11 +442,19 @@ Processing elevation element: 511940 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (200.91, 154.80, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -438,11 +462,19 @@ Processing elevation element: 511941 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (260.80, 209.89, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -450,11 +482,19 @@ Processing elevation element: 511826 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.89, 44.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -462,11 +502,19 @@ Processing elevation element: 511827 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (122.77, 99.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -474,11 +522,19 @@ Processing elevation element: 511828 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (182.66, 154.80, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -486,11 +542,19 @@ Processing elevation element: 511829 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (242.55, 209.89, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -498,11 +562,19 @@ Processing elevation element: 511830 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (302.43, 264.98, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -510,11 +582,19 @@ Processing elevation element: 512464 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.89, -18.37, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -522,11 +602,19 @@ Processing elevation element: 512468 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.89, -21.37, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -534,11 +622,19 @@ Processing elevation element: 511974 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.89, 38.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -546,11 +642,19 @@ Processing elevation element: 511979 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (68.97, 38.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -558,15 +662,11 @@ Processing elevation element: 29152 (Type: ElevationMarker)
 
 
 
-Location type: Location
+ElevationMarker has 1 elevation views
 
 
 
-Location type Location - trying alternative methods...
-
-
-
-Marker has 1 elevation views
+ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
 
 
 
@@ -578,11 +678,19 @@ Processing elevation element: 511984 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (75.05, 38.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -590,15 +698,11 @@ Processing elevation element: 29157 (Type: ElevationMarker)
 
 
 
-Location type: Location
+ElevationMarker has 1 elevation views
 
 
 
-Location type Location - trying alternative methods...
-
-
-
-Marker has 1 elevation views
+ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
 
 
 
@@ -610,11 +714,19 @@ Processing elevation element: 511989 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (81.14, 38.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -622,15 +734,11 @@ Processing elevation element: 29162 (Type: ElevationMarker)
 
 
 
-Location type: Location
+ElevationMarker has 1 elevation views
 
 
 
-Location type Location - trying alternative methods...
-
-
-
-Marker has 1 elevation views
+ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
 
 
 
@@ -642,11 +750,19 @@ Processing elevation element: 512121 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.89, 20.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -654,11 +770,19 @@ Processing elevation element: 512122 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (68.97, 20.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -666,11 +790,19 @@ Processing elevation element: 512123 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (75.05, 20.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -678,11 +810,19 @@ Processing elevation element: 511998 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (122.77, 93.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -690,15 +830,11 @@ Processing elevation element: 29167 (Type: ElevationMarker)
 
 
 
-Location type: Location
+ElevationMarker has 1 elevation views
 
 
 
-Location type Location - trying alternative methods...
-
-
-
-Marker has 1 elevation views
+ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
 
 
 
@@ -710,11 +846,19 @@ Processing elevation element: 511999 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (128.86, 93.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -722,11 +866,19 @@ Processing elevation element: 512000 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (134.94, 93.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -734,11 +886,19 @@ Processing elevation element: 512001 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (141.02, 93.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -746,11 +906,19 @@ Processing elevation element: 512124 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (81.14, 20.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -758,11 +926,19 @@ Processing elevation element: 511753 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.87, 50.62, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -770,11 +946,19 @@ Processing elevation element: 512023 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (62.89, 26.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -782,11 +966,19 @@ Processing elevation element: 512024 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (68.97, 26.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -794,11 +986,19 @@ Processing elevation element: 512025 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (75.05, 26.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -806,11 +1006,19 @@ Processing elevation element: 512026 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (81.14, 26.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -818,11 +1026,19 @@ Processing elevation element: 511915 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (68.97, 44.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -830,11 +1046,19 @@ Processing elevation element: 511916 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (128.86, 99.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -842,11 +1066,19 @@ Processing elevation element: 511917 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (188.74, 154.80, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -854,11 +1086,19 @@ Processing elevation element: 511918 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (248.63, 209.89, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -866,11 +1106,19 @@ Processing elevation element: 511919 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (308.52, 264.98, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -878,15 +1126,11 @@ Processing elevation element: 1242351 (Type: ElevationMarker)
 
 
 
-Location type: Location
+ElevationMarker has 1 elevation views
 
 
 
-Location type Location - trying alternative methods...
-
-
-
-Marker has 1 elevation views
+ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
 
 
 
@@ -898,11 +1142,19 @@ Processing elevation element: 511931 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (75.05, 44.63, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -910,11 +1162,19 @@ Processing elevation element: 511932 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (134.94, 99.71, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -922,11 +1182,19 @@ Processing elevation element: 511933 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (194.83, 154.80, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -934,11 +1202,19 @@ Processing elevation element: 511934 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (254.71, 209.89, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -946,11 +1222,19 @@ Processing elevation element: 511935 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (314.60, 264.98, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -958,11 +1242,19 @@ Processing elevation element: 511937 (Type: FamilyInstance)
 
 
 
-Location type: LocationPoint
+FamilyInstance Location type: LocationPoint
 
 
 
-SUCCESS: LocationPoint updated with FULL transform
+FamilyInstance moved to (320.68, 264.98, 0.00)
+
+
+
+Rotating FamilyInstance by -90.0° around its position
+
+
+
+SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
@@ -983,6 +1275,10 @@ Success rate: 88.6%
 
 
 ================================
+
+
+
+Regenerating document after elevation marker updates...
 
 
 
@@ -1034,39 +1330,111 @@ Found 9 section marker family instances
 
 
 
-Updated section marker point: 511753
+Section marker moved to (122.76, 105.70, 0.00)
 
 
 
-Updated section marker point: 512308
+Rotating section marker by -90.0° around its position
 
 
 
-Updated section marker point: 512386
+Updated section marker point: 511753 (with rotation)
 
 
 
-Updated section marker point: 512393
+Section marker moved to (63.89, -3.37, 0.00)
 
 
 
-Updated section marker point: 512421
+Rotating section marker by -90.0° around its position
 
 
 
-Updated section marker point: 512422
+Updated section marker point: 512308 (with rotation)
 
 
 
-Updated section marker point: 512448
+Section marker moved to (63.89, -6.37, 0.00)
 
 
 
-Updated section marker point: 512449
+Rotating section marker by -90.0° around its position
 
 
 
-Updated section marker point: 512456
+Updated section marker point: 512386 (with rotation)
+
+
+
+Section marker moved to (63.89, -9.37, 0.00)
+
+
+
+Rotating section marker by -90.0° around its position
+
+
+
+Updated section marker point: 512393 (with rotation)
+
+
+
+Section marker moved to (63.01, -12.37, 0.00)
+
+
+
+Rotating section marker by -90.0° around its position
+
+
+
+Updated section marker point: 512421 (with rotation)
+
+
+
+Section marker moved to (63.89, -15.37, 0.00)
+
+
+
+Rotating section marker by -90.0° around its position
+
+
+
+Updated section marker point: 512422 (with rotation)
+
+
+
+Section marker moved to (68.01, -12.37, 0.00)
+
+
+
+Rotating section marker by -90.0° around its position
+
+
+
+Updated section marker point: 512448 (with rotation)
+
+
+
+Section marker moved to (68.89, -15.37, 0.00)
+
+
+
+Rotating section marker by -90.0° around its position
+
+
+
+Updated section marker point: 512449 (with rotation)
+
+
+
+Section marker moved to (73.01, -12.37, 0.00)
+
+
+
+Rotating section marker by -90.0° around its position
+
+
+
+Updated section marker point: 512456 (with rotation)
 
 
 
