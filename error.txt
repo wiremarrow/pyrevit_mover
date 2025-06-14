@@ -1,5 +1,17 @@
 ﻿﻿
 
+Analyzing elements for transformation...
+
+
+
+Found 1413 elements to transform
+
+
+
+Using provided rotation origin: (0.00, 0.00, 0.00)
+
+
+
 === TRANSFORMATION DEBUG ===
 
 
@@ -32,15 +44,15 @@ Is translation only: False
 
 
 
-Analyzing elements for transformation...
-
-
-
-Found 1413 elements to transform
-
-
-
 Applying rotation of 90.0 degrees...
+
+
+
+Rotation center: (0.00, 0.00, 0.00)
+
+
+
+Rotation radians: 1.5708
 
 
 
