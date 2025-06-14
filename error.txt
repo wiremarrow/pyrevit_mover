@@ -410,7 +410,7 @@ FamilyInstance moved to (81.14, 44.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -430,7 +430,7 @@ FamilyInstance moved to (141.02, 99.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -450,7 +450,7 @@ FamilyInstance moved to (200.91, 154.80, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -470,7 +470,7 @@ FamilyInstance moved to (260.80, 209.89, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -490,7 +490,7 @@ FamilyInstance moved to (62.89, 44.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -510,7 +510,7 @@ FamilyInstance moved to (122.77, 99.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -530,7 +530,7 @@ FamilyInstance moved to (182.66, 154.80, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -550,7 +550,7 @@ FamilyInstance moved to (242.55, 209.89, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -570,7 +570,7 @@ FamilyInstance moved to (302.43, 264.98, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -590,7 +590,7 @@ FamilyInstance moved to (62.89, -18.37, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -610,7 +610,7 @@ FamilyInstance moved to (62.89, -21.37, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -630,7 +630,7 @@ FamilyInstance moved to (62.89, 38.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -650,7 +650,7 @@ FamilyInstance moved to (68.97, 38.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -666,11 +666,15 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
+ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-WARNING: Could not update elevation element 29152
+Measured: -90.0°, Corrected: 90.0° - Rotating ElevationMarker around (171.72, 48.59, 0.00)
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
 
 
 
@@ -686,7 +690,7 @@ FamilyInstance moved to (75.05, 38.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -702,11 +706,15 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
+ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-WARNING: Could not update elevation element 29157
+Measured: -90.0°, Corrected: 90.0° - Rotating ElevationMarker around (64.00, -32.74, 0.00)
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
 
 
 
@@ -722,7 +730,7 @@ FamilyInstance moved to (81.14, 38.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -738,11 +746,15 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
+ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-WARNING: Could not update elevation element 29162
+Measured: -90.0°, Corrected: 90.0° - Rotating ElevationMarker around (-51.94, 48.71, 0.00)
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
 
 
 
@@ -758,7 +770,7 @@ FamilyInstance moved to (62.89, 20.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -778,7 +790,7 @@ FamilyInstance moved to (68.97, 20.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -798,7 +810,7 @@ FamilyInstance moved to (75.05, 20.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -818,7 +830,7 @@ FamilyInstance moved to (122.77, 93.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -834,11 +846,15 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
+ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-WARNING: Could not update elevation element 29167
+Measured: -90.0°, Corrected: 90.0° - Rotating ElevationMarker around (64.43, 143.13, 0.00)
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
 
 
 
@@ -854,7 +870,7 @@ FamilyInstance moved to (128.86, 93.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -874,7 +890,7 @@ FamilyInstance moved to (134.94, 93.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -894,7 +910,7 @@ FamilyInstance moved to (141.02, 93.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -914,7 +930,7 @@ FamilyInstance moved to (81.14, 20.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -934,7 +950,7 @@ FamilyInstance moved to (62.87, 50.62, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -954,7 +970,7 @@ FamilyInstance moved to (62.89, 26.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -974,7 +990,7 @@ FamilyInstance moved to (68.97, 26.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -994,7 +1010,7 @@ FamilyInstance moved to (75.05, 26.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1014,7 +1030,7 @@ FamilyInstance moved to (81.14, 26.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1034,7 +1050,7 @@ FamilyInstance moved to (68.97, 44.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1054,7 +1070,7 @@ FamilyInstance moved to (128.86, 99.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1074,7 +1090,7 @@ FamilyInstance moved to (188.74, 154.80, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1094,7 +1110,7 @@ FamilyInstance moved to (248.63, 209.89, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1114,7 +1130,7 @@ FamilyInstance moved to (308.52, 264.98, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1130,11 +1146,15 @@ ElevationMarker has 1 elevation views
 
 
 
-ElevationMarker transformation failed: 'ElevationMarker' object has no attribute 'GetElevationViewId'
+ElevationMarker translated by (59.89, 55.09, 0.00)
 
 
 
-WARNING: Could not update elevation element 1242351
+Measured: -90.0°, Corrected: 90.0° - Rotating ElevationMarker around (-4.46, 106.17, 0.00)
+
+
+
+SUCCESS: ElevationMarker transformed with ElementTransformUtils
 
 
 
@@ -1150,7 +1170,7 @@ FamilyInstance moved to (75.05, 44.63, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1170,7 +1190,7 @@ FamilyInstance moved to (134.94, 99.71, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1190,7 +1210,7 @@ FamilyInstance moved to (194.83, 154.80, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1210,7 +1230,7 @@ FamilyInstance moved to (254.71, 209.89, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1230,7 +1250,7 @@ FamilyInstance moved to (314.60, 264.98, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1250,7 +1270,7 @@ FamilyInstance moved to (320.68, 264.98, 0.00)
 
 
 
-Rotating FamilyInstance by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating FamilyInstance
 
 
 
@@ -1262,7 +1282,7 @@ SUCCESS: FamilyInstance elevation marker transformed correctly
 
 
 
-Updated 39 out of 44 user-created elevation elements
+Updated 44 out of 44 user-created elevation elements
 
 
 
@@ -1270,7 +1290,7 @@ Skipped 0 default elevation markers
 
 
 
-Success rate: 88.6%
+Success rate: 100.0%
 
 
 
@@ -1334,7 +1354,7 @@ Section marker moved to (122.76, 105.70, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1346,7 +1366,7 @@ Section marker moved to (63.89, -3.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1358,7 +1378,7 @@ Section marker moved to (63.89, -6.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1370,7 +1390,7 @@ Section marker moved to (63.89, -9.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1382,7 +1402,7 @@ Section marker moved to (63.01, -12.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1394,7 +1414,7 @@ Section marker moved to (63.89, -15.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1406,7 +1426,7 @@ Section marker moved to (68.01, -12.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1418,7 +1438,7 @@ Section marker moved to (68.89, -15.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -1430,7 +1450,7 @@ Section marker moved to (73.01, -12.37, 0.00)
 
 
 
-Rotating section marker by -90.0° around its position
+Measured: -90.0°, Corrected: 90.0° - Rotating section marker
 
 
 
@@ -2147,7 +2167,7 @@ Model elements: 8/8 transformed
 
 
 
-ELEVATION MARKERS: 39 updated *** KEY IMPROVEMENT ***
+ELEVATION MARKERS: 44 updated *** KEY IMPROVEMENT ***
 
 
 
