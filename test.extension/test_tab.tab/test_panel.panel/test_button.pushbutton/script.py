@@ -675,11 +675,18 @@ def update_elevation_markers_v3(document, transform):
                     # Fallback: apply rotation and translation separately  
                     if not transform.IsTranslation:
                         # MEASURE the actual rotation from the transform matrix
-                        # This ensures we match the building rotation exactly
-                        actual_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        actual_rotation_deg = math.degrees(actual_rotation_rad)
+                        # For +90° building rotation: BasisX=(0,1,0), BasisY=(-1,0,0)
+                        # atan2(-1, 0) = -90°, but we need +90° for elevation markers
+                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        measured_rotation_deg = math.degrees(measured_rotation_rad)
                         
-                        print("  MEASURED rotation from transform matrix: {:.2f} degrees".format(actual_rotation_deg))
+                        # CORRECT THE ROTATION: Elevation markers need OPPOSITE rotation
+                        # If building rotated +90°, elevation markers need +90° to match
+                        actual_rotation_deg = -measured_rotation_deg  # Flip the sign
+                        actual_rotation_rad = math.radians(actual_rotation_deg)
+                        
+                        print("  MEASURED from matrix: {:.2f}°, CORRECTED for elevation: {:.2f}°".format(
+                            measured_rotation_deg, actual_rotation_deg))
                         
                         # Use the measured rotation
                         # Get the actual rotation origin from the transform
@@ -701,9 +708,9 @@ def update_elevation_markers_v3(document, transform):
                                 marker.Location.Point.Y,
                                 marker.Location.Point.Z))
                         
-                        # Rotate using the measured angle
+                        # Rotate using the CORRECTED angle
                         DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, actual_rotation_rad)
-                        print("  Elevation rotated by {:.2f} degrees (measured from transform)".format(actual_rotation_deg))
+                        print("  Elevation rotated by {:.2f} degrees (CORRECTED)".format(actual_rotation_deg))
                         
                         # Debug: show marker position after
                         if hasattr(marker, 'Location') and hasattr(marker.Location, 'Point'):
@@ -858,16 +865,21 @@ def update_section_views_v3(document, transform):
                     
                     if not transform.IsTranslation:
                         # MEASURE the actual rotation from the transform matrix
-                        actual_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
-                        actual_rotation_deg = math.degrees(actual_rotation_rad)
+                        # Same correction needed as elevation markers
+                        measured_rotation_rad = math.atan2(transform.BasisY.X, transform.BasisX.X)
+                        measured_rotation_deg = math.degrees(measured_rotation_rad)
+                        
+                        # CORRECT THE ROTATION: Section markers need same correction as elevation markers
+                        actual_rotation_deg = -measured_rotation_deg  # Flip the sign
+                        actual_rotation_rad = math.radians(actual_rotation_deg)
                         
                         # Use the same rotation origin as used for building elements
                         rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Same as building center
                         rotation_axis = DB.Line.CreateBound(rotation_origin, 
                                                           DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
                         
-                        print("    Rotating section marker by {:.2f} degrees (measured) around ({:.2f}, {:.2f}, {:.2f})".format(
-                            actual_rotation_deg, rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
+                        print("    MEASURED: {:.2f}°, CORRECTED for section: {:.2f}° around ({:.2f}, {:.2f}, {:.2f})".format(
+                            measured_rotation_deg, actual_rotation_deg, rotation_origin.X, rotation_origin.Y, rotation_origin.Z))
                         
                         DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, actual_rotation_rad)
                     
