@@ -115,81 +115,87 @@ def restore_wall_joins(document, wall_joins):
 
 def get_model_elements(document):
     """
-    Get all transformable model elements with better filtering
+    Get all transformable building elements - FIXED to include actual building elements
     """
     
-    collector = DB.FilteredElementCollector(document).WhereElementIsNotElementType()
     elements_to_transform = []
     
-    # Categories to exclude
-    excluded_categories = [
-        DB.BuiltInCategory.OST_ProjectBasePoint,
-        DB.BuiltInCategory.OST_SharedBasePoint,
-        DB.BuiltInCategory.OST_Views,
-        DB.BuiltInCategory.OST_Sheets,
-        DB.BuiltInCategory.OST_Viewports,
-        DB.BuiltInCategory.OST_ElevationMarks,  # Handle separately
-        DB.BuiltInCategory.OST_SectionBox,      # Handle separately
+    # INCLUDE specific building element categories
+    included_categories = [
+        DB.BuiltInCategory.OST_Walls,
+        DB.BuiltInCategory.OST_Floors, 
+        DB.BuiltInCategory.OST_Roofs,
+        DB.BuiltInCategory.OST_Doors,
+        DB.BuiltInCategory.OST_Windows,
+        DB.BuiltInCategory.OST_Furniture,
+        DB.BuiltInCategory.OST_GenericModel,
+        DB.BuiltInCategory.OST_StructuralFraming,
+        DB.BuiltInCategory.OST_StructuralColumns,
+        DB.BuiltInCategory.OST_StructuralFoundation,
+        DB.BuiltInCategory.OST_Stairs,
+        DB.BuiltInCategory.OST_Railings,
+        DB.BuiltInCategory.OST_Ceilings,
+        DB.BuiltInCategory.OST_CurtainWallPanels,
+        DB.BuiltInCategory.OST_CurtainWallMullions,
+        DB.BuiltInCategory.OST_Casework,
+        DB.BuiltInCategory.OST_PlumbingFixtures,
+        DB.BuiltInCategory.OST_LightingFixtures,
+        DB.BuiltInCategory.OST_ElectricalFixtures,
+        DB.BuiltInCategory.OST_MechanicalEquipment,
+        DB.BuiltInCategory.OST_ElectricalEquipment,
+        DB.BuiltInCategory.OST_Entourage,
+        DB.BuiltInCategory.OST_Parking,
+        DB.BuiltInCategory.OST_Site,
+        DB.BuiltInCategory.OST_Topography,
     ]
-    
-    # Element types to exclude by class
-    excluded_types = (
-        DB.View, DB.ViewSheet, DB.ProjectInfo, DB.BasePoint, 
-        DB.ViewFamilyType, DB.Family, DB.FamilySymbol,
-        DB.ElevationMarker,  # Handle separately
-    )
     
     print("Analyzing elements for transformation...")
     
-    for element in collector:
+    # Collect elements from each included category
+    for category in included_categories:
         try:
-            # Skip if no category
-            if not element.Category:
-                continue
-                
-            # Skip excluded categories
-            try:
-                category_id = element.Category.Id.Value
-                excluded_category_values = [int(cat) for cat in excluded_categories]
-                
-                if category_id in excluded_category_values:
+            collector = DB.FilteredElementCollector(document)
+            collector.OfCategory(category).WhereElementIsNotElementType()
+            
+            category_elements = collector.ToElements()
+            category_count = 0
+            
+            for element in category_elements:
+                try:
+                    # Must have Location property to be transformable
+                    if hasattr(element, 'Location') and element.Location is not None:
+                        # Additional check: must be LocationPoint or LocationCurve
+                        location_type = type(element.Location).__name__
+                        if location_type in ['LocationPoint', 'LocationCurve']:
+                            elements_to_transform.append(element.Id)
+                            category_count += 1
+                except:
                     continue
-            except (AttributeError, TypeError):
-                pass
+            
+            if category_count > 0:
+                print("Found {} transformable elements in category {}".format(category_count, category))
                 
-            # Skip excluded element types
-            if isinstance(element, excluded_types):
-                continue
-                
-            # Skip view templates and system families
-            if hasattr(element, 'ViewType') or hasattr(element, 'IsViewTemplate'):
-                continue
-                
-            # Check for transformable elements
-            has_location = hasattr(element, 'Location') and element.Location
-            has_geometry = hasattr(element, 'get_Geometry')
-            
-            if not (has_location or has_geometry):
-                continue
-            
-            # Skip coordinate system elements
-            try:
-                element_name = element.Name.lower() if hasattr(element, 'Name') and element.Name else ""
-                problematic_keywords = [
-                    'base point', 'survey', 'origin', 'internal origin',
-                    'project base point', 'shared base point'
-                ]
-                if any(keyword in element_name for keyword in problematic_keywords):
-                    continue
-            except:
-                pass
-            
-            elements_to_transform.append(element.Id)
-            
         except Exception as e:
+            print("Could not collect category {}: {}".format(category, str(e)))
             continue
     
-    print("Found {} elements to transform".format(len(elements_to_transform)))
+    # Debug: Check what types we actually collected
+    if elements_to_transform:
+        element_types = {}
+        for i, element_id in enumerate(elements_to_transform[:50]):  # Check first 50
+            try:
+                element = document.GetElement(element_id)
+                if element:
+                    elem_type = type(element).__name__
+                    category_name = element.Category.Name if element.Category else "Unknown"
+                    key = "{} ({})".format(elem_type, category_name)
+                    element_types[key] = element_types.get(key, 0) + 1
+            except:
+                continue
+        
+        print("Element types found: {}".format(element_types))
+    
+    print("Found {} total elements to transform".format(len(elements_to_transform)))
     return elements_to_transform
 
 
