@@ -357,13 +357,25 @@ def update_section_views_v3(document, transform):
                     print("  Updating crop box...")
                     crop_box = view.CropBox
                     if crop_box:
-                        min_point = transform.OfPoint(crop_box.Min)
-                        max_point = transform.OfPoint(crop_box.Max)
+                        # For section views, we need to transform the view origin, not the crop box bounds
+                        # The crop box transform contains the view's coordinate system
+                        old_transform = crop_box.Transform
                         
+                        # Transform the origin point
+                        new_origin = transform.OfPoint(old_transform.Origin)
+                        
+                        # Create new transform with moved origin but same orientation
+                        new_transform = DB.Transform.Identity
+                        new_transform.Origin = new_origin
+                        new_transform.BasisX = old_transform.BasisX
+                        new_transform.BasisY = old_transform.BasisY
+                        new_transform.BasisZ = old_transform.BasisZ
+                        
+                        # Create new crop box with same size but new transform
                         new_crop_box = DB.BoundingBoxXYZ()
-                        new_crop_box.Min = min_point
-                        new_crop_box.Max = max_point
-                        new_crop_box.Transform = crop_box.Transform
+                        new_crop_box.Min = crop_box.Min
+                        new_crop_box.Max = crop_box.Max
+                        new_crop_box.Transform = new_transform
                         
                         view.CropBox = new_crop_box
                         updated_count += 1
@@ -432,21 +444,25 @@ def update_plan_views_v3(document, transform):
                 try:
                     crop_box = view.CropBox
                     if crop_box:
-                        # Transform the crop box
-                        min_point = transform.OfPoint(crop_box.Min)
-                        max_point = transform.OfPoint(crop_box.Max)
+                        # For plan views, we need to transform the view origin, not the crop box bounds
+                        # The crop box transform contains the view's coordinate system
+                        old_transform = crop_box.Transform
                         
+                        # Transform the origin point
+                        new_origin = transform.OfPoint(old_transform.Origin)
+                        
+                        # Create new transform with moved origin but same orientation
+                        new_transform = DB.Transform.Identity
+                        new_transform.Origin = new_origin
+                        new_transform.BasisX = old_transform.BasisX
+                        new_transform.BasisY = old_transform.BasisY
+                        new_transform.BasisZ = old_transform.BasisZ
+                        
+                        # Create new crop box with same size but new transform
                         new_crop_box = DB.BoundingBoxXYZ()
-                        new_crop_box.Min = min_point
-                        new_crop_box.Max = max_point
-                        
-                        # Preserve the original transform if it exists
-                        if crop_box.Transform:
-                            # Transform the crop box's coordinate system too
-                            new_transform = crop_box.Transform.Multiply(transform)
-                            new_crop_box.Transform = new_transform
-                        else:
-                            new_crop_box.Transform = crop_box.Transform
+                        new_crop_box.Min = crop_box.Min
+                        new_crop_box.Max = crop_box.Max
+                        new_crop_box.Transform = new_transform
                         
                         view.CropBox = new_crop_box
                         updated_count += 1

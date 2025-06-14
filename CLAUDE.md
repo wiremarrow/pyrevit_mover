@@ -59,3 +59,12 @@ uidoc = revit.uidoc
 - Error handling should be verbose to aid remote debugging
 - Include progress output for long-running operations
 - Test element selection before applying transformations
+
+## API Documentation Requirements
+
+When implementing Revit API functionality:
+- **ALWAYS** search for current Revit API documentation (latest version) before implementing
+- Verify that methods and properties are not deprecated in Revit 2026+
+- Check for API breaking changes between versions
+- Look for official Autodesk documentation and Building Coder blog posts
+- Avoid using deprecated properties like ElementId.IntegerValue (use .Value instead)
