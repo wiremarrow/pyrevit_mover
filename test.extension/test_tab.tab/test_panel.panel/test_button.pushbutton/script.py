@@ -225,21 +225,46 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
             rotation_radians = rotation_degrees * 3.14159265359 / 180.0
             print("Rotation radians: {:.4f}".format(rotation_radians))
             
-            # Debug: Check a sample element before rotation
-            if element_ids:
-                sample_element = document.GetElement(element_ids[0])
-                if sample_element and sample_element.Location:
-                    if hasattr(sample_element.Location, 'Point'):
-                        before_point = sample_element.Location.Point
-                        print("Sample element before rotation: ({:.2f}, {:.2f}, {:.2f})".format(
-                            before_point.X, before_point.Y, before_point.Z))
+            # Debug: Analyze element types and positions before rotation
+            print("\nAnalyzing elements before rotation:")
+            element_types = {}
+            sample_positions = []
+            for i, element_id in enumerate(element_ids[:10]):  # Check first 10
+                try:
+                    element = document.GetElement(element_id)
+                    if element:
+                        elem_type = type(element).__name__
+                        element_types[elem_type] = element_types.get(elem_type, 0) + 1
+                        
+                        if element.Location and i < 5:  # Store positions for first 5
+                            if hasattr(element.Location, 'Point'):
+                                point = element.Location.Point
+                                sample_positions.append((element_id.Value, point.X, point.Y, point.Z, elem_type))
+                                print("Element {} before: ({:.2f}, {:.2f}, {:.2f}) - {}".format(
+                                    element_id.Value, point.X, point.Y, point.Z, elem_type))
+                            elif hasattr(element.Location, 'Curve'):
+                                curve = element.Location.Curve
+                                start = curve.GetEndPoint(0)
+                                sample_positions.append((element_id.Value, start.X, start.Y, start.Z, elem_type + "(curve)"))
+                                print("Element {} (curve) before: ({:.2f}, {:.2f}, {:.2f}) - {}".format(
+                                    element_id.Value, start.X, start.Y, start.Z, elem_type))
+                except:
+                    continue
+            
+            print("Element types to rotate: {}".format(element_types))
             
             # Separate hosted and non-hosted elements
             hosted_elements, non_hosted_elements = separate_hosted_elements(document, element_ids)
+            print("Non-hosted elements: {}, Hosted elements: {}".format(
+                len(non_hosted_elements), len(hosted_elements)))
             
             # Rotate non-hosted elements first (hosts before hosted)
             if non_hosted_elements:
                 non_hosted_list = List[DB.ElementId](non_hosted_elements)
+                print("Rotating {} non-hosted elements around axis from ({:.2f}, {:.2f}, {:.2f}) to ({:.2f}, {:.2f}, {:.2f})".format(
+                    len(non_hosted_elements), 
+                    rotation_axis.GetEndPoint(0).X, rotation_axis.GetEndPoint(0).Y, rotation_axis.GetEndPoint(0).Z,
+                    rotation_axis.GetEndPoint(1).X, rotation_axis.GetEndPoint(1).Y, rotation_axis.GetEndPoint(1).Z))
                 try:
                     DB.ElementTransformUtils.RotateElements(document, non_hosted_list, rotation_axis, rotation_radians)
                     print("Non-hosted elements rotation successful!")
@@ -254,6 +279,7 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
             # Rotate hosted elements (doors, windows, etc.)
             if hosted_elements:
                 hosted_list = List[DB.ElementId](hosted_elements)
+                print("Rotating {} hosted elements".format(len(hosted_elements)))
                 try:
                     DB.ElementTransformUtils.RotateElements(document, hosted_list, rotation_axis, rotation_radians)
                     print("Hosted elements rotation successful!")
@@ -265,14 +291,29 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
                         except:
                             continue
             
-            # Debug: Check the same sample element after rotation
-            if element_ids:
-                sample_element = document.GetElement(element_ids[0])
-                if sample_element and sample_element.Location:
-                    if hasattr(sample_element.Location, 'Point'):
-                        after_point = sample_element.Location.Point
-                        print("Sample element after rotation: ({:.2f}, {:.2f}, {:.2f})".format(
-                            after_point.X, after_point.Y, after_point.Z))
+            # Debug: Check multiple elements after rotation to verify movement
+            print("\nChecking element positions after rotation:")
+            checked_count = 0
+            for element_id in element_ids[:5]:  # Check first 5 elements
+                try:
+                    element = document.GetElement(element_id)
+                    if element and element.Location:
+                        if hasattr(element.Location, 'Point'):
+                            after_point = element.Location.Point
+                            print("Element {} after rotation: ({:.2f}, {:.2f}, {:.2f}) - Type: {}".format(
+                                element_id.Value, after_point.X, after_point.Y, after_point.Z, 
+                                type(element).__name__))
+                            checked_count += 1
+                        elif hasattr(element.Location, 'Curve'):
+                            curve = element.Location.Curve
+                            start_point = curve.GetEndPoint(0)
+                            print("Element {} (curve) start after rotation: ({:.2f}, {:.2f}, {:.2f}) - Type: {}".format(
+                                element_id.Value, start_point.X, start_point.Y, start_point.Z,
+                                type(element).__name__))
+                            checked_count += 1
+                except:
+                    continue
+            print("Checked {} elements for position changes".format(checked_count))
         
         # Step 2: Apply translation if needed  
         translation_vector = transform.Origin
