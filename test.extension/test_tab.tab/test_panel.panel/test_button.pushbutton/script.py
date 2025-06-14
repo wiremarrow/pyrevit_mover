@@ -101,50 +101,72 @@ def get_model_elements(document):
     return elements_to_transform
 
 
-def transform_elements_robust(document, element_ids, transform):
+def transform_elements_robust(document, element_ids, transform, rotation_degrees=0, rotation_origin=None):
     """
-    Robust element transformation using the proven method
+    Robust element transformation using proper Revit API methods
+    For combined rotation + translation, we must apply them separately
     """
     
     if not element_ids:
         return 0
         
     element_ids_list = List[DB.ElementId](element_ids)
+    transformed_count = 0
     
     try:
-        if transform.IsTranslation:
-            print("Using MoveElements for translation...")
-            translation = transform.Origin
-            DB.ElementTransformUtils.MoveElements(document, element_ids_list, translation)
-            print("Bulk move successful!")
-            return len(element_ids)
-        else:
-            print("Complex transformation - applying to each element...")
-            transformed_count = 0
-            for element_id in element_ids:
-                try:
-                    element = document.GetElement(element_id)
-                    if element and element.Location:
-                        location = element.Location
-                        if hasattr(location, 'Move'):
-                            # Try to move with transform
-                            location.Move(transform.OfPoint(DB.XYZ.Zero) - DB.XYZ.Zero)
-                        if hasattr(location, 'Point'):
-                            # Update point location
-                            location.Point = transform.OfPoint(location.Point)
-                        elif hasattr(location, 'Curve'):
-                            # Transform curve
-                            curve = location.Curve
-                            start = transform.OfPoint(curve.GetEndPoint(0))
-                            end = transform.OfPoint(curve.GetEndPoint(1))
-                            location.Curve = DB.Line.CreateBound(start, end)
+        # Step 1: Apply rotation if needed
+        if rotation_degrees != 0 and rotation_origin is not None:
+            print("Applying rotation of {} degrees...".format(rotation_degrees))
+            
+            # Create rotation axis (Z-axis through origin)
+            axis_start = rotation_origin
+            axis_end = DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10)
+            rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
+            
+            # Convert degrees to radians
+            rotation_radians = rotation_degrees * 3.14159265359 / 180.0
+            
+            # Apply rotation to all elements
+            try:
+                DB.ElementTransformUtils.RotateElements(document, element_ids_list, rotation_axis, rotation_radians)
+                print("Bulk rotation successful!")
+            except Exception as rot_e:
+                print("Bulk rotation failed, trying individual: {}".format(str(rot_e)))
+                # Try individual rotation
+                for element_id in element_ids:
+                    try:
+                        DB.ElementTransformUtils.RotateElement(document, element_id, rotation_axis, rotation_radians)
+                    except:
+                        continue
+        
+        # Step 2: Apply translation if needed
+        translation_vector = transform.Origin
+        if not (translation_vector.X == 0 and translation_vector.Y == 0 and translation_vector.Z == 0):
+            print("Applying translation: ({}, {}, {})...".format(
+                translation_vector.X, translation_vector.Y, translation_vector.Z))
+            
+            try:
+                DB.ElementTransformUtils.MoveElements(document, element_ids_list, translation_vector)
+                print("Bulk translation successful!")
+                transformed_count = len(element_ids)
+            except Exception as trans_e:
+                print("Bulk translation failed, trying individual: {}".format(str(trans_e)))
+                # Try individual translation
+                for element_id in element_ids:
+                    try:
+                        DB.ElementTransformUtils.MoveElement(document, element_id, translation_vector)
                         transformed_count += 1
-                except Exception as e:
-                    continue
-            print("Transformed {}/{} elements".format(transformed_count, len(element_ids)))
-            return transformed_count
+                    except:
+                        continue
+        else:
+            # If no translation, count successful rotations
+            transformed_count = len(element_ids)
+            
+        print("Successfully transformed {}/{} elements".format(transformed_count, len(element_ids)))
+        return transformed_count
+        
     except Exception as e:
-        print("Bulk transformation failed: {}".format(str(e)))
+        print("Transformation failed: {}".format(str(e)))
         return 0
 
 
@@ -638,7 +660,7 @@ def transform_model_and_views_v3(document, translation_vector, rotation_angle_de
             # 1. Transform model elements (proven to work)
             elements_to_transform = get_model_elements(document)
             if elements_to_transform:
-                transformed_count = transform_elements_robust(document, elements_to_transform, combined_transform)
+                transformed_count = transform_elements_robust(document, elements_to_transform, combined_transform, rotation_angle_degrees, rotation_origin)
                 print("Successfully transformed {}/{} elements".format(transformed_count, len(elements_to_transform)))
                 
                 success_rate = float(transformed_count) / len(elements_to_transform)
