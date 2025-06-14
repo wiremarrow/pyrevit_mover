@@ -91,11 +91,13 @@ def store_wall_joins(document, element_ids):
 def restore_wall_joins(document, wall_joins):
     """
     Restore wall-to-wall join relationships after transformation
+    Enhanced with better error handling and automatic wall end joining
     """
     if not wall_joins:
         return
     
     print("Restoring {} wall joins...".format(len(wall_joins)))
+    restored_count = 0
     
     for wall1_id, wall2_id in wall_joins:
         try:
@@ -105,12 +107,43 @@ def restore_wall_joins(document, wall_joins):
             if wall1 and wall2:
                 # Check if they're not already joined
                 if not DB.JoinGeometryUtils.AreElementsJoined(document, wall1, wall2):
-                    DB.JoinGeometryUtils.JoinGeometry(document, wall1, wall2)
+                    try:
+                        DB.JoinGeometryUtils.JoinGeometry(document, wall1, wall2)
+                        restored_count += 1
+                        print("  Restored join between walls {} and {}".format(wall1_id.Value, wall2_id.Value))
+                    except Exception as join_e:
+                        print("  Failed to join walls {} and {}: {}".format(wall1_id.Value, wall2_id.Value, str(join_e)))
+                        
+                        # Try auto-join at wall ends as fallback
+                        try:
+                            # Get wall endpoints and see if they're close
+                            if hasattr(wall1, 'Location') and hasattr(wall2, 'Location'):
+                                if isinstance(wall1.Location, DB.LocationCurve) and isinstance(wall2.Location, DB.LocationCurve):
+                                    curve1 = wall1.Location.Curve
+                                    curve2 = wall2.Location.Curve
+                                    
+                                    # Check if wall endpoints are close (within 1 foot)
+                                    endpoints1 = [curve1.GetEndPoint(0), curve1.GetEndPoint(1)]
+                                    endpoints2 = [curve2.GetEndPoint(0), curve2.GetEndPoint(1)]
+                                    
+                                    for ep1 in endpoints1:
+                                        for ep2 in endpoints2:
+                                            distance = ep1.DistanceTo(ep2)
+                                            if distance < 1.0:  # Within 1 foot
+                                                print("    Walls are close at endpoints (distance: {:.3f}), attempting join".format(distance))
+                                                DB.JoinGeometryUtils.JoinGeometry(document, wall1, wall2)
+                                                restored_count += 1
+                                                break
+                        except:
+                            continue
+                else:
+                    print("  Walls {} and {} already joined".format(wall1_id.Value, wall2_id.Value))
+                    restored_count += 1
         except Exception as e:
-            print("Failed to restore wall join: {}".format(str(e)))
+            print("  Failed to restore wall join: {}".format(str(e)))
             continue
     
-    print("Wall join restoration completed")
+    print("Wall join restoration completed: {}/{} joins restored".format(restored_count, len(wall_joins)))
 
 
 def get_model_elements(document):
@@ -147,6 +180,21 @@ def get_model_elements(document):
         DB.BuiltInCategory.OST_Parking,
         DB.BuiltInCategory.OST_Site,
         DB.BuiltInCategory.OST_Topography,
+        # Add additional roof-related categories
+        DB.BuiltInCategory.OST_RoofSoffit,
+        DB.BuiltInCategory.OST_Fascia,
+        DB.BuiltInCategory.OST_Gutters,
+        # Add missing structural categories
+        DB.BuiltInCategory.OST_StructuralConnections,
+        DB.BuiltInCategory.OST_Rebar,
+        # Add missing MEP categories  
+        DB.BuiltInCategory.OST_DuctTerminal,
+        DB.BuiltInCategory.OST_DuctAccessory,
+        DB.BuiltInCategory.OST_PipeAccessory,
+        DB.BuiltInCategory.OST_PipeFitting,
+        # Add more specialty categories
+        DB.BuiltInCategory.OST_SpecialityEquipment,
+        DB.BuiltInCategory.OST_Mass,
     ]
     
     print("Analyzing elements for transformation...")
@@ -162,13 +210,34 @@ def get_model_elements(document):
             
             for element in category_elements:
                 try:
-                    # Must have Location property to be transformable
+                    # Check if element can be transformed
+                    can_transform = False
+                    
+                    # Method 1: Elements with Location property (most common)
                     if hasattr(element, 'Location') and element.Location is not None:
-                        # Additional check: must be LocationPoint or LocationCurve
                         location_type = type(element.Location).__name__
                         if location_type in ['LocationPoint', 'LocationCurve']:
-                            elements_to_transform.append(element.Id)
-                            category_count += 1
+                            can_transform = True
+                    
+                    # Method 2: Sketch-based elements (roofs, floors) might not have standard Location
+                    elif isinstance(element, (DB.Floor, DB.RoofBase, DB.Ceiling)):
+                        # These are sketch-based and can be transformed via ElementTransformUtils
+                        can_transform = True
+                    
+                    # Method 3: Family instances should have geometry even without Location
+                    elif isinstance(element, DB.FamilyInstance):
+                        # Check if it has geometry/can be placed
+                        try:
+                            geom = element.get_Geometry(DB.Options())
+                            if geom is not None:
+                                can_transform = True
+                        except:
+                            pass
+                    
+                    if can_transform:
+                        elements_to_transform.append(element.Id)
+                        category_count += 1
+                        
                 except:
                     continue
             
@@ -202,18 +271,34 @@ def get_model_elements(document):
 def transform_elements_robust(document, element_ids, transform, rotation_degrees=0, rotation_origin=None):
     """
     Robust element transformation using proper Revit API methods
-    Handles hosted elements, wall joins, and element invalidation
+    Handles hosted elements, wall joins, sketch constraints, and element invalidation
     """
     
     if not element_ids:
         return 0
     
     original_count = len(element_ids)
-    element_ids_list = List[DB.ElementId](element_ids)
     transformed_count = 0
     
-    # Store wall joins before transformation
-    wall_joins = store_wall_joins(document, element_ids)
+    # Separate elements by type to handle constraints properly
+    sketch_based_elements = []  # Roofs, floors, ceilings
+    regular_elements = []
+    
+    for element_id in element_ids:
+        try:
+            element = document.GetElement(element_id)
+            if element:
+                if isinstance(element, (DB.Floor, DB.RoofBase, DB.Ceiling)):
+                    sketch_based_elements.append(element_id)
+                else:
+                    regular_elements.append(element_id)
+        except:
+            regular_elements.append(element_id)  # Default to regular
+    
+    print("Regular elements: {}, Sketch-based elements: {}".format(len(regular_elements), len(sketch_based_elements)))
+    
+    # Store wall joins before transformation (only for regular elements)
+    wall_joins = store_wall_joins(document, regular_elements)
     
     try:
         # Step 1: Apply rotation if needed
@@ -259,8 +344,8 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
             
             print("Element types to rotate: {}".format(element_types))
             
-            # Separate hosted and non-hosted elements
-            hosted_elements, non_hosted_elements = separate_hosted_elements(document, element_ids)
+            # Separate hosted and non-hosted elements from REGULAR elements only
+            hosted_elements, non_hosted_elements = separate_hosted_elements(document, regular_elements)
             print("Non-hosted elements: {}, Hosted elements: {}".format(
                 len(non_hosted_elements), len(hosted_elements)))
             
@@ -320,6 +405,47 @@ def transform_elements_robust(document, element_ids, transform, rotation_degrees
                 except:
                     continue
             print("Checked {} elements for position changes".format(checked_count))
+            
+            # Step 1.5: Handle sketch-based elements separately (after regular elements)
+            if sketch_based_elements:
+                print("\\nProcessing {} sketch-based elements (roofs, floors, ceilings)...".format(len(sketch_based_elements)))
+                
+                for sketch_id in sketch_based_elements:
+                    try:
+                        sketch_element = document.GetElement(sketch_id)
+                        if sketch_element:
+                            print("  Processing sketch element: {} (Type: {})".format(
+                                sketch_id.Value, type(sketch_element).__name__))
+                            
+                            # For sketch-based elements, try individual transformation
+                            sketch_list = List[DB.ElementId]([sketch_id])
+                            
+                            try:
+                                # Try rotation first
+                                if rotation_degrees != 0:
+                                    axis_start = rotation_origin
+                                    axis_end = DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10)
+                                    rotation_axis = DB.Line.CreateBound(axis_start, axis_end)
+                                    rotation_radians = rotation_degrees * 3.14159265359 / 180.0
+                                    
+                                    DB.ElementTransformUtils.RotateElements(document, sketch_list, rotation_axis, rotation_radians)
+                                    print("    Sketch element rotated successfully")
+                                
+                                # Then translation
+                                if transform.Origin.GetLength() > 0.001:  # Only if there's meaningful translation
+                                    DB.ElementTransformUtils.MoveElements(document, sketch_list, transform.Origin)
+                                    print("    Sketch element translated successfully")
+                                
+                                transformed_count += 1
+                                
+                            except Exception as sketch_e:
+                                print("    Sketch element transformation failed: {}".format(str(sketch_e)))
+                                # Don't fail the whole operation for sketch constraint issues
+                                continue
+                                
+                    except Exception as e:
+                        print("  Error processing sketch element {}: {}".format(sketch_id.Value, str(e)))
+                        continue
         
         # Step 2: Apply translation if needed  
         translation_vector = transform.Origin
@@ -451,17 +577,29 @@ def update_elevation_markers_v3(document, transform):
             # Method B: Try using ElementTransformUtils
             try:
                 element_list = List[DB.ElementId]([marker.Id])
-                if transform.IsTranslation:
-                    DB.ElementTransformUtils.MoveElements(document, element_list, transform.Origin)
-                    print("  SUCCESS: Moved via ElementTransformUtils")
+                
+                # Apply the FULL transformation (rotation + translation)
+                # Use the combined transform, not just translation
+                if hasattr(DB.ElementTransformUtils, 'TransformElements'):
+                    DB.ElementTransformUtils.TransformElements(document, element_list, transform)
+                    print("  SUCCESS: Full transform via ElementTransformUtils")
                 else:
-                    # For complex transforms, we need to handle each element individually
-                    element = document.GetElement(elem.Id)
-                    if element and element.Location:
-                        location = element.Location
-                        if hasattr(location, 'Point'):
-                            location.Point = transform.OfPoint(location.Point)
-                    print("  SUCCESS: Transformed via ElementTransformUtils")
+                    # Fallback: apply rotation and translation separately
+                    if not transform.IsTranslation:
+                        # Extract rotation angle from transform matrix
+                        rotation_angle = math.atan2(transform.BasisX.Y, transform.BasisX.X)
+                        rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Use same origin as main transform
+                        rotation_axis = DB.Line.CreateBound(rotation_origin, 
+                                                          DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
+                        
+                        # Rotate first
+                        DB.ElementTransformUtils.RotateElements(document, element_list, rotation_axis, rotation_angle)
+                        print("  Elevation rotated by {:.1f} degrees".format(math.degrees(rotation_angle)))
+                    
+                    # Then translate
+                    DB.ElementTransformUtils.MoveElements(document, element_list, transform.Origin)
+                    print("  SUCCESS: Rotation + Translation via ElementTransformUtils")
+                
                 updated_count += 1
                 continue
                 
@@ -562,22 +700,51 @@ def update_section_views_v3(document, transform):
     
     print("Found {} section marker family instances".format(len(section_markers)))
     
-    # Update section markers first
+    # Update section markers first - Apply FULL transformation
     for marker in section_markers:
         try:
+            marker_updated = False
+            
+            # Method 1: Location-based transformation
             if hasattr(marker, 'Location') and marker.Location:
                 if isinstance(marker.Location, DB.LocationCurve):
                     old_curve = marker.Location.Curve
                     new_curve = old_curve.CreateTransformed(transform)
                     marker.Location.Curve = new_curve
-                    print("Updated section marker curve: {}".format(marker.Id))
+                    print("Updated section marker curve: {}".format(marker.Id.Value))
+                    marker_updated = True
                 elif isinstance(marker.Location, DB.LocationPoint):
                     old_point = marker.Location.Point
                     new_point = transform.OfPoint(old_point)
                     marker.Location.Point = new_point
-                    print("Updated section marker point: {}".format(marker.Id))
+                    print("Updated section marker point: {}".format(marker.Id.Value))
+                    marker_updated = True
+            
+            # Method 2: If location method fails, try ElementTransformUtils
+            if not marker_updated:
+                try:
+                    marker_list = List[DB.ElementId]([marker.Id])
+                    
+                    # Apply rotation and translation separately for section markers
+                    if not transform.IsTranslation:
+                        # Extract rotation parameters
+                        rotation_angle = math.atan2(transform.BasisX.Y, transform.BasisX.X)
+                        rotation_origin = DB.XYZ(2.40, 7.49, 0.0)  # Same as building center
+                        rotation_axis = DB.Line.CreateBound(rotation_origin, 
+                                                          DB.XYZ(rotation_origin.X, rotation_origin.Y, rotation_origin.Z + 10))
+                        
+                        DB.ElementTransformUtils.RotateElements(document, marker_list, rotation_axis, rotation_angle)
+                    
+                    # Apply translation
+                    DB.ElementTransformUtils.MoveElements(document, marker_list, transform.Origin)
+                    print("Updated section marker via ElementTransformUtils: {}".format(marker.Id.Value))
+                    marker_updated = True
+                    
+                except Exception as trans_e:
+                    print("Section marker transform failed: {}".format(str(trans_e)))
+                    
         except Exception as e:
-            print("Could not update section marker {}: {}".format(marker.Id, str(e)))
+            print("Could not update section marker {}: {}".format(marker.Id.Value, str(e)))
     
     # Update section views
     for view in section_views:
