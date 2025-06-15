@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Enhanced Transform Model and Views - FIXED v6
-Correct orientation fix: move markers to exact position, adjust facing direction only.
+Enhanced Transform Model and Views - FIXED v7
+API-based fix: markers rotate same amount as building (90°) for proper perpendicular alignment.
 
 Author: Architecture Firm
 Compatible with: Revit 2026
 Required: pyRevit 4.8+
 """
 
-__title__ = "Enhanced Transform\nModel and Views - Fixed v6"
+__title__ = "Enhanced Transform\nModel and Views - Fixed v7"
 __doc__ = "Transform model elements with special focus on elevation markers and view coordination."
 
 # Standard pyRevit imports
@@ -638,13 +638,13 @@ def is_default_elevation_marker(document, marker):
 
 def update_elevation_markers_v3(document, transform, rotation_degrees, building_center):
     """
-    V6 - ORIENTATION FIX: Adjust marker facing direction, not position
-    Problem: V5 rotated marker positions when they just needed orientation adjustment
-    Solution: Move markers correctly, then rotate only around their own center for orientation
+    V7 - CORRECT ROTATION: Use building's actual rotation (90°), not arbitrary 45°
+    Problem: V6 used 45° when markers need same rotation as building (90°)
+    Solution: FamilyInstance markers rotate by building rotation amount around their center
     """
     
-    print("=== V6 ELEVATION MARKER UPDATE - ORIENTATION FIX ===")
-    print("CORRECT FIX: Move markers to new position, adjust orientation around marker center")
+    print("=== V7 ELEVATION MARKER UPDATE - CORRECT ROTATION ===")
+    print("API-BASED FIX: Markers rotate by same amount as building ({}°)".format(rotation_degrees))
     print("Building center: ({:.2f}, {:.2f}, {:.2f})".format(
         building_center.X, building_center.Y, building_center.Z))
     
@@ -694,15 +694,14 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
     
     updated_count = 0
     
-    # V6 FIX: Separate position and orientation
-    # Position: Follow building transformation exactly
-    # Orientation: Add 45° around marker's own center
-    orientation_adjustment_degrees = 45.0  # Additional rotation for proper facing
-    orientation_adjustment_radians = math.radians(orientation_adjustment_degrees)
+    # V7 FIX: Use building's actual rotation amount, not arbitrary 45°
+    # Position: Move markers with translation only
+    # Orientation: Rotate by SAME amount as building (maintain perpendicular relationship to walls)
+    marker_rotation_radians = math.radians(rotation_degrees)  # Same as building rotation
     
-    print("V6 CORRECT FIX: Position follows building exactly, orientation gets 45° adjustment")
-    print("Building rotation: {}°, Marker orientation adjustment: +{}°".format(
-        rotation_degrees, orientation_adjustment_degrees))
+    print("V7 CORRECT FIX: Markers rotate same amount as building")
+    print("Building rotation: {}°, Marker rotation: {}° (same as building)".format(
+        rotation_degrees, rotation_degrees))
     
     for marker in user_markers:
         try:
@@ -713,31 +712,36 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
                 if marker.Location and hasattr(marker.Location, 'Point'):
                     print("  FamilyInstance Location type: LocationPoint")
                     
-                    # Step 1: Move marker to correct position (follow building exactly)
+                    # Step 1: Move marker to new position (translation only, no rotation yet)
                     old_point = marker.Location.Point
-                    new_point = transform.OfPoint(old_point)
+                    # Apply only translation part of transform
+                    translation_vector = transform.Origin
+                    new_point = old_point.Add(translation_vector)
                     marker.Location.Point = new_point
                     print("  FamilyInstance moved to ({:.2f}, {:.2f}, {:.2f})".format(
                         new_point.X, new_point.Y, new_point.Z))
                     
-                    # Step 2: V6 FIX - Rotate around marker's own center for orientation only
-                    # Create rotation axis at marker's new position (not building center)
+                    # Step 2: V7 FIX - Rotate by building's rotation amount around marker center
+                    # Create rotation axis at marker's new position
                     marker_rotation_axis = DB.Line.CreateBound(
                         new_point, 
                         DB.XYZ(new_point.X, new_point.Y, new_point.Z + 10)
                     )
                     
-                    print("  V6 FIX: Orientation adjustment +{}° around marker center ({:.2f}, {:.2f})".format(
-                        orientation_adjustment_degrees, new_point.X, new_point.Y))
+                    print("  V7 FIX: Rotating {}° around marker center ({:.2f}, {:.2f}) - same as building".format(
+                        rotation_degrees, new_point.X, new_point.Y))
                     
-                    DB.ElementTransformUtils.RotateElement(document, marker.Id, marker_rotation_axis, orientation_adjustment_radians)
-                    print("  SUCCESS: FamilyInstance orientation adjusted")
+                    DB.ElementTransformUtils.RotateElement(document, marker.Id, marker_rotation_axis, marker_rotation_radians)
+                    print("  SUCCESS: FamilyInstance rotated by building rotation amount")
                     updated_count += 1
                     
             elif isinstance(marker, DB.ElevationMarker):
-                # ElevationMarker object
+                # ElevationMarker object - use recommended API approach
                 view_count = marker.CurrentViewCount
                 print("  ElevationMarker has {} elevation views".format(view_count))
+                
+                # For ElevationMarker objects, use the recommended API approach:
+                # ElementTransformUtils.RotateElement with the ElevationMarker
                 
                 # Step 1: Apply translation using ElementTransformUtils
                 translation_vector = transform.Origin
@@ -745,33 +749,16 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
                 print("  ElevationMarker translated by ({:.2f}, {:.2f}, {:.2f})".format(
                     translation_vector.X, translation_vector.Y, translation_vector.Z))
                 
-                # Step 2: Apply building rotation around building center (same as building elements)
+                # Step 2: V7 FIX - Rotate by building rotation around building center
+                # This is the recommended approach for ElevationMarker objects
                 building_rotation_axis = DB.Line.CreateBound(
                     building_center, 
                     DB.XYZ(building_center.X, building_center.Y, building_center.Z + 10)
                 )
-                building_rotation_radians = math.radians(rotation_degrees)
-                DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, building_rotation_radians)
-                print("  ElevationMarker rotated {}° around building center".format(rotation_degrees))
                 
-                # Step 3: V6 FIX - Additional orientation adjustment around marker center
-                # Get marker's new position after transformation
-                marker_bbox = marker.get_BoundingBox(None)
-                if marker_bbox:
-                    marker_center = DB.XYZ(
-                        (marker_bbox.Min.X + marker_bbox.Max.X) / 2,
-                        (marker_bbox.Min.Y + marker_bbox.Max.Y) / 2,
-                        marker_bbox.Min.Z
-                    )
-                    
-                    marker_rotation_axis = DB.Line.CreateBound(
-                        marker_center, 
-                        DB.XYZ(marker_center.X, marker_center.Y, marker_center.Z + 10)
-                    )
-                    
-                    print("  V6 FIX: Additional +{}° orientation around marker center".format(orientation_adjustment_degrees))
-                    DB.ElementTransformUtils.RotateElement(document, marker.Id, marker_rotation_axis, orientation_adjustment_radians)
-                    print("  SUCCESS: ElevationMarker orientation adjusted")
+                print("  V7 FIX: Rotating ElevationMarker {}° around building center - API recommended".format(rotation_degrees))
+                DB.ElementTransformUtils.RotateElement(document, marker.Id, building_rotation_axis, marker_rotation_radians)
+                print("  SUCCESS: ElevationMarker rotated by building rotation amount")
                 
                 updated_count += 1
                 
@@ -783,7 +770,7 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
     print("Updated {} out of {} user-created elevation elements".format(updated_count, len(user_markers)))
     print("Skipped {} default elevation markers".format(len(default_markers)))
     print("Success rate: {:.1%}".format(float(updated_count) / len(user_markers) if user_markers else 0))
-    print("V6 FIX: Position follows building exactly, orientation gets +45° adjustment")
+    print("V7 FIX: Markers rotate same amount as building ({}°) for proper perpendicular alignment".format(rotation_degrees))
     print("================================")
     
     return updated_count
@@ -791,11 +778,11 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
 
 def update_section_views_v3(document, transform, rotation_degrees, building_center):
     """
-    V6 - ORIENTATION FIX FOR SECTION MARKERS
-    Same fix as elevation markers: move correctly, adjust orientation around marker center
+    V7 - CORRECT ROTATION FOR SECTION MARKERS
+    Same fix as elevation markers: use building's actual rotation (90°), not 45°
     """
     
-    print("=== V6 SECTION VIEW UPDATE - ORIENTATION FIX ===")
+    print("=== V7 SECTION VIEW UPDATE - CORRECT ROTATION ===")
     
     section_views = DB.FilteredElementCollector(document).OfClass(DB.ViewSection).ToElements()
     print("Found {} section views to process".format(len(section_views)))
@@ -818,39 +805,40 @@ def update_section_views_v3(document, transform, rotation_degrees, building_cent
     
     print("Found {} section marker family instances".format(len(section_markers)))
     
-    # V6 FIX: Same approach as elevation markers
-    # Position: Follow building transformation exactly
-    # Orientation: Add 45° around marker's own center
-    orientation_adjustment_degrees = 45.0
-    orientation_adjustment_radians = math.radians(orientation_adjustment_degrees)
+    # V7 FIX: Same rotation amount as building (90°), not arbitrary 45°
+    # Position: Move markers with translation only
+    # Orientation: Rotate by SAME amount as building
+    marker_rotation_radians = math.radians(rotation_degrees)  # Same as building rotation
     
-    print("V6 CORRECT FIX: Section markers position follows building, orientation gets +45° adjustment")
-    print("Building rotation: {}°, Section marker orientation adjustment: +{}°".format(
-        rotation_degrees, orientation_adjustment_degrees))
+    print("V7 CORRECT FIX: Section markers rotate same amount as building")
+    print("Building rotation: {}°, Section marker rotation: {}° (same as building)".format(
+        rotation_degrees, rotation_degrees))
     print("Building center: ({:.2f}, {:.2f}, {:.2f})".format(
         building_center.X, building_center.Y, building_center.Z))
     
     for marker in section_markers:
         try:
             if marker.Location and hasattr(marker.Location, 'Point'):
-                # Step 1: Move marker to correct position (follow building exactly)
+                # Step 1: Move marker to new position (translation only, no rotation yet)
                 old_point = marker.Location.Point
-                new_point = transform.OfPoint(old_point)
+                # Apply only translation part of transform
+                translation_vector = transform.Origin
+                new_point = old_point.Add(translation_vector)
                 marker.Location.Point = new_point
                 print("  Section marker moved to ({:.2f}, {:.2f}, {:.2f})".format(
                     new_point.X, new_point.Y, new_point.Z))
                 
-                # Step 2: V6 FIX - Orientation adjustment around marker's own center
+                # Step 2: V7 FIX - Rotate by building's rotation amount around marker center
                 marker_rotation_axis = DB.Line.CreateBound(
                     new_point, 
                     DB.XYZ(new_point.X, new_point.Y, new_point.Z + 10)
                 )
                 
-                print("  V6 FIX: Orientation adjustment +{}° around marker center ({:.2f}, {:.2f})".format(
-                    orientation_adjustment_degrees, new_point.X, new_point.Y))
+                print("  V7 FIX: Rotating {}° around marker center ({:.2f}, {:.2f}) - same as building".format(
+                    rotation_degrees, new_point.X, new_point.Y))
                 
-                DB.ElementTransformUtils.RotateElement(document, marker.Id, marker_rotation_axis, orientation_adjustment_radians)
-                print("  Updated section marker: {} (orientation adjusted)".format(marker.Id.Value))
+                DB.ElementTransformUtils.RotateElement(document, marker.Id, marker_rotation_axis, marker_rotation_radians)
+                print("  Updated section marker: {} (rotated by building rotation amount)".format(marker.Id.Value))
         except Exception as e:
             print("  ERROR transforming section marker {}: {}".format(marker.Id.Value, str(e)))
             continue
@@ -1284,12 +1272,12 @@ def main():
     
     # Show confirmation dialog
     result = UI.TaskDialog.Show(
-        "Enhanced Transform Model and Views - v6",
-        "V6 ORIENTATION FIX:\n"
-        "- CORRECTED: Move markers to exact building position\n"
-        "- ORIENTATION: Adjust facing direction +45° around marker center\n"
-        "- FIX: Separate position (building transform) and orientation (45° local)\n"
-        "- ADDRESSES: V5 moved positions when only orientation needed fixing\n\n"
+        "Enhanced Transform Model and Views - v7",
+        "V7 CORRECT ROTATION FIX:\n"
+        "- API-BASED: Markers rotate same amount as building (90°)\n"
+        "- RESEARCH: Based on Revit API documentation for elevation markers\n"
+        "- FIX: FamilyInstance markers use building rotation, not arbitrary 45°\n"
+        "- MAINTAINS: Perpendicular relationship between markers and walls\n\n"
         "Transform settings:\n"
         "Translation: ({}, {}, {}) feet\n"
         "Rotation: {} degrees\n\n"
@@ -1303,7 +1291,7 @@ def main():
         success = transform_model_and_views_v3(doc, translation, ROTATION_DEGREES, ROTATION_ORIGIN)
         
         if success:
-            UI.TaskDialog.Show("Success", "V3 transformation completed!\nCheck output for detailed elevation marker results.")
+            UI.TaskDialog.Show("Success", "V7 transformation completed!\nMarkers now rotate by building rotation amount (90°) for proper alignment.")
         else:
             UI.TaskDialog.Show("Error", "Transformation failed. Check the output for details.")
     else:
