@@ -273,6 +273,85 @@ def is_default_elevation_marker(document, marker):
 
 **Success Criteria**: 
 ✅ 8/8 building elements transformed correctly
-🔄 Elevation markers should now align properly (no 45° offset)  
-🔄 Only user-created elevation markers should be processed
-🔄 Section markers should rotate in correct direction
+❌ **PERSISTENT**: Elevation markers still 45° counterclockwise off (V4-V7 failed)
+✅ Only user-created elevation markers processed (0 defaults skipped)
+❌ **PERSISTENT**: Section markers direction vectors unchanged
+
+## CRITICAL BREAKTHROUGH - V7+ RESEARCH (December 2024)
+
+### PERSISTENT 45° ORIENTATION ISSUE 
+**Problem**: Despite 4 fix attempts (V4-V7), elevation markers consistently 45° counterclockwise off in direction vector (not position)
+
+**User Feedback Pattern**:
+- V4: "elevation markers are still 45 degrees counterclockwise off!"
+- V5: "elevation markers are now 135 degrees counterclockwise now, even worse!"  
+- V6: "markers are still 45 degrees too counter clockwise"
+- V7: "elevation markers still seem to be skewed 45 degrees counterclockwise"
+
+### ROOT CAUSE DISCOVERED: Wrong Transformation Target
+
+**Current Failed Approach**: 
+```python
+# Physical geometry rotation (what we've been doing)
+marker.Location.Point = new_point  # ✅ Position correct
+ElementTransformUtils.RotateElement(doc, marker.Id, axis, angle)  # ❌ Doesn't affect direction vector
+```
+
+**Correct Approach Needed**:
+```python
+# Direction vector manipulation (what we should do)
+facing_orientation = marker.FacingOrientation  # Actual visual direction
+view_direction = elev_view.ViewDirection  # For hosted views
+# Update these direction vectors directly
+```
+
+### API RESEARCH FINDINGS
+
+#### FamilyInstance Direction Control
+- **`FacingOrientation`**: Direct access to facing direction vector
+- **`FlippedHand/FlippedFacing`**: Affect coordinate system (may cause 45° offset)
+- **Rule**: If one flip true (not both), result must be reversed
+
+#### ElevationMarker Direction Control  
+- **`ViewDirection`**: Direction of hosted elevation views
+- **Key insight**: "Elevation marker orientation determined by orientation of views it hosts"
+- **Standard directions**: East (1,0,0), West (-1,0,0), North (0,1,0), South (0,-1,0)
+
+#### Failed Approaches Analysis
+| Version | Approach | API Success | Visual Result | Issue |
+|---------|----------|-------------|---------------|--------|
+| V4 | Building center rotation | 100% | Still 45° off | Wrong rotation point |
+| V5 | 135° compensation | 100% | Worse (135° off) | Wrong angle |
+| V6 | 45° around marker center | 100% | Still 45° off | Wrong assumption |
+| V7 | 90° building rotation | 100% | Still 45° off | Not affecting direction vector |
+
+### NEXT INVESTIGATION PRIORITIES
+
+#### 1. IMMEDIATE: Direction Vector Diagnostic
+- Read current `FacingOrientation` of sample marker
+- Read `ViewDirection` of hosted elevation view
+- Check `FlippedHand/FlippedFacing` status
+- Determine if 45° offset is in these properties
+
+#### 2. HIGH: Direct Direction Vector Manipulation
+- Calculate new direction vectors based on 90° building rotation
+- Update `ViewDirection`, `RightDirection`, `UpDirection` of elevation views
+- Test if this affects visual orientation
+
+#### 3. VALIDATION: Small Test First
+- Pick one elevation marker 
+- Manually set direction vector to known good value
+- Verify visual change occurs
+- Confirm this is the correct mechanism
+
+### EVIDENCE SUPPORTING THEORY
+1. **API Success vs Visual Failure**: All versions report 100% success but visual direction unchanged
+2. **Section Markers Also Unchanged**: "section markers still not changing" suggests direction vectors untouched
+3. **Position vs Direction**: User confirms "absolute location seems accurate" but direction wrong
+4. **Consistent 45° Offset**: Suggests systematic issue with coordinate system or direction calculation
+
+### RESEARCH SOURCES
+- Revit API Documentation 2022-2026
+- The Building Coder: Elevation marker rotation techniques
+- Stack Overflow: FamilyInstance facing direction
+- Dynamo Forums: Elevation marker direction control
