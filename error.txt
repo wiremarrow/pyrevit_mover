@@ -374,11 +374,11 @@ Success rate: 100.0% of elements transformed
 
 
 
-=== V6 ELEVATION MARKER UPDATE - ORIENTATION FIX ===
+=== V7 ELEVATION MARKER UPDATE - CORRECT ROTATION ===
 
 
 
-CORRECT FIX: Move markers to new position, adjust orientation around marker center
+API-BASED FIX: Markers rotate by same amount as building (90.0°)
 
 
 
@@ -394,11 +394,11 @@ Filtered: 0 default markers skipped, 44 user markers to process
 
 
 
-V6 CORRECT FIX: Position follows building exactly, orientation gets 45° adjustment
+V7 CORRECT FIX: Markers rotate same amount as building
 
 
 
-Building rotation: 90.0°, Marker orientation adjustment: +45.0°
+Building rotation: 90.0°, Marker rotation: 90.0° (same as building)
 
 
 
@@ -410,15 +410,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 26.34, 0.00)
+FamilyInstance moved to (31.14, -5.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 26.34)
+V7 FIX: Rotating 90.0° around marker center (31.14, -5.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -430,15 +430,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-16.45, 25.43, 0.00)
+FamilyInstance moved to (41.02, -0.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-16.45, 25.43)
+V7 FIX: Rotating 90.0° around marker center (41.02, -0.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -450,15 +450,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-15.55, -11.36, 0.00)
+FamilyInstance moved to (50.91, 4.80, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-15.55, -11.36)
+V7 FIX: Rotating 90.0° around marker center (50.91, 4.80) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -470,15 +470,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (21.25, -10.46, 0.00)
+FamilyInstance moved to (60.80, 9.89, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (21.25, -10.46)
+V7 FIX: Rotating 90.0° around marker center (60.80, 9.89) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -490,15 +490,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 8.09, 0.00)
+FamilyInstance moved to (12.89, -5.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (12.89, -5.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -510,15 +510,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (1.80, 25.43, 0.00)
+FamilyInstance moved to (22.77, -0.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (1.80, 25.43)
+V7 FIX: Rotating 90.0° around marker center (22.77, -0.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -530,15 +530,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-15.55, 6.89, 0.00)
+FamilyInstance moved to (32.66, 4.80, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-15.55, 6.89)
+V7 FIX: Rotating 90.0° around marker center (32.66, 4.80) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -550,15 +550,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (3.00, -10.46, 0.00)
+FamilyInstance moved to (42.55, 9.89, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (3.00, -10.46)
+V7 FIX: Rotating 90.0° around marker center (42.55, 9.89) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -570,15 +570,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 8.09, 0.00)
+FamilyInstance moved to (52.43, 14.98, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (52.43, 14.98) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -590,15 +590,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (83.35, 8.09, 0.00)
+FamilyInstance moved to (12.89, -68.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (83.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (12.89, -68.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -610,15 +610,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (86.35, 8.09, 0.00)
+FamilyInstance moved to (12.89, -71.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (86.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (12.89, -71.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -630,15 +630,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (26.35, 8.09, 0.00)
+FamilyInstance moved to (12.89, -11.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (26.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (12.89, -11.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -650,15 +650,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (26.35, 14.17, 0.00)
+FamilyInstance moved to (18.97, -11.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (26.35, 14.17)
+V7 FIX: Rotating 90.0° around marker center (18.97, -11.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -674,7 +674,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-ElevationMarker rotated 90.0° around building center
+V7 FIX: Rotating ElevationMarker 90.0° around building center - API recommended
+
+
+
+SUCCESS: ElevationMarker rotated by building rotation amount
 
 
 
@@ -686,15 +690,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (26.35, 20.25, 0.00)
+FamilyInstance moved to (25.05, -11.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (26.35, 20.25)
+V7 FIX: Rotating 90.0° around marker center (25.05, -11.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -710,7 +714,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-ElevationMarker rotated 90.0° around building center
+V7 FIX: Rotating ElevationMarker 90.0° around building center - API recommended
+
+
+
+SUCCESS: ElevationMarker rotated by building rotation amount
 
 
 
@@ -722,15 +730,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (26.35, 26.34, 0.00)
+FamilyInstance moved to (31.14, -11.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (26.35, 26.34)
+V7 FIX: Rotating 90.0° around marker center (31.14, -11.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -746,7 +754,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-ElevationMarker rotated 90.0° around building center
+V7 FIX: Rotating ElevationMarker 90.0° around building center - API recommended
+
+
+
+SUCCESS: ElevationMarker rotated by building rotation amount
 
 
 
@@ -758,15 +770,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (44.35, 8.09, 0.00)
+FamilyInstance moved to (12.89, -29.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (44.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (12.89, -29.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -778,15 +790,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (44.35, 14.17, 0.00)
+FamilyInstance moved to (18.97, -29.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (44.35, 14.17)
+V7 FIX: Rotating 90.0° around marker center (18.97, -29.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -798,15 +810,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (44.35, 20.25, 0.00)
+FamilyInstance moved to (25.05, -29.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (44.35, 20.25)
+V7 FIX: Rotating 90.0° around marker center (25.05, -29.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -818,15 +830,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (1.80, 31.43, 0.00)
+FamilyInstance moved to (22.77, -6.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (1.80, 31.43)
+V7 FIX: Rotating 90.0° around marker center (22.77, -6.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -842,7 +854,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-ElevationMarker rotated 90.0° around building center
+V7 FIX: Rotating ElevationMarker 90.0° around building center - API recommended
+
+
+
+SUCCESS: ElevationMarker rotated by building rotation amount
 
 
 
@@ -854,15 +870,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-4.28, 31.43, 0.00)
+FamilyInstance moved to (28.86, -6.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-4.28, 31.43)
+V7 FIX: Rotating 90.0° around marker center (28.86, -6.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -874,15 +890,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-10.37, 31.43, 0.00)
+FamilyInstance moved to (34.94, -6.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-10.37, 31.43)
+V7 FIX: Rotating 90.0° around marker center (34.94, -6.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -894,15 +910,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-16.45, 31.43, 0.00)
+FamilyInstance moved to (41.02, -6.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-16.45, 31.43)
+V7 FIX: Rotating 90.0° around marker center (41.02, -6.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -914,15 +930,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (44.35, 26.34, 0.00)
+FamilyInstance moved to (31.14, -29.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (44.35, 26.34)
+V7 FIX: Rotating 90.0° around marker center (31.14, -29.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -934,15 +950,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (14.36, 8.07, 0.00)
+FamilyInstance moved to (12.87, 0.62, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (14.36, 8.07)
+V7 FIX: Rotating 90.0° around marker center (12.87, 0.62) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -954,15 +970,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (38.35, 8.09, 0.00)
+FamilyInstance moved to (12.89, -23.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (38.35, 8.09)
+V7 FIX: Rotating 90.0° around marker center (12.89, -23.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -974,15 +990,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (38.35, 14.17, 0.00)
+FamilyInstance moved to (18.97, -23.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (38.35, 14.17)
+V7 FIX: Rotating 90.0° around marker center (18.97, -23.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -994,15 +1010,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (38.35, 20.25, 0.00)
+FamilyInstance moved to (25.05, -23.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (38.35, 20.25)
+V7 FIX: Rotating 90.0° around marker center (25.05, -23.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1014,15 +1030,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (38.35, 26.34, 0.00)
+FamilyInstance moved to (31.14, -23.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (38.35, 26.34)
+V7 FIX: Rotating 90.0° around marker center (31.14, -23.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1034,15 +1050,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 14.17, 0.00)
+FamilyInstance moved to (18.97, -5.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 14.17)
+V7 FIX: Rotating 90.0° around marker center (18.97, -5.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1054,15 +1070,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-4.28, 25.43, 0.00)
+FamilyInstance moved to (28.86, -0.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-4.28, 25.43)
+V7 FIX: Rotating 90.0° around marker center (28.86, -0.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1074,15 +1090,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-15.55, 0.80, 0.00)
+FamilyInstance moved to (38.74, 4.80, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-15.55, 0.80)
+V7 FIX: Rotating 90.0° around marker center (38.74, 4.80) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1094,15 +1110,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (9.08, -10.46, 0.00)
+FamilyInstance moved to (48.63, 9.89, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (9.08, -10.46)
+V7 FIX: Rotating 90.0° around marker center (48.63, 9.89) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1114,15 +1130,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 14.17, 0.00)
+FamilyInstance moved to (58.52, 14.98, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 14.17)
+V7 FIX: Rotating 90.0° around marker center (58.52, 14.98) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1138,7 +1154,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-ElevationMarker rotated 90.0° around building center
+V7 FIX: Rotating ElevationMarker 90.0° around building center - API recommended
+
+
+
+SUCCESS: ElevationMarker rotated by building rotation amount
 
 
 
@@ -1150,15 +1170,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 20.25, 0.00)
+FamilyInstance moved to (25.05, -5.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 20.25)
+V7 FIX: Rotating 90.0° around marker center (25.05, -5.37) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1170,15 +1190,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-10.37, 25.43, 0.00)
+FamilyInstance moved to (34.94, -0.29, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-10.37, 25.43)
+V7 FIX: Rotating 90.0° around marker center (34.94, -0.29) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1190,15 +1210,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (-15.55, -5.28, 0.00)
+FamilyInstance moved to (44.83, 4.80, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (-15.55, -5.28)
+V7 FIX: Rotating 90.0° around marker center (44.83, 4.80) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1210,15 +1230,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (15.17, -10.46, 0.00)
+FamilyInstance moved to (54.71, 9.89, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (15.17, -10.46)
+V7 FIX: Rotating 90.0° around marker center (54.71, 9.89) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1230,15 +1250,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 20.25, 0.00)
+FamilyInstance moved to (64.60, 14.98, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 20.25)
+V7 FIX: Rotating 90.0° around marker center (64.60, 14.98) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1250,15 +1270,15 @@ FamilyInstance Location type: LocationPoint
 
 
 
-FamilyInstance moved to (20.35, 26.34, 0.00)
+FamilyInstance moved to (70.68, 14.98, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (20.35, 26.34)
+V7 FIX: Rotating 90.0° around marker center (70.68, 14.98) - same as building
 
 
 
-SUCCESS: FamilyInstance orientation adjusted
+SUCCESS: FamilyInstance rotated by building rotation amount
 
 
 
@@ -1278,7 +1298,7 @@ Success rate: 100.0%
 
 
 
-V6 FIX: Position follows building exactly, orientation gets +45° adjustment
+V7 FIX: Markers rotate same amount as building (90.0°) for proper perpendicular alignment
 
 
 
@@ -1290,7 +1310,7 @@ Regenerating document after elevation marker updates...
 
 
 
-=== V6 SECTION VIEW UPDATE - ORIENTATION FIX ===
+=== V7 SECTION VIEW UPDATE - CORRECT ROTATION ===
 
 
 
@@ -1338,11 +1358,11 @@ Found 9 section marker family instances
 
 
 
-V6 CORRECT FIX: Section markers position follows building, orientation gets +45° adjustment
+V7 CORRECT FIX: Section markers rotate same amount as building
 
 
 
-Building rotation: 90.0°, Section marker orientation adjustment: +45.0°
+Building rotation: 90.0°, Section marker rotation: 90.0° (same as building)
 
 
 
@@ -1350,111 +1370,111 @@ Building center: (2.40, 7.49, -0.00)
 
 
 
-Section marker moved to (1.82, 19.45, 0.00)
+Section marker moved to (22.76, 5.70, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (1.82, 19.45)
+V7 FIX: Rotating 90.0° around marker center (22.76, 5.70) - same as building
 
 
 
-Updated section marker: 511753 (orientation adjusted)
+Updated section marker: 511753 (rotated by building rotation amount)
 
 
 
-Section marker moved to (68.35, 9.09, 0.00)
+Section marker moved to (13.89, -53.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (68.35, 9.09)
+V7 FIX: Rotating 90.0° around marker center (13.89, -53.37) - same as building
 
 
 
-Updated section marker: 512308 (orientation adjusted)
+Updated section marker: 512308 (rotated by building rotation amount)
 
 
 
-Section marker moved to (71.35, 9.09, 0.00)
+Section marker moved to (13.89, -56.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (71.35, 9.09)
+V7 FIX: Rotating 90.0° around marker center (13.89, -56.37) - same as building
 
 
 
-Updated section marker: 512386 (orientation adjusted)
+Updated section marker: 512386 (rotated by building rotation amount)
 
 
 
-Section marker moved to (74.35, 9.09, 0.00)
+Section marker moved to (13.89, -59.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (74.35, 9.09)
+V7 FIX: Rotating 90.0° around marker center (13.89, -59.37) - same as building
 
 
 
-Updated section marker: 512393 (orientation adjusted)
+Updated section marker: 512393 (rotated by building rotation amount)
 
 
 
-Section marker moved to (77.35, 8.21, 0.00)
+Section marker moved to (13.01, -62.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (77.35, 8.21)
+V7 FIX: Rotating 90.0° around marker center (13.01, -62.37) - same as building
 
 
 
-Updated section marker: 512421 (orientation adjusted)
+Updated section marker: 512421 (rotated by building rotation amount)
 
 
 
-Section marker moved to (80.35, 9.09, 0.00)
+Section marker moved to (13.89, -65.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (80.35, 9.09)
+V7 FIX: Rotating 90.0° around marker center (13.89, -65.37) - same as building
 
 
 
-Updated section marker: 512422 (orientation adjusted)
+Updated section marker: 512422 (rotated by building rotation amount)
 
 
 
-Section marker moved to (77.35, 13.21, 0.00)
+Section marker moved to (18.01, -62.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (77.35, 13.21)
+V7 FIX: Rotating 90.0° around marker center (18.01, -62.37) - same as building
 
 
 
-Updated section marker: 512448 (orientation adjusted)
+Updated section marker: 512448 (rotated by building rotation amount)
 
 
 
-Section marker moved to (80.35, 14.09, 0.00)
+Section marker moved to (18.89, -65.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (80.35, 14.09)
+V7 FIX: Rotating 90.0° around marker center (18.89, -65.37) - same as building
 
 
 
-Updated section marker: 512449 (orientation adjusted)
+Updated section marker: 512449 (rotated by building rotation amount)
 
 
 
-Section marker moved to (77.35, 18.21, 0.00)
+Section marker moved to (23.01, -62.37, 0.00)
 
 
 
-V6 FIX: Orientation adjustment +45.0° around marker center (77.35, 18.21)
+V7 FIX: Rotating 90.0° around marker center (23.01, -62.37) - same as building
 
 
 
-Updated section marker: 512456 (orientation adjusted)
+Updated section marker: 512456 (rotated by building rotation amount)
 
 
 
