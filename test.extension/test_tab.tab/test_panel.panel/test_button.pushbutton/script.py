@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Enhanced Transform Model and Views - FIXED v3
-Major focus on elevation marker fixes and view coordination.
+Enhanced Transform Model and Views - FIXED v5
+Simple 45° compensation for elevation/section marker alignment.
 
 Author: Architecture Firm
 Compatible with: Revit 2026
 Required: pyRevit 4.8+
 """
 
-__title__ = "Enhanced Transform\nModel and Views - Fixed v3"
+__title__ = "Enhanced Transform\nModel and Views - Fixed v5"
 __doc__ = "Transform model elements with special focus on elevation markers and view coordination."
 
 # Standard pyRevit imports
@@ -643,7 +643,7 @@ def update_elevation_markers_v3(document, transform, rotation_degrees, building_
     """
     
     print("=== V5 ELEVATION MARKER UPDATE - 45° COMPENSATION ===")
-    print("CRITICAL FIX: Rotating around building center (same axis as building transformation)")
+    print("SIMPLE FIX: Adding 45° compensation to all elevation markers")
     print("Building center rotation axis: ({:.2f}, {:.2f}, {:.2f})".format(
         building_center.X, building_center.Y, building_center.Z))
     
@@ -1278,7 +1278,7 @@ def main():
     
     # Show confirmation dialog
     result = UI.TaskDialog.Show(
-        "Enhanced Transform Model and Views - v3",
+        "Enhanced Transform Model and Views - v5",
         "V5 SIMPLE 45° COMPENSATION:\n"
         "- SIMPLE: Add 45° to all marker rotations\n"
         "- DIAGNOSTIC: Found flipped status affecting some markers\n"
