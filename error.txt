@@ -374,11 +374,11 @@ Success rate: 100.0% of elements transformed
 
 
 
-=== V4 ELEVATION MARKER UPDATE - BUILDING CENTER ROTATION ===
+=== V5 ELEVATION MARKER UPDATE - 45° COMPENSATION ===
 
 
 
-CRITICAL FIX: Rotating around building center (same axis as building transformation)
+SIMPLE FIX: Adding 45° compensation to all elevation markers
 
 
 
@@ -394,15 +394,15 @@ Filtered: 0 default markers skipped, 44 user markers to process
 
 
 
-V4 CRITICAL FIX: Using building center rotation axis for all markers
+V5 SIMPLE FIX: Adding 45° compensation to all elevation markers
+
+
+
+Building rotation: 90.0°, Marker rotation: 135.0° (with 45° compensation)
 
 
 
 Rotation axis: (2.40, 7.49, -0.00) to (2.40, 7.49, 10.00)
-
-
-
-Rotation angle: 90.0 degrees
 
 
 
@@ -422,11 +422,11 @@ FamilyInstance moved to (20.35, 26.34, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -438,19 +438,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, -48.000000000, 0.000000000), HandOrientation=(-48.000000000, 0.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, -33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-15.55, -11.36, 0.00)
+FamilyInstance moved to (3.04, -18.53, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -462,7 +462,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(-48.000000000, 0.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
 
 
 
@@ -470,15 +470,15 @@ WARNING: Left-handed coordinate system detected - may need direction reversal!
 
 
 
-FamilyInstance moved to (20.35, 26.34, 0.00)
+FamilyInstance moved to (-16.45, 25.43, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -490,7 +490,7 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(0.000000000, -48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(33.941125497, 33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
@@ -498,15 +498,15 @@ WARNING: Left-handed coordinate system detected - may need direction reversal!
 
 
 
-FamilyInstance moved to (-15.55, -11.36, 0.00)
+FamilyInstance moved to (28.42, 8.13, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -526,11 +526,11 @@ FamilyInstance moved to (20.35, 8.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -542,19 +542,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-15.55, 6.89, 0.00)
+FamilyInstance moved to (-9.87, -5.63, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -566,23 +566,51 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
-FamilyInstance moved to (20.35, 8.09, 0.00)
+FamilyInstance moved to (1.80, 25.43, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
 Processing elevation element: 511829 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(33.941125497, -33.941125497, 0.000000000), HandOrientation=(33.941125497, 33.941125497, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
+FamilyInstance moved to (15.52, -4.78, 0.00)
+
+
+
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
+
+
+
+SUCCESS: FamilyInstance rotated with 45° compensation
+
+
+
+Processing elevation element: 511830 (Type: FamilyInstance)
 
 
 
@@ -602,39 +630,11 @@ FamilyInstance moved to (-15.55, 6.89, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
-
-
-
-Processing elevation element: 511830 (Type: FamilyInstance)
-
-
-
-FamilyInstance Location type: LocationPoint
-
-
-
-DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
-
-
-
-WARNING: Left-handed coordinate system detected - may need direction reversal!
-
-
-
-FamilyInstance moved to (20.35, 8.09, 0.00)
-
-
-
-V4 FIX: Rotating around building center axis (not marker position)
-
-
-
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -654,11 +654,11 @@ FamilyInstance moved to (83.35, 8.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -678,11 +678,11 @@ FamilyInstance moved to (86.35, 8.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -702,11 +702,11 @@ FamilyInstance moved to (26.35, 8.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -726,11 +726,11 @@ FamilyInstance moved to (26.35, 14.17, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -746,11 +746,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: ElevationMarker rotated around building center
+SUCCESS: ElevationMarker rotated with 45° compensation
 
 
 
@@ -770,11 +770,11 @@ FamilyInstance moved to (26.35, 20.25, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -790,11 +790,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: ElevationMarker rotated around building center
+SUCCESS: ElevationMarker rotated with 45° compensation
 
 
 
@@ -814,11 +814,11 @@ FamilyInstance moved to (26.35, 26.34, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -834,11 +834,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: ElevationMarker rotated around building center
+SUCCESS: ElevationMarker rotated with 45° compensation
 
 
 
@@ -858,11 +858,11 @@ FamilyInstance moved to (44.35, 8.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -882,11 +882,11 @@ FamilyInstance moved to (44.35, 14.17, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -906,11 +906,11 @@ FamilyInstance moved to (44.35, 20.25, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -922,19 +922,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-21.55, 6.89, 0.00)
+FamilyInstance moved to (-14.11, -9.87, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -950,11 +950,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: ElevationMarker rotated around building center
+SUCCESS: ElevationMarker rotated with 45° compensation
 
 
 
@@ -966,19 +966,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-21.55, 0.80, 0.00)
+FamilyInstance moved to (-9.81, -14.17, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -990,19 +990,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-21.55, -5.28, 0.00)
+FamilyInstance moved to (-5.51, -18.47, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1014,19 +1014,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-21.55, -11.36, 0.00)
+FamilyInstance moved to (-1.20, -22.78, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1046,11 +1046,11 @@ FamilyInstance moved to (44.35, 26.34, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1070,11 +1070,11 @@ FamilyInstance moved to (14.36, 8.07, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1094,11 +1094,11 @@ FamilyInstance moved to (38.35, 8.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1118,11 +1118,11 @@ FamilyInstance moved to (38.35, 14.17, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1142,11 +1142,11 @@ FamilyInstance moved to (38.35, 20.25, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1166,11 +1166,11 @@ FamilyInstance moved to (38.35, 26.34, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1190,11 +1190,11 @@ FamilyInstance moved to (20.35, 14.17, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1206,19 +1206,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-15.55, 0.80, 0.00)
+FamilyInstance moved to (-5.57, -9.93, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1230,23 +1230,51 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
-FamilyInstance moved to (20.35, 14.17, 0.00)
+FamilyInstance moved to (-4.28, 25.43, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
 Processing elevation element: 511918 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(33.941125497, -33.941125497, 0.000000000), HandOrientation=(33.941125497, 33.941125497, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
+FamilyInstance moved to (19.82, -0.48, 0.00)
+
+
+
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
+
+
+
+SUCCESS: FamilyInstance rotated with 45° compensation
+
+
+
+Processing elevation element: 511919 (Type: FamilyInstance)
 
 
 
@@ -1266,39 +1294,11 @@ FamilyInstance moved to (-15.55, 0.80, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
-
-
-
-Processing elevation element: 511919 (Type: FamilyInstance)
-
-
-
-FamilyInstance Location type: LocationPoint
-
-
-
-DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
-
-
-
-WARNING: Left-handed coordinate system detected - may need direction reversal!
-
-
-
-FamilyInstance moved to (20.35, 14.17, 0.00)
-
-
-
-V4 FIX: Rotating around building center axis (not marker position)
-
-
-
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1314,11 +1314,11 @@ ElevationMarker translated by (9.89, 5.09, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: ElevationMarker rotated around building center
+SUCCESS: ElevationMarker rotated with 45° compensation
 
 
 
@@ -1338,11 +1338,11 @@ FamilyInstance moved to (20.35, 20.25, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1354,19 +1354,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(-33.941125497, -33.941125497, 0.000000000), HandOrientation=(-33.941125497, 33.941125497, 0.000000000)
 
 
 
-FamilyInstance moved to (-15.55, -5.28, 0.00)
+FamilyInstance moved to (-1.26, -14.23, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1378,23 +1378,51 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, -48.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
 
 
 
-FamilyInstance moved to (20.35, 20.25, 0.00)
+FamilyInstance moved to (-10.37, 25.43, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
 Processing elevation element: 511934 (Type: FamilyInstance)
+
+
+
+FamilyInstance Location type: LocationPoint
+
+
+
+DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(33.941125497, -33.941125497, 0.000000000), HandOrientation=(33.941125497, 33.941125497, 0.000000000)
+
+
+
+WARNING: Left-handed coordinate system detected - may need direction reversal!
+
+
+
+FamilyInstance moved to (24.12, 3.82, 0.00)
+
+
+
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
+
+
+
+SUCCESS: FamilyInstance rotated with 45° compensation
+
+
+
+Processing elevation element: 511935 (Type: FamilyInstance)
 
 
 
@@ -1414,39 +1442,11 @@ FamilyInstance moved to (-15.55, -5.28, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
-
-
-
-Processing elevation element: 511935 (Type: FamilyInstance)
-
-
-
-FamilyInstance Location type: LocationPoint
-
-
-
-DIAGNOSTIC: FacingFlipped=True, HandFlipped=False, FacingOrientation=(48.000000000, 0.000000000, 0.000000000), HandOrientation=(0.000000000, 48.000000000, 0.000000000)
-
-
-
-WARNING: Left-handed coordinate system detected - may need direction reversal!
-
-
-
-FamilyInstance moved to (20.35, 20.25, 0.00)
-
-
-
-V4 FIX: Rotating around building center axis (not marker position)
-
-
-
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1458,19 +1458,19 @@ FamilyInstance Location type: LocationPoint
 
 
 
-DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, 48.000000000, 0.000000000), HandOrientation=(48.000000000, 0.000000000, 0.000000000)
+DIAGNOSTIC: FacingFlipped=False, HandFlipped=False, FacingOrientation=(0.000000000, -48.000000000, 0.000000000), HandOrientation=(-48.000000000, 0.000000000, 0.000000000)
 
 
 
-FamilyInstance moved to (20.35, 26.34, 0.00)
+FamilyInstance moved to (-15.55, -11.36, 0.00)
 
 
 
-V4 FIX: Rotating around building center axis (not marker position)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-SUCCESS: FamilyInstance rotated around building center
+SUCCESS: FamilyInstance rotated with 45° compensation
 
 
 
@@ -1490,7 +1490,7 @@ Success rate: 100.0%
 
 
 
-FIXED: Using original rotation angle 90.0° instead of calculated matrix values
+FIXED: Using original rotation angle 135.0° instead of calculated matrix values
 
 
 
@@ -1502,7 +1502,7 @@ Regenerating document after elevation marker updates...
 
 
 
-=== V3 SECTION VIEW UPDATE - FIXED SECTION MARKERS ===
+=== V5 SECTION VIEW UPDATE - 45° COMPENSATION ===
 
 
 
@@ -1550,7 +1550,11 @@ Found 9 section marker family instances
 
 
 
-V4 FIXED: Section markers using building center rotation axis
+V5 SIMPLE FIX: Section markers with 45° compensation
+
+
+
+Building rotation: 90.0°, Section marker rotation: 135.0° (with 45° compensation)
 
 
 
@@ -1558,19 +1562,15 @@ Building center axis: (2.40, 7.49, -0.00)
 
 
 
-Rotation angle: 90.0 degrees
+Section marker moved to (-5.64, -1.38, 0.00)
 
 
 
-Section marker moved to (-9.56, 6.90, 0.00)
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-V4 FIX: Rotating section marker around building center
-
-
-
-Updated section marker: 511753 (rotated around building center)
+Updated section marker: 511753 (with 45° compensation)
 
 
 
@@ -1578,11 +1578,11 @@ Section marker moved to (68.35, 9.09, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512308 (rotated around building center)
+Updated section marker: 512308 (with 45° compensation)
 
 
 
@@ -1590,11 +1590,11 @@ Section marker moved to (71.35, 9.09, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512386 (rotated around building center)
+Updated section marker: 512386 (with 45° compensation)
 
 
 
@@ -1602,11 +1602,11 @@ Section marker moved to (74.35, 9.09, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512393 (rotated around building center)
+Updated section marker: 512393 (with 45° compensation)
 
 
 
@@ -1614,11 +1614,11 @@ Section marker moved to (77.35, 8.21, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512421 (rotated around building center)
+Updated section marker: 512421 (with 45° compensation)
 
 
 
@@ -1626,11 +1626,11 @@ Section marker moved to (80.35, 9.09, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512422 (rotated around building center)
+Updated section marker: 512422 (with 45° compensation)
 
 
 
@@ -1638,11 +1638,11 @@ Section marker moved to (77.35, 13.21, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512448 (rotated around building center)
+Updated section marker: 512448 (with 45° compensation)
 
 
 
@@ -1650,11 +1650,11 @@ Section marker moved to (80.35, 14.09, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512449 (rotated around building center)
+Updated section marker: 512449 (with 45° compensation)
 
 
 
@@ -1662,11 +1662,11 @@ Section marker moved to (77.35, 18.21, 0.00)
 
 
 
-V4 FIX: Rotating section marker around building center
+V5 FIX: Rotating by 135.0° (90.0° building + 45° compensation)
 
 
 
-Updated section marker: 512456 (rotated around building center)
+Updated section marker: 512456 (with 45° compensation)
 
 
 
